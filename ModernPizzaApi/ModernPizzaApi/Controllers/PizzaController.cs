@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ModernPizzaApi.Models;
@@ -12,21 +14,26 @@ using MongoDB.Bson;
 
 namespace ModernPizzaApi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("[controller]")]
-    public class ModerPizzaMainController : ControllerBase
+    public class PizzaMainController : ControllerBase
     {
-        private readonly ILogger<ModerPizzaMainController> _logger;
+        private readonly ILogger<PizzaMainController> _logger;
 
-        public ModerPizzaMainController(ILogger<ModerPizzaMainController> logger)
+        public PizzaMainController(ILogger<PizzaMainController> logger)
         {
             _logger = logger;
         }
+
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<List<PizzaModel>> PobierzWszystkie()
         {
-            return DBConnector.PobierzWszystkie();
+            return DBConnector.PobierzWszystkiePizza();
         }
+
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<PizzaModel> PobierzPizze(String id)
         {
@@ -34,6 +41,7 @@ namespace ModernPizzaApi.Controllers
             var result = DBConnector.PobierzPizza(newId);
             return result;
         }
+
         [HttpPost]
         public ActionResult<String> DodajPizza([FromBody]PizzaModel Pizza)
         {
@@ -42,12 +50,14 @@ namespace ModernPizzaApi.Controllers
                 return result.Result;
             return result.Result;
         }
+
         [HttpPut]
         public ActionResult<String> AktualizujPizze([FromBody] PizzaModel Pizza)
         {
             var result = DBConnector.AktualizujPizzaAsync(Pizza);
             return result.Result;
         }
+
         [HttpDelete]
         public ActionResult<String> UsunPizza([FromBody] PizzaModel Pizza)
         {

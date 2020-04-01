@@ -1,12 +1,10 @@
 ﻿using ModernPizzaApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace ModernPizzaApi.Utils
 {
-    public static class TransakcjaUtil
+    public static class Utillities
     {
 
         public static double ObliczPodatekPrzedmiotu(IPrzedmiotMenu przedmiot)
@@ -17,6 +15,12 @@ namespace ModernPizzaApi.Utils
                 return Math.Round(przedmiot.Cena * 0.08, 2);
             else
                 return 0;
+        }
+        public static String getHexGuid()
+        {
+            byte[] ba = Encoding.Default.GetBytes(Guid.NewGuid().ToString());
+            var hexString = BitConverter.ToString(ba);
+            return hexString.Replace("-", "").Remove(24);
         }
     }
 }
