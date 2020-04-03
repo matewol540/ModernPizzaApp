@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using ModernPizzaApi.Utils;
 
 namespace ModernPizzaApi
 {
@@ -17,6 +18,9 @@ namespace ModernPizzaApi
     {
         private static Semaphore _zasoby = new Semaphore(0, 1);
         private static MongoClient dbClient = new MongoClient(Constants.MONGODB_CONNECTION_STR);
+
+        public static List<TransakcjaModel> OtwarteZamowienia = new List<TransakcjaModel>();
+        public static List<TransakcjaModel> DoWalidacjiZamowienia = new List<TransakcjaModel>();
 
         #region PizzaCommands
         public static List<PizzaModel> PobierzWszystkiePizza()
@@ -27,15 +31,13 @@ namespace ModernPizzaApi
             var PustyFiltr = Builders<PizzaModel>.Filter.Empty;
             return MongoDBKolekcja.Find(PustyFiltr).ToList();
         }
-
         public static PizzaModel PobierzPizza(String id)
         {
             var MongoDBKlient = dbClient.GetDatabase("ModernPizzaDB");
             var PizzaKolekcja = MongoDBKlient.GetCollection<PizzaModel>("Pizza");
 
-            return PizzaKolekcja.Find<PizzaModel>(x => x.PizzaID == id).First();
+            return PizzaKolekcja.Find<PizzaModel>(x => x.ObjectId == id).First();
         }
-
         public static async Task<string> DodajPizzaAsync(PizzaModel pizza)
         {
             try
@@ -50,25 +52,23 @@ namespace ModernPizzaApi
             }
             return "Dodano";
         }
-
         public static async Task<String> AktualizujPizzaAsync(PizzaModel pizza)
         {
             var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
             var PizzaKolekcja = MongoDBClient.GetCollection<PizzaModel>("Pizza");
 
             var update = Builders<PizzaModel>.Update.Set("Nazwa", pizza.Nazwa);
-            await PizzaKolekcja.UpdateOneAsync(x => x.PizzaID.Equals(pizza.PizzaID), update);
+            await PizzaKolekcja.UpdateOneAsync(x => x.ObjectId.Equals(pizza.ObjectId), update);
 
             return "Aktualizowano";
         }
-
         public static async Task<String> UsunPizzaAsync(PizzaModel pizza)
         {
             var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
             var PizzaKolekcja = MongoDBClient.GetCollection<BsonDocument>("Pizza");
 
 
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", pizza.PizzaID);
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", pizza.ObjectId);
 
             var res = await PizzaKolekcja.DeleteOneAsync(filter);
 
@@ -116,7 +116,7 @@ namespace ModernPizzaApi
 
             var Token = TokenHandler.CreateToken(TokenDescriptor);
             Personel.Token = TokenHandler.WriteToken(Token);
-
+            Personel.Haslo = String.Empty;
             return Personel;
         }
         internal static async Task<String> DodajPracownikaAsync(PersonelModel personel)
@@ -135,8 +135,117 @@ namespace ModernPizzaApi
         }
         #endregion
 
-        #region Menu
+        #region Transakcje
+        internal static List<TransakcjaModel> PobierzOtwarteZamowienia()
+        {
+            return OtwarteZamowienia;
+        }
+        internal static List<TransakcjaModel> PobierzDoWalidacji()
+        {
+            return DoWalidacjiZamowienia;
+        }
+        public static String DodajZamowienie(TransakcjaModel Transakcja)
+        {
+            try
+            {
+                if (Transakcja.Produkty.Where(x => x.WymagaWalidacji()).Count() > 0)
+                    DoWalidacjiZamowienia.Add(Transakcja);
+                else
+                    OtwarteZamowienia.Add(Transakcja);
+            }
+            catch (Exception err)
+            {
+                return err.Message;
+            }
+            return "Dodano zamowienie";
+        }
+        public static string WalidujWiek(TransakcjaModel transakcja, bool poprawnyWiek)
+        {
+            try
+            {
+                if (poprawnyWiek)
+                {
+                    DoWalidacjiZamowienia.Remove(transakcja);
+                    OtwarteZamowienia.Add(transakcja);
+                }
+                else
+                {
+                    DoWalidacjiZamowienia.Remove(transakcja);
+                }
+            }
+            catch (Exception err)
+            {
+                return $"Blad operacji - {err.Message}";
+            }
+            return "Success";
+        }
+        public static String AnulujZamowienie(TransakcjaModel transakcja)
+        {
+            try
+            {
+                OtwarteZamowienia.Remove(transakcja);
+            }
+            catch (Exception err)
+            {
+                return err.Message;
+            }
+            return "Usunieto zamowienie";
+        }
+        public static async Task<String> ZakonczZamowienieAsync(TransakcjaModel transakcja)
+        {
+            try
+            {
+                var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+                var TransakcjaKolekcja = MongoDBClient.GetCollection<TransakcjaModel>("Transakcje");
 
+                await TransakcjaKolekcja.InsertOneAsync(transakcja);
+            }
+            catch (Exception err)
+            {
+                return err.Message;
+            }
+            return $"Zamowienie {transakcja.objectId} zakonczono";
+        }
+
+        #endregion
+
+        #region Kod Wejscia
+        public static String PobierzKodWejscia(DateTime dt)
+        {
+            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var KodKolekcja = MongoDBClient.GetCollection<KodWejsciaModel>("KodWejscia");
+
+            var KodWejscia = String.Empty;
+
+            var task = KodKolekcja.Find<KodWejsciaModel>(x => x.Data == dt.ToString("yyyyMMdd"));
+            if (task.Any())
+                KodWejscia = task.First().kodWejscia;
+            else
+            {
+                KodWejscia = Utillities.PobierNowyKodWejscia();
+                ZapiszKodWejsciaAsync(DateTime.Now, KodWejscia).Wait();
+            }
+            return KodWejscia;
+        }
+        public static Boolean WalidujKodWejscia(KodWejsciaModel KodWejscia)
+        {
+            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var KodKolekcja = MongoDBClient.GetCollection<KodWejsciaModel>("KodWejscia");
+
+            var response = KodKolekcja.Find<KodWejsciaModel>(x => x.kodWejscia == KodWejscia.kodWejscia && x.Data == KodWejscia.Data);
+
+            return response.Any();
+        }
+
+        public static async Task ZapiszKodWejsciaAsync(DateTime dt, String kodWejscia)
+        {
+            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var KodKolekcja = MongoDBClient.GetCollection<KodWejsciaModel>("KodWejscia");
+
+            var TempKodWejscia = new KodWejsciaModel(dt.ToString("yyyyMMdd"), kodWejscia);
+
+            await KodKolekcja.InsertOneAsync(TempKodWejscia);
+        }
         #endregion
     }
 }

@@ -2,41 +2,45 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using ModernPizzaApi.Utils;
-
 namespace ModernPizzaApi.Models
 {
-    public class PizzaModel : IPrzedmiotTransakcji
+    public class NapojModel : IPrzedmiotTransakcji
     {
-        [BsonId()]
+
+        [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public String ObjectId { get; set; }
         [BsonElement("Nazwa")]
         public String Nazwa { get; set; }
-        [BsonElement("Lista_Skladnikow")]
-        public List<String> Lista_Skladnikow { get; set; }
         [BsonElement("Cena")]
         public double Cena { get; set; }
+        [BsonElement("WalidacjaWieku")]
+        public Boolean WalidujWiek { get; set; }
 
-        public PizzaModel()
+        public NapojModel()
         {
             ObjectId = Utillities.getHexGuid();
-            Nazwa = "Random pizza";
-            Lista_Skladnikow = new List<string>();
-            Lista_Skladnikow.Add("Pomidor");
-            Lista_Skladnikow.Add("Szynka");
-            Lista_Skladnikow.Add("Ser feta");
-            Cena = 25.0F; 
-        }
+            Nazwa = "Przykladowy napoj";
+            Cena = 5.0F;
 
-        public bool WymagaWalidacji()
-        {
-            return false;
+            //Do usuniecia
+            Random rnd = new Random();
+            //Koniec usuniecia 
+
+            WalidujWiek = rnd.Next(0, 1) == 1;
         }
 
         public double PobierzCene()
         {
             return Cena;
+        }
+
+        public bool WymagaWalidacji()
+        {
+            return WalidujWiek;
         }
     }
 }

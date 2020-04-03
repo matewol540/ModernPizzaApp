@@ -30,12 +30,12 @@ namespace ModernPizzaApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("Auth")]
-        public IActionResult Authenticate([FromBody]PersonelModel Personel)
+        public ActionResult<String> Authenticate([FromBody]PersonelModel Personel)
         {
             var tempUser = DBConnector.AutoryzujPersonel(Personel.Login, Personel.SzyfrujHaslo(Personel.Login, Personel.Haslo));
             if (tempUser == null)
                 return new BadRequestResult();
-            return new OkResult();
+            return tempUser.Token;
         }
 
         [HttpPost]
