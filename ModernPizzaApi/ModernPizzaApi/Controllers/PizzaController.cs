@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ModernPizzaApi.Models;
-using MongoDB.Bson;
 
 namespace ModernPizzaApi.Controllers
 {
@@ -35,11 +29,13 @@ namespace ModernPizzaApi.Controllers
 
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public ActionResult<PizzaModel> PobierzPizze(String id)
+        public ActionResult PobierzPizze(String id)
         {
             var newId = id;
             var result = DBConnector.PobierzPizza(newId);
-            return result;
+            byte[] b = System.IO.File.ReadAllBytes(result.SciezkaDoObrazu);
+
+            return File(b, "image/jpeg");
         }
 
         [HttpPost]

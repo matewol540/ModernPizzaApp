@@ -6,10 +6,7 @@
              mc:Ignorable="d"
              x:Class="MobilePizzaApp.Page1">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        
+<Button Text="Click me" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Button_Clicked" />
     </ContentPage.Content>
 </ContentPage>

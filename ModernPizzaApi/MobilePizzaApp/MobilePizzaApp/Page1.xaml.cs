@@ -16,5 +16,10 @@ namespace MobilePizzaApp
         {
             InitializeComponent();
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Witaj w aplikacji", "qweq", "qweqwe");
+        }
     }
 }

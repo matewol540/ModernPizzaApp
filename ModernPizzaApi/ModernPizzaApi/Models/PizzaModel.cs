@@ -17,6 +17,10 @@ namespace ModernPizzaApi.Models
         public List<String> Lista_Skladnikow { get; set; }
         [BsonElement("Cena")]
         public double Cena { get; set; }
+        [BsonElement("Obraz")]
+        public String SciezkaDoObrazu;
+        [BsonElement("Oznaczenia")]
+        public List<String> Oznaczenia; // Ostra, Bez glutenu, Weganska
 
         public PizzaModel()
         {
@@ -26,7 +30,8 @@ namespace ModernPizzaApi.Models
             Lista_Skladnikow.Add("Pomidor");
             Lista_Skladnikow.Add("Szynka");
             Lista_Skladnikow.Add("Ser feta");
-            Cena = 25.0F; 
+            Cena = 25.0F;
+            SciezkaDoObrazu = @"D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\Zasoby\fff.png";
         }
 
         public bool WymagaWalidacji()
