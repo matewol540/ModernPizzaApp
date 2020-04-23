@@ -16,22 +16,27 @@ namespace ModernPizzaApi.Models
         [BsonElement("NumerStolika")]
         public int NumerStolika { get; set; }
         [BsonElement("DataTranskacji")]
-        public DateTime DataTranskacji{ get; set; }
+        public DateTime DataTranskacji { get; set; }
         [BsonElement("Kwota")]
         public double Kwota { get; set; }
         [BsonElement("FormaPlatnosci")]
         public String FormaPlatnosci { get; set; }
-        [BsonElement("Produkty")]
-        public List<IPrzedmiotTransakcji> Produkty { get; set; }
+        [BsonElement("ProduktyWydane")]
+        public List<IPrzedmiotTransakcji> ProduktyWydane { get; set; }
+        [BsonElement("ProduktyZamowione")]
+        public List<IPrzedmiotTransakcji> ProduktyZamowione { get; set; }
+
+
+        public Boolean WiekAutoryzowany { get; set; }
 
         public TransakcjaModel()
         {
             objectId = Utillities.getHexGuid();
-            Produkty = new List<IPrzedmiotTransakcji>();
-            Produkty.Add(new PizzaModel());
-            Produkty.Add(new PizzaModel());
-            Produkty.Add(new NapojModel());
-            Produkty.ForEach(x => Kwota += x.PobierzCene());
+            ProduktyWydane = new List<IPrzedmiotTransakcji>();
+            ProduktyWydane.Add(new PizzaModel());
+            ProduktyWydane.Add(new PizzaModel());
+            ProduktyWydane.Add(new NapojModel());
+            ProduktyWydane.ForEach(x => Kwota += x.PobierzCene());
         }
     }
 }

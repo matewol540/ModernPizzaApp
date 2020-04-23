@@ -148,7 +148,7 @@ namespace ModernPizzaApi
         {
             try
             {
-                if (Transakcja.Produkty.Where(x => x.WymagaWalidacji()).Count() > 0)
+                if (Transakcja.ProduktyWydane.Where(x => x.WymagaWalidacji()).Count() > 0)
                     DoWalidacjiZamowienia.Add(Transakcja);
                 else
                     OtwarteZamowienia.Add(Transakcja);
@@ -206,6 +206,10 @@ namespace ModernPizzaApi
             }
             return $"Zamowienie {transakcja.objectId} zakonczono";
         }
+
+        #endregion
+
+        #region NapojCommands
 
         #endregion
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MobilePizzaApp.Pages;
+using System;
+using System.Net;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,11 +12,12 @@ namespace MobilePizzaApp
         {
             InitializeComponent();
 
-            MainPage = new Page1();
+            MainPage = new Main();
         }
 
         protected override void OnStart()
         {
+            ServicePointManager.ServerCertificateValidationCallback += (o, certificate, chain, errors) => true;
         }
 
         protected override void OnSleep()
