@@ -12,7 +12,7 @@ using ModernPizzaApi.Models;
 namespace ModernPizzaApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TransakcjaController : ControllerBase
     {

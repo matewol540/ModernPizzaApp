@@ -18,10 +18,10 @@ namespace MobilePizzaApp.Views
         {
             InitializeComponent();
         }
-        public InformationView(InformationModel model)
+        public InformationView(ArticleModel model)
         {
             InitializeComponent();
-            PrzykladowyStack.BindingContext = model;
+            ArticleObject.BindingContext = model;
         }
     }
 }

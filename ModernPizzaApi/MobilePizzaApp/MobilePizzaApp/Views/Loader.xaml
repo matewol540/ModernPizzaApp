@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobilePizzaApp.Pages.Loader"
+             xmlns:local="clr-namespace:MobilePizzaApp.RemoveAfterCourse">
+  <ContentView.Content>
+      <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Image  Source="{local:EmbeddedClass MobilePizzaApp.Zasoby.PizzaIkona.png}"/>
+            <ActivityIndicator IsRunning="False"
+                               AbsoluteLayout.LayoutBounds="0.5,0.5,50,50" 
+                               AbsoluteLayout.LayoutFlags="PositionProportional"
+                               />
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

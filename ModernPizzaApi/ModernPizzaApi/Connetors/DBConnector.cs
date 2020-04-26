@@ -11,12 +11,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using ModernPizzaApi.Utils;
+using ModernPizzaApi.Controllers;
 
 namespace ModernPizzaApi
 {
     public static class DBConnector
     {
-        private static Semaphore _zasoby = new Semaphore(0, 1);
         private static MongoClient dbClient = new MongoClient(Constants.MONGODB_CONNECTION_STR);
 
         public static List<TransakcjaModel> OtwarteZamowienia = new List<TransakcjaModel>();
@@ -249,6 +249,24 @@ namespace ModernPizzaApi
             var TempKodWejscia = new KodWejsciaModel(dt.ToString("yyyyMMdd"), kodWejscia);
 
             await KodKolekcja.InsertOneAsync(TempKodWejscia);
+        }
+        #endregion
+
+        #region Artykul
+        public static async Task<List<ArtykulModel>> PobierzArtykulyAsync(int StartIndex, int StopIndex)
+        {
+            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
+            var PustyFiltr = Builders<ArtykulModel>.Filter.Empty;
+            var TempList = await ArtykulKolekcja.FindAsync<ArtykulModel>(PustyFiltr);
+            return TempList.ToList();
+        }
+
+        public static async void DodajArtykul(ArtykulModel Artykul)
+        {
+            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
+            await ArtykulKolekcja.InsertOneAsync(Artykul);
         }
         #endregion
     }

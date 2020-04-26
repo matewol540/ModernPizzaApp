@@ -14,7 +14,11 @@
     <TabbedPage.Padding>
         <OnPlatform x:TypeArguments="Thickness" iOS="0,20,0,0"/>
     </TabbedPage.Padding>
-    <local:StartPage Title="Strona glowna" IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.HomeIcon.png}"/>
+    <local:StartPage x:Name="StartPage"
+                     Title="Strona glowna"
+                     
+                     IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.HomeIcon.png}"
+                     />
     <local:MenuPage Title="Menu" Icon="https://www.pngitem.com/pimgs/m/30-302597_menu-menu-png-icon-transparent-png.png"/>
     <ContentPage Title="Zamowienia" IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.PizzaIkona.png}">
     </ContentPage>

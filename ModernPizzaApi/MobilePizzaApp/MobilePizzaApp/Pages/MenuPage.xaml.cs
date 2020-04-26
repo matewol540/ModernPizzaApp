@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MobilePizzaApp.Pages.IntroductionPages
+namespace MobilePizzaApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage : CarouselPage
@@ -37,27 +37,6 @@ namespace MobilePizzaApp.Pages.IntroductionPages
             {
                 await DisplayAlert("Error", "Connection refused!", "Ok");
             }
-
-            //HttpClientHandler clientHandler = new HttpClientHandler();
-            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            //try
-            //{
-            //    using (var Client = new HttpClient(clientHandler))
-            //    {
-            //        var response = await Client.GetAsync(ConnectionApiUri);
-
-            //        if (response.IsSuccessStatusCode)
-            //        {
-            //            string Content = await response.Content.ReadAsStringAsync();
-            //            var tempList = JsonConvert.DeserializeObject<List<PizzaModel>>(Content);
-            //            PizzaItemsList.ItemsSource = tempList;
-            //        }
-            //    }
-            //}
-            //catch
-            //{
-            //    await DisplayAlert("Error", "Connection refused!", "Ok");
-            //}
         }
 
         async void ViewCell_Tapped(object sender, EventArgs e)

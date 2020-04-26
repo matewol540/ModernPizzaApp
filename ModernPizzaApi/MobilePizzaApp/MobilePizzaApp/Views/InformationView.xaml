@@ -4,10 +4,19 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MobilePizzaApp.Views.InformationView">
-  <ContentView.Content>
-      <StackLayout x:Name="PrzykladowyStack">
-            <Label Text="{Binding Tytul_Informacji}" />
-      </StackLayout>
-  </ContentView.Content>
+             xmlns:ic="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="MobilePizzaApp.Views.InformationView"
+             xmlns:local="clr-namespace:MobilePizzaApp.RemoveAfterCourse"
+             >
+    <ContentView.Content>
+        <Frame BorderColor="Black"
+            CornerRadius="5"
+            IsClippedToBounds="True"
+            Padding="20">
+            <StackLayout x:Name="ArticleObject" >
+                <ic:CircleImage WidthRequest="250" HeightRequest="250" Aspect="AspectFit" Source="{local:EmbeddedClass MobilePizzaApp.Zasoby.PizzaIkona.png}" />
+                <Label Text="{Binding Tytul}" />
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
 </ContentView>

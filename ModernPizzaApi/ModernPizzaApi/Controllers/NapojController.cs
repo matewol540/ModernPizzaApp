@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ModernPizzaApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class NapojController : ControllerBase
     {

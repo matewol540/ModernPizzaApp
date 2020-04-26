@@ -9,7 +9,7 @@ using ModernPizzaApi.Models;
 namespace ModernPizzaApi.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class PersonelController : ControllerBase
     {
