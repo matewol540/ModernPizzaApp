@@ -14,7 +14,7 @@
             IsClippedToBounds="True"
             Padding="20">
             <StackLayout x:Name="ArticleObject" >
-                <ic:CircleImage WidthRequest="250" HeightRequest="250" Aspect="AspectFit" Source="{local:EmbeddedClass MobilePizzaApp.Zasoby.PizzaIkona.png}" />
+                <ic:CircleImage x:Name="ArticleImage" WidthRequest="250" HeightRequest="250" Aspect="AspectFit" />
                 <Label Text="{Binding Tytul}" />
             </StackLayout>
         </Frame>

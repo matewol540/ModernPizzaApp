@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using ModernPizzaApi.Utils;
 using ModernPizzaApi.Controllers;
+using System.IO;
 
 namespace ModernPizzaApi
 {
@@ -253,7 +254,7 @@ namespace ModernPizzaApi
         #endregion
 
         #region Artykul
-        public static async Task<List<ArtykulModel>> PobierzArtykulyAsync(int StartIndex, int StopIndex)
+        public static async Task<List<ArtykulModel>> PobierzArtykulyAsync()
         {
             var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
             var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
@@ -262,11 +263,12 @@ namespace ModernPizzaApi
             return TempList.ToList();
         }
 
-        public static async void DodajArtykul(ArtykulModel Artykul)
+        public static void DodajArtykul(ArtykulModel Artykul)
         {
+            Artykul.Obraz = File.ReadAllBytes(@"D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\Zasoby\PizzaIkona.png");
             var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
             var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
-            await ArtykulKolekcja.InsertOneAsync(Artykul);
+             ArtykulKolekcja.InsertOne(Artykul);
         }
         #endregion
     }

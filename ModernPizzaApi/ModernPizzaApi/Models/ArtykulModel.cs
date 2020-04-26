@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ModernPizzaApi.Models
 {
@@ -21,6 +16,7 @@ namespace ModernPizzaApi.Models
         [BsonElement("Data")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime Data { get; set; }
-        
+        [BsonElement("Obraz")]
+        public byte[] Obraz { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MobilePizzaApp.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,11 @@ namespace MobilePizzaApp.Views
         {
             InitializeComponent();
             ArticleObject.BindingContext = model;
+            if (model.obraz != null)
+                ArticleImage.Source = ImageSource.FromStream(() => new MemoryStream(model.obraz));
+            else
+                ArticleImage.Source = ImageSource.FromUri(new Uri("https://via.placeholder.com/150"));
+
         }
     }
 }

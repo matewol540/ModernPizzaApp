@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernPizzaApi.Models;
-using SQLitePCL;
+using MongoDB.Bson;
 
 namespace ModernPizzaApi.Controllers
 {
@@ -19,9 +18,8 @@ namespace ModernPizzaApi.Controllers
         [HttpGet("{LastIndex}")]
         public IEnumerable<ArtykulModel> Get(int LastIndex)
         {
-            var ArtykulyList = DBConnector.PobierzArtykulyAsync(LastIndex, LastIndex + ArtykulCountPerRequest).Result;
+            var ArtykulyList = DBConnector.PobierzArtykulyAsync().Result;
             ArtykulyList = ArtykulyList.OrderBy(x => x.Data).Skip(LastIndex).Take(ArtykulCountPerRequest).ToList();
-
             return ArtykulyList;
         }
 
@@ -30,7 +28,7 @@ namespace ModernPizzaApi.Controllers
         {
             try
             {
-                 DBConnector.DodajArtykul(Artykul);
+                DBConnector.DodajArtykul(Artykul);
             }
             catch (Exception err)
             {
@@ -38,6 +36,24 @@ namespace ModernPizzaApi.Controllers
             }
         }
 
+        [HttpPut]
+        public void PutArticle()
+        {
+            try
+            {
+                var Artykul = new ArtykulModel()
+                {
+                    Data = DateTime.Now,
+                    Tytul = "Testowy Artykul z innym zdjeciem",
+                    Zawartosc = "Jest to jeden z wielu testów ktorer zostana dodane do bazy danych"
+                };
+                DBConnector.DodajArtykul(Artykul);
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine("Error occured while adding article to DB.");
+            }
+        }
         //// PUT: api/Artykul/5
         //[HttpPut("{id}")]
         //public void Put(int id, [FromBody] string value)

@@ -15,5 +15,7 @@ namespace MobilePizzaApp.Models
         public String Zawartosc { get; set; }
         [JsonProperty("Data")]
         public DateTime Data { get; set; }
+        [JsonProperty("Obraz")]
+        public byte[] obraz;
     }
 }
