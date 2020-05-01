@@ -13,13 +13,13 @@ namespace ModernPizzaApi.Controllers
     [ApiController]
     public class ArtykulController : ControllerBase
     {
-        private const int ArtykulCountPerRequest = 4;
+        private const int ArtykulCountPerRequest = 5;
 
         [HttpGet("{LastIndex}")]
         public IEnumerable<ArtykulModel> Get(int LastIndex)
         {
             var ArtykulyList = DBConnector.PobierzArtykulyAsync().Result;
-            ArtykulyList = ArtykulyList.OrderBy(x => x.Data).Skip(LastIndex).Take(ArtykulCountPerRequest).ToList();
+            ArtykulyList = ArtykulyList.OrderByDescending(x => x.Data).Skip(LastIndex).Take(ArtykulCountPerRequest).ToList();
             return ArtykulyList;
         }
 

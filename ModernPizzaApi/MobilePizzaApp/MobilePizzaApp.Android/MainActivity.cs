@@ -26,6 +26,7 @@ namespace MobilePizzaApp.Droid
             ServicePointManager.ServerCertificateValidationCallback += (o, cert, chain, errors) => true;
             ImageCircleRenderer.Init();
             LoadApplication(new App());
+            XFGloss.Droid.Library.Init(this, savedInstanceState);
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

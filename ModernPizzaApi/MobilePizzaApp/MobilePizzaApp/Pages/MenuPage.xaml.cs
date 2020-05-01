@@ -12,7 +12,6 @@ namespace MobilePizzaApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage : CarouselPage
     {
-        String ConnectionApiUri = "https://192.168.0.24:45455/pizzamain";
         public MenuPage()
         {
             InitializeComponent();
@@ -24,7 +23,7 @@ namespace MobilePizzaApp.Pages
             {
                 using (var HttpClient = new HttpApiConnector().GetClient())
                 {
-                    var response = await HttpClient.GetAsync(ConnectionApiUri);
+                    var response = await HttpClient.GetAsync(Constants.ConnectionApiUri);
                     if (response.IsSuccessStatusCode)
                     {
                         string Content = await response.Content.ReadAsStringAsync();
@@ -46,6 +45,11 @@ namespace MobilePizzaApp.Pages
             var Pizza = ((sender as ViewCell).BindingContext as PizzaModel);
             await Navigation.PushModalAsync(new DescriptionPage(Pizza));
             PizzaItemsList.SelectedItem = null;
+        }
+
+        private void AddItemToOrderList(object sender, EventArgs e)
+        {
+
         }
     }
 }

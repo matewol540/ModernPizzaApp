@@ -13,7 +13,7 @@
                     <ViewCell Tapped="ViewCell_Tapped">
                         <StackLayout Orientation="Horizontal" Padding="5">
                             <Label Text="{d:Binding Nazwa}" FontSize="20" HorizontalOptions="StartAndExpand"/>
-                            <Button Text="Dodaj do zamowienia"/>
+                            <Button Text="Dodaj do zamowienia" Clicked="AddItemToOrderList"/>
                             <Button Text="Szczegoly"/>
                         </StackLayout>
                     </ViewCell>
@@ -21,7 +21,6 @@
             </ListView.ItemTemplate>
         </ListView>
     </ContentPage>
-
 
 
     <ContentPage Title="Napoje">

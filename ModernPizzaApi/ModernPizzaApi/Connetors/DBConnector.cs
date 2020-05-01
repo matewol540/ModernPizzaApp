@@ -265,7 +265,7 @@ namespace ModernPizzaApi
 
         public static void DodajArtykul(ArtykulModel Artykul)
         {
-            Artykul.Obraz = File.ReadAllBytes(@"D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\Zasoby\PizzaIkona.png");
+            Artykul.Obraz = File.ReadAllBytes(@"D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\Zasoby\TempPizzeria.jpg");
             var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
             var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
              ArtykulKolekcja.InsertOne(Artykul);

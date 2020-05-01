@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="MobilePizzaApp.Pages.Loader"
-             xmlns:local="clr-namespace:MobilePizzaApp.RemoveAfterCourse">
+             xmlns:local="clr-namespace:MobilePizzaApp.MarkupExtension">
   <ContentView.Content>
       <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <Image  Source="{local:EmbeddedClass MobilePizzaApp.Zasoby.PizzaIkona.png}"/>

@@ -4,7 +4,9 @@ using MobilePizzaApp.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,7 +19,6 @@ namespace MobilePizzaApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StartPage : ContentPage
     {
-        String ConnectionApiUri = "https://192.168.0.24:45455/artykul/";
         Task<int> IsLoadingTask = null;
         int LastLoadedItemsCount;
         public StartPage()
@@ -25,7 +26,6 @@ namespace MobilePizzaApp.Pages
             InitializeComponent();
             LoadArticlesFromApi(0);
         }
-
         public async Task<int> LoadArticlesFromApi(int StartIndex)
         {
             var InfTemp = new List<ArticleModel>();
@@ -33,7 +33,7 @@ namespace MobilePizzaApp.Pages
             {
                 using (var HttpClient = new HttpApiConnector().GetClient())
                 {
-                    var response = await HttpClient.GetAsync(ConnectionApiUri + StartIndex);
+                    var response = await HttpClient.GetAsync(Constants.ConnectionApiUriArtykul + StartIndex);
                     if (response.IsSuccessStatusCode)
                     {
                         string Content = await response.Content.ReadAsStringAsync();
@@ -42,6 +42,7 @@ namespace MobilePizzaApp.Pages
                 }
                 for (int i = 0; i < (InfTemp.Count / 2); i++)
                     NewsGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(330, GridUnitType.Absolute) });
+                LoadFirstAsMainNews(InfTemp);
                 InfTemp.ForEach(x => NewsGrid.Children.Add(new InformationView(x), NewsGrid.Children.Count % 2, NewsGrid.Children.Count / 2));
             }
             catch (Exception err)
@@ -54,6 +55,17 @@ namespace MobilePizzaApp.Pages
             LastLoadedItemsCount = InfTemp.Count;
             return InfTemp.Count;
         }
+
+        private void LoadFirstAsMainNews(List<ArticleModel> articleModel)
+        {
+            if (FirstNews.BindingContext == null)
+            {
+                FirstNews.BindingContext = articleModel.First();
+                FirstImageArticle.Source = ImageSource.FromStream(() => new MemoryStream(articleModel.First().obraz));
+                articleModel.Remove(articleModel.First());
+            }
+        }
+
         private void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
         {
             if (IsLoadingTask == null &&
