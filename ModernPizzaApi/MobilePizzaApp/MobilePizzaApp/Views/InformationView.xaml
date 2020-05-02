@@ -7,16 +7,21 @@
              xmlns:ic="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="MobilePizzaApp.Views.InformationView"
              xmlns:local="clr-namespace:MobilePizzaApp.MarkupExtension"
+             Padding="10"
              >
     <ContentView.Content>
-        <Frame BorderColor="Black"
-            CornerRadius="5"
+        <Frame 
+            CornerRadius="10"
             IsClippedToBounds="True"
-            Padding="20">
-            <StackLayout x:Name="ArticleObject" >
-                <ic:CircleImage x:Name="ArticleImage" WidthRequest="270" HeightRequest="250" Aspect="Fill" />
-                <Label Text="{Binding Tytul}" />
-            </StackLayout>
+            BackgroundColor="Blue"
+            Padding="-5"
+            >
+            <AbsoluteLayout x:Name="ArticleObject"  BackgroundColor="Green">
+                <local:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="Transparent" BackgroundColor="Red" Padding="-10" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
+                    <Image x:Name="ArticleImage" Aspect="AspectFill"/>
+                </local:GradientFrameRenderer>
+                <Label Text="{Binding Tytul}" Padding="3" FontFamily="{StaticResource Helvetica}" TextColor="Black" FontSize="Large" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0,1,1,0.2" AbsoluteLayout.LayoutFlags="All"/>
+            </AbsoluteLayout>
         </Frame>
     </ContentView.Content>
 </ContentView>

@@ -4,6 +4,7 @@ using MobilePizzaApp.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -19,43 +20,54 @@ namespace MobilePizzaApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StartPage : ContentPage
     {
-        Task<int> IsLoadingTask = null;
-        int LastLoadedItemsCount;
+        Task<int> IsLoadingTask = null; // Task ladujacy odpowiada za activity indicator
+        int LastLoadedItemsCount; // Index ostatnio pobranego
+        List<ArticleModel> LoadedArticles; // Lsita pobranych artykulow
+        List<InformationView> ListInfoView; // Lista widokow utworzonych dla artykulow
+
         public StartPage()
         {
             InitializeComponent();
-            LoadArticlesFromApi(0);
+            LoadedArticles = new List<ArticleModel>();
         }
-        public async Task<int> LoadArticlesFromApi(int StartIndex)
+        private async void LoadArticles(object sender, EventArgs e)
+        {
+            var tempLoadedArticles = await DownloadArticlesToList(0);
+            LoadFirstAsMainNews(LoadedArticles);
+            ListInfoView = CreateInformationViewFromList(LoadedArticles, tempLoadedArticles);
+            LastLoadedItemsCount = ListInfoView.Count+1;
+            ListInfoView.ForEach(x => NewsGrid.Children.Add(x, NewsGrid.Children.Count % 2, NewsGrid.Children.Count / 2));
+        }
+
+        private async Task<int> DownloadArticlesToList(int v) // Liczva ostatnio pobranych
         {
             var InfTemp = new List<ArticleModel>();
             try
             {
                 using (var HttpClient = new HttpApiConnector().GetClient())
                 {
-                    var response = await HttpClient.GetAsync(Constants.ConnectionApiUriArtykul + StartIndex);
+                    var response = await HttpClient.GetAsync(Constants.ConnectionApiUriArtykul + v);
                     if (response.IsSuccessStatusCode)
                     {
                         string Content = await response.Content.ReadAsStringAsync();
                         InfTemp = JsonConvert.DeserializeObject<List<ArticleModel>>(Content);
                     }
                 }
-                for (int i = 0; i < (InfTemp.Count / 2); i++)
-                    NewsGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(330, GridUnitType.Absolute) });
-                LoadFirstAsMainNews(InfTemp);
-                InfTemp.ForEach(x => NewsGrid.Children.Add(new InformationView(x), NewsGrid.Children.Count % 2, NewsGrid.Children.Count / 2));
-            }
+             }
             catch (Exception err)
             {
                 await DisplayAlert("Error", "Connection refused!", "Ok");
                 return 0;
             }
-            ActivityIndicator.IsRunning = false;
-            IsLoadingTask = null;
-            LastLoadedItemsCount = InfTemp.Count;
+            finally
+            {
+                for (int i = 0; i < (InfTemp.Count / 2); i++)
+                    NewsGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(330, GridUnitType.Absolute) });
+                LoadedArticles.AddRange(InfTemp);
+                ActivityIndicator.IsRunning = false;
+            }
             return InfTemp.Count;
         }
-
         private void LoadFirstAsMainNews(List<ArticleModel> articleModel)
         {
             if (FirstNews.BindingContext == null)
@@ -65,17 +77,35 @@ namespace MobilePizzaApp.Pages
                 articleModel.Remove(articleModel.First());
             }
         }
+        private List<InformationView> CreateInformationViewFromList(List<ArticleModel> articleModels, int ToBeLoadedCount)
+        {
+            var TempInformationList = new List<InformationView>();
+            articleModels.Skip(articleModels.Count - ToBeLoadedCount).ToList().ForEach(x => TempInformationList.Add(new InformationView(x)));
+            return TempInformationList;
+        }
 
-        private void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
+
+
+
+
+
+
+        private async void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
         {
             if (IsLoadingTask == null &&
-                NewsGrid.Children[NewsGrid.Children.Count - 3].Y + NewsGrid.Children[NewsGrid.Children.Count - 3].Height / 4 < e.ScrollY &&
+                NewsGrid.Children[NewsGrid.Children.Count - 3].Y + NewsGrid.Children[NewsGrid.Children.Count - 3].Height / 4 < e.ScrollY + 300 &&
                 LastLoadedItemsCount != 0)
             {
-                IsLoadingTask = LoadArticlesFromApi(NewsGrid.Children.Count);
+                IsLoadingTask = DownloadArticlesToList(LoadedArticles.Count+1);
+                var TempCount = await IsLoadingTask;
+                ListInfoView = CreateInformationViewFromList(LoadedArticles, TempCount);
+                LastLoadedItemsCount = ListInfoView.Count;
+                ListInfoView.ForEach(x => NewsGrid.Children.Add(x, NewsGrid.Children.Count % 2, NewsGrid.Children.Count / 2));
                 ActivityIndicator.IsRunning = !IsLoadingTask.IsCompleted;
-                Thread.Sleep(2000);
+                IsLoadingTask = null;
             }
         }
+
+
     }
 }

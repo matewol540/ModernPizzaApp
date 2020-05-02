@@ -6,6 +6,15 @@
              mc:Ignorable="d"
              x:Class="MobilePizzaApp.App">
     <Application.Resources>
-
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="Oswald">
+                <On Platform="Android" Value="Oswald-VariableFont_wght.ttf#Oswald" />
+                <On Platform="iOS" Value="Oswald" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="Helvetica">
+                <On Platform="Android" Value="Helvetica.ttf#Helvetica" />
+                <On Platform="iOS" Value="Helvetica" />
+            </OnPlatform>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
