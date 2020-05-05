@@ -32,11 +32,14 @@ namespace MobilePizzaApp.Pages
         }
         private async void LoadArticles(object sender, EventArgs e)
         {
-            var tempLoadedArticles = await DownloadArticlesToList(0);
-            LoadFirstAsMainNews(LoadedArticles);
-            ListInfoView = CreateInformationViewFromList(LoadedArticles, tempLoadedArticles);
-            LastLoadedItemsCount = ListInfoView.Count+1;
-            ListInfoView.ForEach(x => NewsGrid.Children.Add(x, NewsGrid.Children.Count % 2, NewsGrid.Children.Count / 2));
+            if (LoadedArticles.Count == 0)
+            {
+                var tempLoadedArticles = await DownloadArticlesToList(0);
+                LoadFirstAsMainNews(LoadedArticles);
+                ListInfoView = CreateInformationViewFromList(LoadedArticles, tempLoadedArticles);
+                LastLoadedItemsCount = ListInfoView.Count + 1;
+                ListInfoView.ForEach(x => NewsGrid.Children.Add(x, NewsGrid.Children.Count % 2, NewsGrid.Children.Count / 2));
+            }
         }
 
         private async Task<int> DownloadArticlesToList(int v) // Liczva ostatnio pobranych
@@ -83,13 +86,6 @@ namespace MobilePizzaApp.Pages
             articleModels.Skip(articleModels.Count - ToBeLoadedCount).ToList().ForEach(x => TempInformationList.Add(new InformationView(x)));
             return TempInformationList;
         }
-
-
-
-
-
-
-
         private async void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
         {
             if (IsLoadingTask == null &&

@@ -13,14 +13,17 @@
         <Frame 
             CornerRadius="10"
             IsClippedToBounds="True"
-            BackgroundColor="Blue"
             Padding="-5"
             >
-            <AbsoluteLayout x:Name="ArticleObject"  BackgroundColor="Green">
-                <local:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="Transparent" BackgroundColor="Red" Padding="-10" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
-                    <Image x:Name="ArticleImage" Aspect="AspectFill"/>
+            <AbsoluteLayout x:Name="ArticleObject">
+                <local:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="Transparent" Padding="-10" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional" >
+                    <Image x:Name="ArticleImage" Aspect="AspectFill">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OpenArticleInFullScreenMode" NumberOfTapsRequired="1"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </local:GradientFrameRenderer>
-                <Label Text="{Binding Tytul}" Padding="3" FontFamily="{StaticResource Helvetica}" TextColor="Black" FontSize="Large" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0,1,1,0.2" AbsoluteLayout.LayoutFlags="All"/>
+                <Label Text="{Binding Tytul}" Padding="3" FontFamily="{StaticResource Helvetica}" TextColor="Black" FontSize="Large" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0,1,0.9,0.2" AbsoluteLayout.LayoutFlags="All"/>
             </AbsoluteLayout>
         </Frame>
     </ContentView.Content>

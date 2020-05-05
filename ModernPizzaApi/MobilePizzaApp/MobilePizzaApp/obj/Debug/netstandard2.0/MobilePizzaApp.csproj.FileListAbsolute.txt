@@ -34,3 +34,4 @@ D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netsta
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\Helvetica.ttf
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\MobilePizzaApp.csproj.CoreCompileInputs.cache
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\XamlC.stamp
+D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\ArticlePage.xaml.g.cs

@@ -1,4 +1,5 @@
 ﻿using MobilePizzaApp.Models;
+using MobilePizzaApp.Pages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,6 +29,11 @@ namespace MobilePizzaApp.Views
             else
                 ArticleImage.Source = ImageSource.FromUri(new Uri("https://via.placeholder.com/150"));
 
+        }
+
+        private async void OpenArticleInFullScreenMode(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new ArticlePage((ArticleModel)ArticleObject.BindingContext)));
         }
     }
 }
