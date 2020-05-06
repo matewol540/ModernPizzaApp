@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobilePizzaApp.Pages.RegisterPAge"
+             xmlns:FrameRenderer="clr-namespace:MobilePizzaApp.MarkupExtension"
+             x:Name="RegisterPage">
+    <ContentPage.Content>
+        <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+            <FrameRenderer:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="Red" Padding="0" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
+
+            <StackLayout  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="10">
+                <Frame CornerRadius="5" VerticalOptions="CenterAndExpand">
+                    <StackLayout>
+                        <Frame x:Name="NameFrame" BorderColor="{Binding Source={x:Reference RegisterPage}, Path=ImieColor}">
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <Label Text="Name" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>
+                                <Entry x:Name="NameEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                            </StackLayout>
+                        </Frame>
+                        <Frame x:Name="SubnameFrame" BorderColor="Transparent">
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <Label Text="Subname" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>
+                                <Entry  x:Name="SubNameEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                            </StackLayout>
+                        </Frame >
+                        <Frame x:Name="MailFrame" BorderColor="Transparent">
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <Label Text="E-Mail" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="150" FontSize="Medium" FontFamily="{StaticResource Helvetica}"/>
+                                <Entry x:Name="MailEntry"  HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame >
+                        <Frame x:Name="PasswordFrame" BorderColor="Transparent">
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <Label Text="Password" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>
+                                <Entry x:Name="PasswordEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsPassword="True"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame x:Name="RepeatPasswordFrame" BorderColor="Transparent">
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <Label Text="Repeat Password" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>
+                                <Entry x:Name="RepeatPasswordEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsPassword="True"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame x:Name="CheckboxFrame" BorderColor="Transparent">
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <CheckBox x:Name="IsAgreedTermsOfUse"/>
+                                <Label Text="Zapoznałem się z regulaminem" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Padding="0">
+                    <Button Clicked="RegisterUser" Text="Zarejestruj" BackgroundColor="Transparent"/>
+                </Frame>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content >
+</ContentPage>

@@ -6,9 +6,9 @@ namespace MobilePizzaApp.ApiConnector
 {
     public static class Constants
     {
-        public const String ApiUrl = "https://192.168.0.24:45455/";
+        private const String ApiUrl = "https://modernpizzaapi.azurewebsites.net/";
 
-        public static String ConnectionApiUri
+        public static String ConnectionApiUriPizza
         {
             get
             {
@@ -20,6 +20,13 @@ namespace MobilePizzaApp.ApiConnector
             get
             {
                 return ApiUrl + "artykul/";
+            }
+        }
+        public static String ConnectionApiUriUser
+        {
+            get
+            {
+                return ApiUrl + "api/uzytkownik/";
             }
         }
     }

@@ -18,15 +18,25 @@ namespace ModernPizzaApi
 {
     public static class DBConnector
     {
-        private static MongoClient dbClient = new MongoClient(Constants.MONGODB_CONNECTION_STR);
+        //private static MongoClient dbClient = new MongoClient(Constants.MONGODB_CONNECTION_STR);
+        //private const String DBName = "ModernPizzaDB";
 
+        //Connection to exteranal DB
+        private static MongoClient dbClient = new MongoClient(new MongoClientSettings()
+        {
+            ConnectionMode = ConnectionMode.Automatic,
+            Credential = MongoCredential.CreateCredential("bvjlr3yieol9j03", "u2bcoixvwja8lneywmyo", "LWSdD6FD3x9g4WrT9Dv8"),
+            Server = new MongoServerAddress("bvjlr3yieol9j03-mongodb.services.clever-cloud.com", 27017)
+
+        });
+        private const String DBName = "bvjlr3yieol9j03";
         public static List<TransakcjaModel> OtwarteZamowienia = new List<TransakcjaModel>();
         public static List<TransakcjaModel> DoWalidacjiZamowienia = new List<TransakcjaModel>();
 
         #region PizzaCommands
         public static List<PizzaModel> PobierzWszystkiePizza()
         {
-            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var MongoDBClient = dbClient.GetDatabase(DBName);
             var MongoDBKolekcja = MongoDBClient.GetCollection<PizzaModel>("Pizza");
 
             var PustyFiltr = Builders<PizzaModel>.Filter.Empty;
@@ -34,7 +44,7 @@ namespace ModernPizzaApi
         }
         public static PizzaModel PobierzPizza(String id)
         {
-            var MongoDBKlient = dbClient.GetDatabase("ModernPizzaDB");
+            var MongoDBKlient = dbClient.GetDatabase(DBName);
             var PizzaKolekcja = MongoDBKlient.GetCollection<PizzaModel>("Pizza");
 
             return PizzaKolekcja.Find<PizzaModel>(x => x.ObjectId == id).First();
@@ -43,7 +53,7 @@ namespace ModernPizzaApi
         {
             try
             {
-                var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+                var MongoDBClient = dbClient.GetDatabase(DBName);
                 var PizzaKolekcja = MongoDBClient.GetCollection<PizzaModel>("Pizza");
                 await PizzaKolekcja.InsertOneAsync(pizza);
             }
@@ -55,7 +65,7 @@ namespace ModernPizzaApi
         }
         public static async Task<String> AktualizujPizzaAsync(PizzaModel pizza)
         {
-            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var MongoDBClient = dbClient.GetDatabase(DBName);
             var PizzaKolekcja = MongoDBClient.GetCollection<PizzaModel>("Pizza");
 
             var update = Builders<PizzaModel>.Update.Set("Nazwa", pizza.Nazwa);
@@ -65,7 +75,7 @@ namespace ModernPizzaApi
         }
         public static async Task<String> UsunPizzaAsync(PizzaModel pizza)
         {
-            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var MongoDBClient = dbClient.GetDatabase(DBName);
             var PizzaKolekcja = MongoDBClient.GetCollection<BsonDocument>("Pizza");
 
 
@@ -82,7 +92,7 @@ namespace ModernPizzaApi
         #region PersonelCommands
         internal static List<PersonelModel> PobierzWszystkichPracownikow()
         {
-            var MongoDBKlient = dbClient.GetDatabase("ModernPizzaDB");
+            var MongoDBKlient = dbClient.GetDatabase(DBName);
             var PersonelKolekcja = MongoDBKlient.GetCollection<PersonelModel>("Personel");
 
             var Filter = Builders<PersonelModel>.Filter.Empty;
@@ -93,7 +103,7 @@ namespace ModernPizzaApi
         }
         internal static PersonelModel AutoryzujPersonel(string login, string v)
         {
-            var MongoDBKlient = dbClient.GetDatabase("ModernPizzaDB");
+            var MongoDBKlient = dbClient.GetDatabase(DBName);
             var PersonelKolekcja = MongoDBKlient.GetCollection<PersonelModel>("Personel");
 
             var Personel = PersonelKolekcja.Find(x => x.Login == login && x.Haslo == v).First();
@@ -124,7 +134,7 @@ namespace ModernPizzaApi
         {
             try
             {
-                var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+                var MongoDBClient = dbClient.GetDatabase(DBName);
                 var PersonelKolekcja = MongoDBClient.GetCollection<PersonelModel>("Personel");
                 await PersonelKolekcja.InsertOneAsync(personel);
             }
@@ -196,7 +206,7 @@ namespace ModernPizzaApi
         {
             try
             {
-                var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+                var MongoDBClient = dbClient.GetDatabase(DBName);
                 var TransakcjaKolekcja = MongoDBClient.GetCollection<TransakcjaModel>("Transakcje");
 
                 await TransakcjaKolekcja.InsertOneAsync(transakcja);
@@ -217,7 +227,7 @@ namespace ModernPizzaApi
         #region Kod Wejscia
         public static String PobierzKodWejscia(DateTime dt)
         {
-            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var MongoDBClient = dbClient.GetDatabase(DBName);
             var KodKolekcja = MongoDBClient.GetCollection<KodWejsciaModel>("KodWejscia");
 
             var KodWejscia = String.Empty;
@@ -234,7 +244,7 @@ namespace ModernPizzaApi
         }
         public static Boolean WalidujKodWejscia(KodWejsciaModel KodWejscia)
         {
-            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var MongoDBClient = dbClient.GetDatabase(DBName);
             var KodKolekcja = MongoDBClient.GetCollection<KodWejsciaModel>("KodWejscia");
 
             var response = KodKolekcja.Find<KodWejsciaModel>(x => x.kodWejscia == KodWejscia.kodWejscia && x.Data == KodWejscia.Data);
@@ -244,7 +254,7 @@ namespace ModernPizzaApi
 
         public static async Task ZapiszKodWejsciaAsync(DateTime dt, String kodWejscia)
         {
-            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var MongoDBClient = dbClient.GetDatabase(DBName);
             var KodKolekcja = MongoDBClient.GetCollection<KodWejsciaModel>("KodWejscia");
 
             var TempKodWejscia = new KodWejsciaModel(dt.ToString("yyyyMMdd"), kodWejscia);
@@ -256,7 +266,7 @@ namespace ModernPizzaApi
         #region Artykul
         public static async Task<List<ArtykulModel>> PobierzArtykulyAsync()
         {
-            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var MongoDBClient = dbClient.GetDatabase(DBName);
             var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
             var PustyFiltr = Builders<ArtykulModel>.Filter.Empty;
             var TempList = await ArtykulKolekcja.FindAsync<ArtykulModel>(PustyFiltr);
@@ -266,9 +276,19 @@ namespace ModernPizzaApi
         public static void DodajArtykul(ArtykulModel Artykul)
         {
             Artykul.Obraz = File.ReadAllBytes(@"D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\Zasoby\TempPizzeria.jpg");
-            var MongoDBClient = dbClient.GetDatabase("ModernPizzaDB");
+            var MongoDBClient = dbClient.GetDatabase(DBName);
             var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
-             ArtykulKolekcja.InsertOne(Artykul);
+            ArtykulKolekcja.InsertOne(Artykul);
+        }
+
+
+        #endregion
+        #region Uzytkownik 
+        public async static void DodajUzytkownika(UserModel userModel)
+        {
+            var MongoDBClient = dbClient.GetDatabase(DBName);
+            var UzytkownicyKolekcja = MongoDBClient.GetCollection<UserModel>("Uzytkownicy");
+            await UzytkownicyKolekcja.InsertOneAsync(userModel);
         }
         #endregion
     }

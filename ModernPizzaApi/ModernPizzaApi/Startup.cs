@@ -14,6 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
+
 
 namespace ModernPizzaApi
 {
@@ -56,6 +59,11 @@ namespace ModernPizzaApi
                     ClockSkew = TimeSpan.FromMinutes(0)
                 };
             });
+            services.AddSwaggerGen(c =>
+            c.SwaggerDoc("Version_1.0.0", new OpenApiInfo(){
+                Title = "Modern Pizza API",
+
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,6 +89,12 @@ namespace ModernPizzaApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(x =>
+            {
+                x.SwaggerEndpoint("/swagger/Version_1.0.0/swagger.json", "ModernPizzaApi");
+                x.RoutePrefix = String.Empty;
             });
         }
     }

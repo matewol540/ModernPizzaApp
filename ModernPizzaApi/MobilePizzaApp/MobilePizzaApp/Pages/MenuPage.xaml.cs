@@ -23,7 +23,7 @@ namespace MobilePizzaApp.Pages
             {
                 using (var HttpClient = new HttpApiConnector().GetClient())
                 {
-                    var response = await HttpClient.GetAsync(Constants.ConnectionApiUri);
+                    var response = await HttpClient.GetAsync(Constants.ConnectionApiUriPizza);
                     if (response.IsSuccessStatusCode)
                     {
                         string Content = await response.Content.ReadAsStringAsync();

@@ -148,9 +148,6 @@ D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\bin\Debug\netcoreapp3.1\runtime
 D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernPizzaApi.csproj.CoreCompileInputs.cache
-D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernPizzaApi.MvcApplicationPartsAssemblyInfo.cs
-D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernPizzaApi.MvcApplicationPartsAssemblyInfo.cache
 D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernPizzaApi.AssemblyInfoInputs.cache
 D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernPizzaApi.AssemblyInfo.cs
 D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernPizzaApi.RazorTargetAssemblyInfo.cache
@@ -161,3 +158,13 @@ D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernP
 D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernPizzaApi.pdb
 D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernPizzaApi.genruntimeconfig.cache
 D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernPizzaApi.csprojAssemblyReference.cache
+D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\bin\Debug\netcoreapp3.1\System.Web.Http.WebHost.dll
+D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
+D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\bin\Debug\netcoreapp3.1\Swashbuckle.Core.dll
+D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\bin\Debug\netcoreapp3.1\WebActivatorEx.dll
+D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernPizzaApi.csproj.CoreCompileInputs.cache
+D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernPizzaApi.MvcApplicationPartsAssemblyInfo.cs
+D:\ModernPizzaRepo\ModernPizzaApi\ModernPizzaApi\obj\Debug\netcoreapp3.1\ModernPizzaApi.MvcApplicationPartsAssemblyInfo.cache
