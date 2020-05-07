@@ -17,5 +17,7 @@ namespace MobilePizzaApp.Models
         public String Mail { get; set; }
         [JsonProperty("Haslo")]
         public String Password { get; set; }
+        [JsonProperty("Role")]
+        public String Role { get; set; }
     }
 }

@@ -83,7 +83,8 @@ namespace MobilePizzaApp.Pages
                 Imie = String.IsNullOrEmpty(nameEntry) ? String.Empty : nameEntry,
                 Nazwisko = String.IsNullOrEmpty(subNameEntry) ? String.Empty : subNameEntry,
                 Mail = mailEntry,
-                Password = ConvertStringToHash(passwordEntry)
+                Password = ConvertStringToHash(passwordEntry),
+                Role = "User"
             };
             return Model;
         }
