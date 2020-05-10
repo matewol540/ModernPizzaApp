@@ -33,11 +33,14 @@
                             </StackLayout>
                         </Frame >
                         <Frame x:Name="PasswordFrame" BorderColor="Transparent">
-                            <StackLayout Orientation="Horizontal" Padding="10">
-                                <Label Text="Password" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>
-                                <Entry x:Name="PasswordEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsPassword="True"/>
+                            <StackLayout >
+                                <StackLayout Orientation="Horizontal" Padding="10">
+                                    <Label Text="Password" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>
+                                    <Entry x:Name="PasswordEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsPassword="True"/>
+                                </StackLayout>
+                                <StackLayout x:Name="PasswordIndicator" Orientation="Horizontal"/>
                             </StackLayout>
-                        </Frame>
+                            </Frame>
                         <Frame x:Name="RepeatPasswordFrame" BorderColor="Transparent">
                             <StackLayout Orientation="Horizontal" Padding="10">
                                 <Label Text="Repeat Password" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>

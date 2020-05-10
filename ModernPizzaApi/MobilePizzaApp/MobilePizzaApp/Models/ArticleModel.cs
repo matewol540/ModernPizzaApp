@@ -7,7 +7,7 @@ namespace MobilePizzaApp.Models
 {
     public class ArticleModel
     {
-        [JsonProperty("objectid")]
+        [JsonProperty("id")]
         public String ObjectId { get; set; }
         [JsonProperty("Tytul")]
         public String Tytul { get; set; }

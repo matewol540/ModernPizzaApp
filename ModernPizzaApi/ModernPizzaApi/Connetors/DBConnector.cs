@@ -13,6 +13,8 @@ using System.Security.Claims;
 using ModernPizzaApi.Utils;
 using ModernPizzaApi.Controllers;
 using System.IO;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Primitives;
 
 namespace ModernPizzaApi
 {
@@ -29,8 +31,14 @@ namespace ModernPizzaApi
             Server = new MongoServerAddress("bvjlr3yieol9j03-mongodb.services.clever-cloud.com", 27017)
 
         });
+
+
+
         private const String DBName = "bvjlr3yieol9j03";
         public static List<TransakcjaModel> OtwarteZamowienia = new List<TransakcjaModel>();
+
+
+
         public static List<TransakcjaModel> DoWalidacjiZamowienia = new List<TransakcjaModel>();
 
         #region PizzaCommands
@@ -272,7 +280,26 @@ namespace ModernPizzaApi
             var TempList = await ArtykulKolekcja.FindAsync<ArtykulModel>(PustyFiltr);
             return TempList.ToList();
         }
+        internal static async Task<ArtykulModel> PobierzArtykulAsync(String artykulId)
+        {
+            var MongoDBClient = dbClient.GetDatabase(DBName);
+            var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
+            var Article = await ArtykulKolekcja.FindAsync<ArtykulModel>(x => x.Id == artykulId);
 
+            return Article.First();
+        }
+
+        internal static async Task<ArtykulModel> DodajKomentarz(KomentarzModel komment)
+        {
+            var MongoDBClient = dbClient.GetDatabase(DBName);
+            var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
+            var TempArtykul = ArtykulKolekcja.Find(x => x.Id == komment.Artykulid).First();
+            if (TempArtykul.Komentarze == null)
+                TempArtykul.Komentarze = new List<KomentarzModel>();
+            TempArtykul.Komentarze.Add(komment);
+            await ArtykulKolekcja.FindOneAndReplaceAsync(x => x.Id == komment.Artykulid, TempArtykul);
+            return TempArtykul;
+        }
         public static void DodajArtykul(ArtykulModel Artykul)
         {
             Artykul.Obraz = File.ReadAllBytes(@"D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\Zasoby\TempPizzeria.jpg");
@@ -284,11 +311,60 @@ namespace ModernPizzaApi
 
         #endregion
         #region Uzytkownik 
-        public async static void DodajUzytkownika(UserModel userModel)
+        public static UserModel AuthLoggingUser(string login, string v)
+        {
+            var MongoDBKlient = dbClient.GetDatabase(DBName);
+            var UsersCollection = MongoDBKlient.GetCollection<UserModel>("Uzytkownicy");
+
+            var User = UsersCollection.Find(x => x.Mail == login && x.Haslo == v).First();
+            if (User == null)
+                return null;
+            var TokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("PizzaDemoKeyAndSomeRandomData");
+            var TokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, User.Mail),
+                    new Claim(ClaimTypes.Role, User.Role)
+                }),
+                Expires = DateTime.Now.AddDays(90),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var Token = TokenHandler.CreateToken(TokenDescriptor);
+            User.Token = TokenHandler.WriteToken(Token);
+            User.Haslo = String.Empty;
+            return User;
+        }
+        public async static Task<Boolean> DodajUzytkownika(UserModel userModel)
         {
             var MongoDBClient = dbClient.GetDatabase(DBName);
             var UzytkownicyKolekcja = MongoDBClient.GetCollection<UserModel>("Uzytkownicy");
-            await UzytkownicyKolekcja.InsertOneAsync(userModel);
+            var ExistingMail = UzytkownicyKolekcja.Find(x => x.Mail == userModel.Mail);
+            if (ExistingMail.CountDocuments() != 0)
+                return false;
+            else
+                await UzytkownicyKolekcja.InsertOneAsync(userModel);
+            return true;
+        }
+        internal async static Task<UserModel> PobierzUzytkownika(String token)
+        {
+            var TokenHandler = new JwtSecurityTokenHandler();
+            var Claims = TokenHandler.ReadToken(token) as JwtSecurityToken;
+            var Mail = Claims.Claims.First(x => x.Type == "unique_name").Value;
+
+            var MongoDBKlient = dbClient.GetDatabase(DBName);
+            var UsersCollection = MongoDBKlient.GetCollection<UserModel>("Uzytkownicy");
+            var users = await UsersCollection.FindAsync<UserModel>(x => x.Mail == Mail);
+            try
+            {
+                return users.First();
+            }
+            catch (Exception err)
+            {
+
+            }
+            return null;
         }
         #endregion
     }

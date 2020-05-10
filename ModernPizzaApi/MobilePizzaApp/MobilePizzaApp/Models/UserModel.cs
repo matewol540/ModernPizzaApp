@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace MobilePizzaApp.Models
@@ -19,5 +21,18 @@ namespace MobilePizzaApp.Models
         public String Password { get; set; }
         [JsonProperty("Role")]
         public String Role { get; set; }
+        
+        public static String EncryotPw(String pw)
+        {
+            var EncyrptedPW = String.Empty;
+            using (var MD5Encryptor = MD5.Create())
+            {
+                var tempBytes = MD5Encryptor.ComputeHash(Encoding.UTF8.GetBytes(pw + "someRandomText"));
+                StringBuilder sb = new StringBuilder();
+                tempBytes.ToList().ForEach(x => sb.Append(x.ToString("x2")));
+                EncyrptedPW = sb.ToString();
+            }
+            return EncyrptedPW;
+        }
     }
 }

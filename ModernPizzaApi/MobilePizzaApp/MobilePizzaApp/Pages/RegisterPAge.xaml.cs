@@ -13,12 +13,14 @@ using Xamarin.Forms.Xaml;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
+using Xamarin.Forms.Internals;
 
 namespace MobilePizzaApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPAge : ContentPage
     {
+        private Regex MailRegex = new Regex("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
         public CarouselPage ParentPage { get; set; }
         public Color ImieColor
         {
@@ -33,15 +35,88 @@ namespace MobilePizzaApp.Pages
                 return Color.Red;
             }
         }
+        public Color MailColor
+        {
+            get
+            {
+                var Mail = MailEntry.Text;
+                if (String.IsNullOrEmpty(Mail) || MailRegex.IsMatch(Mail))
+                    return Color.Red;
+                if (MailRegex.IsMatch(Mail))
+                    return Color.Green;
+                return Color.Transparent;
+            }
+        }
+        public Color PasswordColor
+        {
+            get
+            {
+                var PW1 = PasswordEntry.Text;
+                var PW2 = RepeatPasswordEntry.Text;
+                if (PW1 != PW2 || PW1 == String.Empty || PW2 == String.Empty)
+                    return Color.Red;
+                return Color.Green;
+            }
+        }
+        public Color CheckBoxColor
+        {
+            get
+            {
+                if (IsAgreedTermsOfUse.IsChecked)
+                    return Color.Green;
+                return Color.Red;
+            }
+        }
+
+        public List<BoxView> Boxes = new List<BoxView>()
+        {
+            new BoxView()
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor=Color.Red,
+                IsVisible = false,
+                HeightRequest=8
+            },
+            new BoxView()
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor=Color.Orange,
+                IsVisible = false,
+                HeightRequest=8
+            },
+            new BoxView()
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor=Color.Yellow,
+                IsVisible = false,
+                HeightRequest=8
+            },
+            new BoxView()
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor=Color.Green,
+                IsVisible = false,
+                HeightRequest=8
+            }
+        };
 
         public RegisterPAge()
         {
             InitializeComponent();
-            this.NameEntry.TextChanged += (object send, TextChangedEventArgs err) =>
+            Boxes.ForEach(x => PasswordIndicator.Children.Add(x));
+            this.PasswordEntry.TextChanged += (object send, TextChangedEventArgs err) =>
             {
-                NameFrame.BorderColor = ImieColor;
+                var Pw = PasswordEntry.Text;
+                int CountToTake = 0;
+                if (Pw.Length > 8)
+                    CountToTake += 2;
+                if (Pw.Any(char.IsUpper) && Pw.Any(char.IsLower))
+                    CountToTake += 1;
+                if (Pw.Any(char.IsDigit))
+                    CountToTake += 1;
+                Boxes.Take(CountToTake).ForEach(x => x.IsVisible = true);
+                Boxes.Skip(CountToTake).ToList().ForEach(x => x.IsVisible = false);
             };
-
         }
 
         private async void RegisterUser(object sender, EventArgs e)
@@ -66,39 +141,57 @@ namespace MobilePizzaApp.Pages
                         await DisplayAlert("Sukces", "Możesz sie zalogować za pomocą wprowadzonych danych", "OK");
                     }
                     else
-                        await DisplayAlert("Wystąpił błąd...", "Uzytkownik nie moze zostac dodany. Sprobuj ponownie pozniej", "OK");
+                        await DisplayAlert("Wystąpił błąd...", "Uzytkownik nie moze zostac dodany, ponieważ inne konto zostało zarejestrowane pod tym adresem", "OK");
                 }
             }
             catch (Exception err)
             {
-
+                await DisplayAlert("Wystąpił błąd...", err.StackTrace, "OK");
             }
         }
         private UserModel CreateUserFromParams(String mailEntry, String passwordEntry, Boolean isAgreedTermsOfUse, String nameEntry = null, String subNameEntry = null)
         {
-            if (String.IsNullOrEmpty(mailEntry) || String.IsNullOrEmpty(passwordEntry))
+            String ErrorMessage = GetErrorMessage(mailEntry, passwordEntry, isAgreedTermsOfUse, nameEntry, subNameEntry);
+            if (!String.IsNullOrEmpty(ErrorMessage))
+            {
+                DisplayAlert("Error", ErrorMessage, "OK");
                 return null;
+            }
+
             var Model = new UserModel
             {
                 Imie = String.IsNullOrEmpty(nameEntry) ? String.Empty : nameEntry,
                 Nazwisko = String.IsNullOrEmpty(subNameEntry) ? String.Empty : subNameEntry,
                 Mail = mailEntry,
-                Password = ConvertStringToHash(passwordEntry),
+                Password = UserModel.EncryotPw(passwordEntry),
                 Role = "User"
             };
             return Model;
         }
-        private string ConvertStringToHash(string passwordEntry)
+        private string GetErrorMessage(String mailEntry, String passwordEntry, Boolean isAgreedTermsOfUse, String nameEntry = null, String subNameEntry = null)
         {
-            var EncyrptedPW = String.Empty;
-            using (var MD5Encryptor = MD5.Create())
+            String ErrorMessage = String.Empty;
+            if (String.IsNullOrEmpty(mailEntry) || !MailRegex.IsMatch(mailEntry))
             {
-                var tempBytes = MD5Encryptor.ComputeHash(Encoding.UTF8.GetBytes(passwordEntry + "someRandomText"));
-                StringBuilder sb = new StringBuilder();
-                tempBytes.ToList().ForEach(x => sb.Append(x.ToString("x2")));
-                EncyrptedPW = sb.ToString();
+                MailFrame.BorderColor = MailColor;
+                ErrorMessage += $"Provided e-mail contains errors. {Environment.NewLine}";
             }
-            return EncyrptedPW;
+            if (String.IsNullOrEmpty(passwordEntry))
+            {
+                PasswordFrame.BorderColor = PasswordColor;
+                ErrorMessage += $"Password must be filled. {Environment.NewLine}";
+            }
+            if (passwordEntry != RepeatPasswordEntry.Text)
+            {
+                PasswordFrame.BorderColor = PasswordColor;
+                ErrorMessage += $"Provided passwords are not equal. {Environment.NewLine}";
+            }
+            if (!IsAgreedTermsOfUse.IsChecked)
+            {
+                CheckboxFrame.BorderColor = CheckBoxColor;
+                ErrorMessage += $"Nie zaakceptowano regulaminu";
+            }
+            return ErrorMessage;
         }
 
     }

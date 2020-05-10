@@ -6,23 +6,38 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ModernPizzaApi.Models;
 using MongoDB.Bson;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ModernPizzaApi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     [ApiController]
     public class ArtykulController : ControllerBase
     {
         private const int ArtykulCountPerRequest = 5;
 
+        [AllowAnonymous]
         [HttpGet("{LastIndex}")]
-        public IEnumerable<ArtykulModel> Get(int LastIndex)
+        public IEnumerable<ArtykulModel> PobierzArtykuly(int LastIndex)
         {
             var ArtykulyList = DBConnector.PobierzArtykulyAsync().Result;
             ArtykulyList = ArtykulyList.OrderByDescending(x => x.Data).Skip(LastIndex).Take(ArtykulCountPerRequest).ToList();
+            ArtykulyList.ForEach(x => x.Komentarze = null);
             return ArtykulyList;
         }
 
+        [AllowAnonymous]
+        [HttpGet("Komentarz/{ArtykulId}")]
+        public IEnumerable<KomentarzModel> PobierzKomentarzeArtykulu(String ArtykulId)
+        {
+            var Artykul = DBConnector.PobierzArtykulAsync(ArtykulId).Result;
+            if (Artykul.Komentarze == null)
+                return new List<KomentarzModel>();
+            return Artykul.Komentarze;
+        }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public void Post([FromBody]ArtykulModel Artykul)
         {
@@ -36,6 +51,22 @@ namespace ModernPizzaApi.Controllers
             }
         }
 
+        [HttpPost("komentarz")]
+        [Authorize(Roles = "User")]
+        public async Task<ActionResult<ArtykulModel>> Dodajkomentarz([FromBody]KomentarzModel komment)
+        {
+            try
+            {
+                return await DBConnector.DodajKomentarz(komment);
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine("Error occured while adding article to DB.");
+                return null;
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public void PutArticle()
         {

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobilePizzaApp.Pages.LoginApplicationPage"
+             xmlns:FrameRenderer="clr-namespace:MobilePizzaApp.MarkupExtension">
+    <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+        <FrameRenderer:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="Red" Padding="0" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+        </FrameRenderer:GradientFrameRenderer>
+        <StackLayout  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="10">
+            <Frame CornerRadius="5" VerticalOptions="EndAndExpand">
+                <StackLayout Orientation="Horizontal" Padding="10">
+                    <Label Text="Login" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="150" FontSize="Medium" FontFamily="{StaticResource Helvetica}"/>
+                    <Entry x:Name="loginEntry"  HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5" VerticalOptions="StartAndExpand">
+                <StackLayout Orientation="Horizontal" Padding="10">
+                    <Label  Text="Password" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>
+                    <Entry x:Name="passwordEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsPassword="True"/>
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" >
+                        <CheckBox x:Name="Zapamietaj" />
+                        <Label Text="Zapamietaj mnie" VerticalOptions="Center"  FontSize="Medium"/>
+                    </StackLayout>
+                    <Button Text="Zaloguj"  FontFamily="{StaticResource Helvetica}" FontSize="Title" Clicked="Button_ClickedAsync" />
+                </StackLayout>
+            </Frame>
+            <Label VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10" TextColor="Black" FontSize="Large">
+                <Label.Text>
+                    If you don't have account swipe left to register
+                </Label.Text>
+            </Label>
+        </StackLayout>
+    </AbsoluteLayout>
+
+</ContentPage>

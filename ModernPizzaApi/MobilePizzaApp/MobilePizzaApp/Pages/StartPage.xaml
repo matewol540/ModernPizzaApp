@@ -19,7 +19,11 @@
                     </Grid.RowDefinitions>
                     <AbsoluteLayout x:Name="FirstNews" Grid.Row="0" Padding="-20">
                         <EmbeddedSource:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="Transparent" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
-                            <Image  x:Name="FirstImageArticle" Aspect="AspectFill" />
+                            <Image  x:Name="FirstImageArticle" Aspect="AspectFill">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
+                                </Image.GestureRecognizers>
+                            </Image>
                         </EmbeddedSource:GradientFrameRenderer>
                         <Label Text="{Binding Tytul}"  TextColor="Black" FontFamily="{StaticResource Oswald}"  AbsoluteLayout.LayoutBounds="0,1,1,0.3" AbsoluteLayout.LayoutFlags="All" FontSize="36" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
                     </AbsoluteLayout>

@@ -11,13 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace MobilePizzaApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UserAccountPage : CarouselPage
+    public partial class ManageAccountPage : ContentPage
     {
-
-        public UserAccountPage()
+        public UserModel User { get; set; }
+        public ManageAccountPage()
         {
             InitializeComponent();
-            this.RegisterPage.ParentPage = this;
         }
     }
 }

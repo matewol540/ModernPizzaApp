@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace ModernPizzaApi.Models
 {
@@ -16,13 +17,10 @@ namespace ModernPizzaApi.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public String ObjectID { get; set; }
 
-        [Required]
         [BsonElement("Login")]
         public String Login { get; set; }
-        [Required]
         [BsonElement("Haslo")]
         public String Haslo { get; set; }
-
 
         [BsonElement("Imie")]
         public String Imie { get; set; }
@@ -32,7 +30,10 @@ namespace ModernPizzaApi.Models
 
         [BsonElement("Stanowisko")]
         public String Stanowisko { get; set; }
-       
+        [BsonElement("Role")]
+        public ClaimsIdentity Role { get; internal set; }
+
+
         public String Token { get; set; }
 
         public PersonelModel()

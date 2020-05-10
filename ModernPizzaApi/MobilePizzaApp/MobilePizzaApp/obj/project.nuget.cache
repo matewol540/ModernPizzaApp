@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RTOWZWVXAMMwXTlRytgul5B10+mFabZddrPo0jZA1bXJfBkycOPulX5vxRwHDo3z35qvqn6Pk0QBdDREBw6SwQ==",
+  "dgSpecHash": "jQtdMO7QoQyk8WpdYr2+4kSyY95xIoqKaObxlEfNXv1KXGpAcnOrM5/VMxfuZdYEXiE95KMXohOE2gHsiPE5ng==",
   "success": true,
   "projectFilePath": "D:\\ModernPizzaRepo\\ModernPizzaApi\\MobilePizzaApp\\MobilePizzaApp\\MobilePizzaApp.csproj",
   "expectedPackageFiles": [
@@ -18,6 +18,7 @@
     "C:\\Users\\wolsk\\.nuget\\packages\\xam.plugins.forms.imagecircle\\3.0.0.5\\xam.plugins.forms.imagecircle.3.0.0.5.nupkg.sha512",
     "C:\\Users\\wolsk\\.nuget\\packages\\xam.plugins.messaging\\5.2.0\\xam.plugins.messaging.5.2.0.nupkg.sha512",
     "C:\\Users\\wolsk\\.nuget\\packages\\xam.plugins.notifier\\3.0.1\\xam.plugins.notifier.3.0.1.nupkg.sha512",
+    "C:\\Users\\wolsk\\.nuget\\packages\\xamarin.auth\\1.7.0\\xamarin.auth.1.7.0.nupkg.sha512",
     "C:\\Users\\wolsk\\.nuget\\packages\\xamarin.essentials\\1.5.3.1\\xamarin.essentials.1.5.3.1.nupkg.sha512",
     "C:\\Users\\wolsk\\.nuget\\packages\\xamarin.forms\\4.6.0.726\\xamarin.forms.4.6.0.726.nupkg.sha512",
     "C:\\Users\\wolsk\\.nuget\\packages\\zxing.net.mobile\\2.4.1\\zxing.net.mobile.2.4.1.nupkg.sha512"

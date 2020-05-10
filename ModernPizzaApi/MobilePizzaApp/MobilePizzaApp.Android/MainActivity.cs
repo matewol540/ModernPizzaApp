@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using ImageCircle.Forms.Plugin.Droid;
 using System.Net;
+using Android.Content;
 
 namespace MobilePizzaApp.Droid
 {

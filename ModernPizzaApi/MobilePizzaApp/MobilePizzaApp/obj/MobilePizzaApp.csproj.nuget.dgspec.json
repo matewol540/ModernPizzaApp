@@ -80,6 +80,10 @@
               "target": "Package",
               "version": "[3.0.1, )"
             },
+            "Xamarin.Auth": {
+              "target": "Package",
+              "version": "[1.7.0, )"
+            },
             "Xamarin.Essentials": {
               "target": "Package",
               "version": "[1.5.3.1, )"

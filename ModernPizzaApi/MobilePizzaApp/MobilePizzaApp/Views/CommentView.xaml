@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobilePizzaApp.Views.CommentView"
+             >
+    <ContentView.Content>
+            <!--<AbsoluteLayout Padding="5">
+                <Label Text="{Binding Tresc}" AbsoluteLayout.LayoutBounds="0,0.1,0.8,0.7" AbsoluteLayout.LayoutFlags="All" />
+                <BoxView BackgroundColor="Black" AbsoluteLayout.LayoutBounds="0,0.7,1,0.05" AbsoluteLayout.LayoutFlags="All"/>
+                <StackLayout Orientation="Horizontal"  AbsoluteLayout.LayoutBounds="0,0.9,0.8,0.2" AbsoluteLayout.LayoutFlags="All">
+                    <Label Text="{Binding Autor}" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="{Binding Data}" HorizontalOptions="End"/>
+                </StackLayout>
+            </AbsoluteLayout>-->
+        <Frame>
+        <StackLayout>
+                <Label Text="{Binding Tresc}"/>
+                <BoxView BackgroundColor="Black"  HeightRequest="0.1" />
+                <StackLayout Orientation="Horizontal" >
+                    <Label Text="{Binding Autor, StringFormat='Autor: {0}'}" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="{Binding Data}" HorizontalOptions="End"/>
+            </StackLayout>
+        </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

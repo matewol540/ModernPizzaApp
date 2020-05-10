@@ -8,16 +8,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MobilePizzaApp.Pages
+namespace MobilePizzaApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UserAccountPage : CarouselPage
+    public partial class CommentView : ContentView
     {
-
-        public UserAccountPage()
+        public CommentView()
         {
             InitializeComponent();
-            this.RegisterPage.ParentPage = this;
         }
     }
 }
