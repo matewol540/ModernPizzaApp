@@ -4,6 +4,7 @@ using MobilePizzaApp.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,6 @@ namespace MobilePizzaApp
         public Main()
         {
             InitializeComponent();
-
         }
         private async Task<UserModel> DownloadUser()
         {
@@ -33,6 +33,9 @@ namespace MobilePizzaApp
                     {
                         var Context = await response.Content.ReadAsStringAsync();
                         return Newtonsoft.Json.JsonConvert.DeserializeObject<UserModel>(Context);
+                    } else
+                    {
+                        throw new Exception();
                     }
                 }
             }
@@ -45,7 +48,7 @@ namespace MobilePizzaApp
         }
         private async void PagesOrganizer_Appearing(object sender, EventArgs e)
         {
-            var User = new UserModel();
+            UserModel User = null;
             if (Application.Current.Properties.ContainsKey("token"))
                 User = await DownloadUser();
 

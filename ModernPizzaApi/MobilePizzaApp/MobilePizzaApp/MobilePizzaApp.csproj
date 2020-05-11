@@ -72,22 +72,22 @@
     <EmbeddedResource Update="Pages\ArticlePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\LoginApplicationPage.xaml">
+    <EmbeddedResource Update="Pages\UserManagePages\LoginApplicationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\ManageAccountPage.xaml">
+    <EmbeddedResource Update="Pages\UserManagePages\ManageAccountPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\OrderPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\RegisterPAge.xaml">
+    <EmbeddedResource Update="Pages\UserManagePages\RegisterPAge.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\RezerwacjaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\UserAccountPage.xaml">
+    <EmbeddedResource Update="Pages\UserManagePages\UserAccountPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CommentView.xaml">

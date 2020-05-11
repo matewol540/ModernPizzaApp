@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobilePizzaApp.Pages.ManageAccountPage"
+             Appearing="ContentPage_Appearing" >
+    <ContentPage.Content>
+        <StackLayout x:Name="UserManagePage">
+            <Entry Placeholder="E-mail" Text="{Binding Mail}" IsEnabled="False"/>
+            <StackLayout Orientation="Horizontal">
+                <Image x:Name="AvatarImage">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ChangeImageAvatar"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <StackLayout>
+                    <Entry Placeholder="Imie" Text="{Binding Imie}"/>
+                    <Entry Placeholder="Nazwisko" Text="{Binding Nazwisko}"/>
+                </StackLayout>                
+            </StackLayout>
+            <Entry Placeholder="E-mail" Text="{Binding Mail}" IsEnabled="False"/>
+            <Label Text="{Binding Mail, StringFormat='E-Mail: {0}'}" />
+            <Button Text="Change password" Clicked="Button_Clicked"/>
+            <Button Text="Wyloguj" HorizontalOptions="FillAndExpand" Clicked="Logout_Clicked"/>
+            <Button Text="Save changes" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+            <Button Text="Usun konto" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -57,6 +57,7 @@ namespace ModernPizzaApi
 
             return PizzaKolekcja.Find<PizzaModel>(x => x.ObjectId == id).First();
         }
+
         public static async Task<string> DodajPizzaAsync(PizzaModel pizza)
         {
             try
@@ -365,6 +366,37 @@ namespace ModernPizzaApi
 
             }
             return null;
+        }
+        public async static Task<Boolean> AktualizujUzytkownika(UserModel user)
+        {
+            try
+            {
+                var MongoDBKlient = dbClient.GetDatabase(DBName);
+                var UsersCollection = MongoDBKlient.GetCollection<UserModel>("Uzytkownicy");
+                var UpdateUser = (await UsersCollection.FindAsync<UserModel>(x => x.Mail == user.Mail)).First();
+                UpdateUser.Haslo = user.Haslo;
+                await UsersCollection.ReplaceOneAsync<UserModel>(x => x.Mail == user.Mail, UpdateUser);
+                return true;
+            }
+            catch (Exception err)
+            {
+                
+            }
+            return false;
+        }
+
+        public static void UsunUzytkownik(UserModel user)
+        {
+            try
+            {
+                var MongoDBKlient = dbClient.GetDatabase(DBName);
+                var UsersCollection = MongoDBKlient.GetCollection<UserModel>("Uzytkownicy");
+                UsersCollection.FindOneAndDeleteAsync<UserModel>(x => x.Mail == user.Mail);
+            }
+            catch (Exception err)
+            {
+
+            }
         }
         #endregion
     }

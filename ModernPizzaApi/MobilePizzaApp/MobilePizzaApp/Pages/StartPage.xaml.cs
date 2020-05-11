@@ -30,7 +30,11 @@ namespace MobilePizzaApp.Pages
             InitializeComponent();
             LoadedArticles = new List<ArticleModel>();
         }
-        private async void LoadArticles(object sender, EventArgs e)
+        private void LoadArticles(object sender, EventArgs e)
+        {
+            Load();
+        }
+        public async void Load()
         {
             if (LoadedArticles.Count == 0)
             {
@@ -56,7 +60,7 @@ namespace MobilePizzaApp.Pages
                         InfTemp = JsonConvert.DeserializeObject<List<ArticleModel>>(Content);
                     }
                 }
-             }
+            }
             catch (Exception err)
             {
                 await DisplayAlert("Error", "Connection refused!", "Ok");
@@ -76,7 +80,7 @@ namespace MobilePizzaApp.Pages
             if (FirstNews.BindingContext == null)
             {
                 FirstNews.BindingContext = articleModel.First();
-                FirstImageArticle.Source = ImageSource.FromStream(() => new MemoryStream(articleModel.First().obraz));
+                FirstImageArticle.Source = ImageSource.FromStream(() => new MemoryStream((FirstNews.BindingContext as ArticleModel).obraz));
                 articleModel.Remove(articleModel.First());
             }
         }
@@ -92,7 +96,7 @@ namespace MobilePizzaApp.Pages
                 NewsGrid.Children[NewsGrid.Children.Count - 3].Y + NewsGrid.Children[NewsGrid.Children.Count - 3].Height / 4 < e.ScrollY + 300 &&
                 LastLoadedItemsCount != 0)
             {
-                IsLoadingTask = DownloadArticlesToList(LoadedArticles.Count+1);
+                IsLoadingTask = DownloadArticlesToList(LoadedArticles.Count + 1);
                 var TempCount = await IsLoadingTask;
                 ListInfoView = CreateInformationViewFromList(LoadedArticles, TempCount);
                 LastLoadedItemsCount = ListInfoView.Count;

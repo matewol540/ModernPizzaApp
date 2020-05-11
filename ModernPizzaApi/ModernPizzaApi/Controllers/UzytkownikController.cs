@@ -21,14 +21,6 @@ namespace ModernPizzaApi.Controllers
     public class UzytkownikController : ControllerBase
     {
 
-        [HttpGet("auth")]
-        public async Task<ActionResult<UserModel>> GetUserCredits()
-        {
-            var token = Request.Headers[HeaderNames.Authorization].ToString().Split(' ').Last();
-            var result = await DBConnector.PobierzUzytkownika(token);
-            result.Haslo = String.Empty;
-            return Ok(result);
-        }
 
         [AllowAnonymous]
         [HttpPost("login")]
@@ -50,17 +42,27 @@ namespace ModernPizzaApi.Controllers
             return BadRequest();
         }
 
+        [HttpGet("auth")]
+        public async Task<ActionResult<UserModel>> GetUserCredits()
+        {
+            var token = Request.Headers[HeaderNames.Authorization].ToString().Split(' ').Last();
+            var result = await DBConnector.PobierzUzytkownika(token);
+            result.Haslo = String.Empty;
+            return Ok(result);
+        }
 
-        //[HttpPut("{id}")]
-        //public void EditUser(int id, [FromBody] string value)
-        //{
+        [HttpPut]
+        public async Task<Boolean> EditUser([FromBody]UserModel User)
+        {
+            var result = await DBConnector.AktualizujUzytkownika(User);
+            return result;
+        }
 
-        //}
-
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void DeleteUser(int id)
-        //{
-        //}
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete()]
+        public void DeleteUser([FromBody] UserModel user)
+        {
+            DBConnector.UsunUzytkownik(user);
+        }
     }
 }
