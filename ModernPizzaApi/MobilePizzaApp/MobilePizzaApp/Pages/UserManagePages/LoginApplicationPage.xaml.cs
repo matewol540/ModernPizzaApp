@@ -22,20 +22,21 @@ namespace MobilePizzaApp.Pages
             InitializeComponent();
         }
 
-        private void Button_ClickedAsync(object sender, EventArgs e)
+        private async void Button_ClickedAsync(object sender, EventArgs e)
         {
-
-            if (LoginToApplication().Result)
+            LoginAcivityIndicator.IsRunning = true;
+            if (await LoginToApplication())
             {
                 (Application.Current.MainPage as TabbedPage).CurrentPage = (Application.Current.MainPage as TabbedPage).Children[0];
                 (Application.Current.MainPage as TabbedPage).Children.RemoveAt(4);
+                LoginAcivityIndicator.IsRunning = false;
                 (Application.Current.MainPage as TabbedPage).Children.Insert(4, new ManageAccountPage()
                 {
                     Title = "Moje konto",
                     IconImageSource = ImageSource.FromResource("ModernPizzaApp.Zasoby.OsobaIkona.png"),
                     User = User
                 });
-                ///*await*/ DisplayAlert("Sukces", "Udało się poprawnie zalogować do aplikajci", "Ok");
+                await DisplayAlert("Sukces", "Udało się poprawnie zalogować do aplikajci", "Ok");
             }
         }
         private async Task<Boolean> LoginToApplication()

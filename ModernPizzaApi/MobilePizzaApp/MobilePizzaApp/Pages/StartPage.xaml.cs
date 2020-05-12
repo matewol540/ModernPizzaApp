@@ -96,6 +96,7 @@ namespace MobilePizzaApp.Pages
                 NewsGrid.Children[NewsGrid.Children.Count - 3].Y + NewsGrid.Children[NewsGrid.Children.Count - 3].Height / 4 < e.ScrollY + 300 &&
                 LastLoadedItemsCount != 0)
             {
+                ActivityIndicator.IsRunning = true;
                 IsLoadingTask = DownloadArticlesToList(LoadedArticles.Count + 1);
                 var TempCount = await IsLoadingTask;
                 ListInfoView = CreateInformationViewFromList(LoadedArticles, TempCount);

@@ -70,9 +70,9 @@ namespace MobilePizzaApp.Pages
             Task<String> task1, task2;
             do
             {
-                task1 = DisplayPromptAsync("Step 2", "Wprowadz nowe haslo");
+                task1 = DisplayPromptAsync("Step 2", "Wprowadz nowe haslo","Dalej","Anuluj");
                 Password1 = await task1;
-                task2 = DisplayPromptAsync("Step 3", "Ponownie wprowadz nowe haslo");
+                task2 = DisplayPromptAsync("Step 3", "Ponownie wprowadz nowe haslo", "Dalej", "Anuluj");
                 Password2 = await task2;
             }
             while (Password1 != Password2 || task1.IsCanceled || task2.IsCanceled);
@@ -108,13 +108,13 @@ namespace MobilePizzaApp.Pages
         {
             if (Application.Current.Properties.Remove("token"))
             {
-                //(Application.Current.MainPage as TabbedPage).CurrentPage = (Application.Current.MainPage as TabbedPage).Children[0];
-                //(Application.Current.MainPage as TabbedPage).Children.RemoveAt(4);
-                //(Application.Current.MainPage as TabbedPage).Children.Insert(4, new UserAccountPage()
-                //{
-                //    Title = "Moje konto",
-                //    IconImageSource = ImageSource.FromResource("ModernPizzaApp.Zasoby.OsobaIkona.png"),
-                //});
+                (Application.Current.MainPage as TabbedPage).CurrentPage = (Application.Current.MainPage as TabbedPage).Children[0];
+                (Application.Current.MainPage as TabbedPage).Children.RemoveAt(4);
+                (Application.Current.MainPage as TabbedPage).Children.Insert(4, new UserAccountPage()
+                {
+                    Title = "Moje konto",
+                    IconImageSource = ImageSource.FromResource("ModernPizzaApp.Zasoby.OsobaIkona.png"),
+                });
                 Application.Current.SavePropertiesAsync();
             }
         }

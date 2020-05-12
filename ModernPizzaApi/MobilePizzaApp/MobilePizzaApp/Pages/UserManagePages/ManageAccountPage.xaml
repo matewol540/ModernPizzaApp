@@ -5,27 +5,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="MobilePizzaApp.Pages.ManageAccountPage"
-             Appearing="ContentPage_Appearing" >
+             Appearing="ContentPage_Appearing"
+             xmlns:MarkupExtension="clr-namespace:MobilePizzaApp.MarkupExtension"
+             xmlns:ic="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             >
     <ContentPage.Content>
-        <StackLayout x:Name="UserManagePage">
-            <Entry Placeholder="E-mail" Text="{Binding Mail}" IsEnabled="False"/>
-            <StackLayout Orientation="Horizontal">
-                <Image x:Name="AvatarImage">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="ChangeImageAvatar"/>
-                    </Image.GestureRecognizers>
-                </Image>
-                <StackLayout>
-                    <Entry Placeholder="Imie" Text="{Binding Imie}"/>
-                    <Entry Placeholder="Nazwisko" Text="{Binding Nazwisko}"/>
-                </StackLayout>                
-            </StackLayout>
-            <Entry Placeholder="E-mail" Text="{Binding Mail}" IsEnabled="False"/>
-            <Label Text="{Binding Mail, StringFormat='E-Mail: {0}'}" />
-            <Button Text="Change password" Clicked="Button_Clicked"/>
-            <Button Text="Wyloguj" HorizontalOptions="FillAndExpand" Clicked="Logout_Clicked"/>
-            <Button Text="Save changes" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
-            <Button Text="Usun konto" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
-        </StackLayout>
+        <AbsoluteLayout x:Name="UserManagePage" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15">
+            
+
+            <Frame AbsoluteLayout.LayoutBounds="0,120,1,0.3" AbsoluteLayout.LayoutFlags="SizeProportional" >
+                <StackLayout HorizontalOptions="FillAndExpand" Padding="20">
+                    <Entry Placeholder="Imie" Text="{Binding Imie}" HorizontalOptions="FillAndExpand" />
+                    <Entry Placeholder="Nazwisko" Text="{Binding Nazwisko}" HorizontalOptions="FillAndExpand"/>
+                    <Entry Placeholder="E-mail" Text="{Binding Mail, StringFormat='E-Mail: {0}'}" IsEnabled="False" VerticalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+            
+            <ic:CircleImage Source="https://picsum.photos/200/300" HorizontalOptions="Start" Aspect="AspectFill" WidthRequest="150" AbsoluteLayout.LayoutBounds="0.5,10,150,150" AbsoluteLayout.LayoutFlags="XProportional">
+                <ic:CircleImage.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ChangeImageAvatar"/>
+                </ic:CircleImage.GestureRecognizers>
+            </ic:CircleImage>
+            
+            <Frame AbsoluteLayout.LayoutBounds="0,0.8,1,0.25" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout  VerticalOptions="CenterAndExpand" >
+                    <Button Text="Zmien haslo" Clicked="Button_Clicked" VerticalOptions="End"/>
+                    <Button Text="Zapisz Zmiany" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+                    <Button Text="Wyloguj" HorizontalOptions="FillAndExpand" Clicked="Logout_Clicked" VerticalOptions="End"/>
+                </StackLayout>
+            </Frame>
+            <Frame AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" >
+                <Button Text="Usun konto" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+            </Frame>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

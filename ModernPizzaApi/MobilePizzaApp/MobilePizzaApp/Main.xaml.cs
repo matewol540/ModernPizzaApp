@@ -49,6 +49,8 @@ namespace MobilePizzaApp
         private async void PagesOrganizer_Appearing(object sender, EventArgs e)
         {
             UserModel User = null;
+            PagesOrganizer.Children.RemoveAt(4);
+
             if (Application.Current.Properties.ContainsKey("token"))
                 User = await DownloadUser();
 
