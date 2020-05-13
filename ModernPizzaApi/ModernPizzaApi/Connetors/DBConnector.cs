@@ -374,8 +374,8 @@ namespace ModernPizzaApi
                 var MongoDBKlient = dbClient.GetDatabase(DBName);
                 var UsersCollection = MongoDBKlient.GetCollection<UserModel>("Uzytkownicy");
                 var UpdateUser = (await UsersCollection.FindAsync<UserModel>(x => x.Mail == user.Mail)).First();
-                UpdateUser.Haslo = user.Haslo;
-                await UsersCollection.ReplaceOneAsync<UserModel>(x => x.Mail == user.Mail, UpdateUser);
+                user.ObjectId = UpdateUser.ObjectId;
+                await UsersCollection.ReplaceOneAsync<UserModel>(x => x.Mail == user.Mail, user);
                 return true;
             }
             catch (Exception err)

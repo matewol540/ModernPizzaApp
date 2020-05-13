@@ -164,7 +164,8 @@ namespace MobilePizzaApp.Pages
                 Nazwisko = String.IsNullOrEmpty(subNameEntry) ? String.Empty : subNameEntry,
                 Mail = mailEntry,
                 Password = UserModel.EncryotPw(passwordEntry),
-                Role = "User"
+                Role = "User",
+                Avatar = new byte[1]
             };
             return Model;
         }

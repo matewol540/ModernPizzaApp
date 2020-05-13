@@ -50,7 +50,6 @@ namespace ModernPizzaApi.Controllers
             result.Haslo = String.Empty;
             return Ok(result);
         }
-
         [HttpPut]
         public async Task<Boolean> EditUser([FromBody]UserModel User)
         {

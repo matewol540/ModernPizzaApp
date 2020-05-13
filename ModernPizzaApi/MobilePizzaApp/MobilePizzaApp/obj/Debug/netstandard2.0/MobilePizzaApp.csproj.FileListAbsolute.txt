@@ -34,9 +34,9 @@ D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netsta
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\Helvetica.ttf
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\ArticlePage.xaml.g.cs
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Views\CommentView.xaml.g.cs
-D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\MobilePizzaApp.csproj.CoreCompileInputs.cache
-D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\XamlC.stamp
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\UserManagePages\LoginApplicationPage.xaml.g.cs
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\UserManagePages\ManageAccountPage.xaml.g.cs
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\UserManagePages\RegisterPAge.xaml.g.cs
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\UserManagePages\UserAccountPage.xaml.g.cs
+D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\MobilePizzaApp.csproj.CoreCompileInputs.cache
+D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\XamlC.stamp

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "jQtdMO7QoQyk8WpdYr2+4kSyY95xIoqKaObxlEfNXv1KXGpAcnOrM5/VMxfuZdYEXiE95KMXohOE2gHsiPE5ng==",
+  "dgSpecHash": "r2dg92fbmQJcNPsl6Q5FgK5QQM7uJKFssHtCfs8DoBYEPFUd8VDOpYwRs31KDLLSo7Yi/PNtgmXjyidkagwmZQ==",
   "success": true,
   "projectFilePath": "D:\\ModernPizzaRepo\\ModernPizzaApi\\MobilePizzaApp\\MobilePizzaApp\\MobilePizzaApp.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "C:\\Users\\wolsk\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
     "C:\\Users\\wolsk\\.nuget\\packages\\xam.plugin.externalmaps\\4.0.1\\xam.plugin.externalmaps.4.0.1.nupkg.sha512",
     "C:\\Users\\wolsk\\.nuget\\packages\\xam.plugin.geolocator\\4.5.0.6\\xam.plugin.geolocator.4.5.0.6.nupkg.sha512",
+    "C:\\Users\\wolsk\\.nuget\\packages\\xam.plugin.media\\5.0.1\\xam.plugin.media.5.0.1.nupkg.sha512",
     "C:\\Users\\wolsk\\.nuget\\packages\\xam.plugins.forms.imagecircle\\3.0.0.5\\xam.plugins.forms.imagecircle.3.0.0.5.nupkg.sha512",
     "C:\\Users\\wolsk\\.nuget\\packages\\xam.plugins.messaging\\5.2.0\\xam.plugins.messaging.5.2.0.nupkg.sha512",
     "C:\\Users\\wolsk\\.nuget\\packages\\xam.plugins.notifier\\3.0.1\\xam.plugins.notifier.3.0.1.nupkg.sha512",

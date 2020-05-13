@@ -145,6 +145,18 @@
           "lib/netstandard2.0/Plugin.Geolocator.dll": {}
         }
       },
+      "Xam.Plugin.Media/5.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Essentials": "1.5.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/Plugin.Media.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Plugin.Media.dll": {}
+        }
+      },
       "Xam.Plugins.Forms.ImageCircle/3.0.0.5": {
         "type": "package",
         "dependencies": {
@@ -674,6 +686,46 @@
         "xam.plugin.geolocator.nuspec"
       ]
     },
+    "Xam.Plugin.Media/5.0.1": {
+      "sha512": "UUR31EEnhDVa4IXgVfQIAL3u9v6YAyppsb5UlO9MNJ4quGGkfcWX++JexjB1nMGqvCzsjAT2t32drKDIXoW4SQ==",
+      "type": "package",
+      "path": "xam.plugin.media/5.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/monoandroid10.0/Plugin.Media.dll",
+        "lib/monoandroid10.0/Plugin.Media.pdb",
+        "lib/monoandroid10.0/Plugin.Media.xml",
+        "lib/monoandroid80/Plugin.Media.dll",
+        "lib/monoandroid80/Plugin.Media.pdb",
+        "lib/monoandroid80/Plugin.Media.xml",
+        "lib/monoandroid81/Plugin.Media.dll",
+        "lib/monoandroid81/Plugin.Media.pdb",
+        "lib/monoandroid81/Plugin.Media.xml",
+        "lib/monoandroid90/Plugin.Media.dll",
+        "lib/monoandroid90/Plugin.Media.pdb",
+        "lib/monoandroid90/Plugin.Media.xml",
+        "lib/netstandard1.0/Plugin.Media.dll",
+        "lib/netstandard1.0/Plugin.Media.pdb",
+        "lib/netstandard1.0/Plugin.Media.xml",
+        "lib/netstandard2.0/Plugin.Media.dll",
+        "lib/netstandard2.0/Plugin.Media.pdb",
+        "lib/netstandard2.0/Plugin.Media.xml",
+        "lib/tizen40/Plugin.Media.dll",
+        "lib/tizen40/Plugin.Media.pdb",
+        "lib/tizen40/Plugin.Media.xml",
+        "lib/uap10.0.16299/Plugin.Media.dll",
+        "lib/uap10.0.16299/Plugin.Media.pdb",
+        "lib/uap10.0.16299/Plugin.Media.pri",
+        "lib/uap10.0.16299/Plugin.Media.xml",
+        "lib/xamarinios10/Plugin.Media.dll",
+        "lib/xamarinios10/Plugin.Media.pdb",
+        "lib/xamarinios10/Plugin.Media.xml",
+        "readme.txt",
+        "xam.plugin.media.5.0.1.nupkg.sha512",
+        "xam.plugin.media.nuspec"
+      ]
+    },
     "Xam.Plugins.Forms.ImageCircle/3.0.0.5": {
       "sha512": "59HyuAaUzuloQmu/PVCDCJQMRuuhqmIpCQ+d5hH5Qp8AZsa/vDi5ulrXDKRMZSZt/xbXsyZV+aZ/W/SZaYt2Mg==",
       "type": "package",
@@ -1193,6 +1245,7 @@
       "SkiaSharp >= 1.68.2",
       "Xam.Plugin.ExternalMaps >= 4.0.1",
       "Xam.Plugin.Geolocator >= 4.5.0.6",
+      "Xam.Plugin.Media >= 5.0.1",
       "Xam.Plugins.Forms.ImageCircle >= 3.0.0.5",
       "Xam.Plugins.Messaging >= 5.2.0",
       "Xam.Plugins.Notifier >= 3.0.1",
@@ -1269,6 +1322,10 @@
           "Xam.Plugin.Geolocator": {
             "target": "Package",
             "version": "[4.5.0.6, )"
+          },
+          "Xam.Plugin.Media": {
+            "target": "Package",
+            "version": "[5.0.1, )"
           },
           "Xam.Plugins.Forms.ImageCircle": {
             "target": "Package",

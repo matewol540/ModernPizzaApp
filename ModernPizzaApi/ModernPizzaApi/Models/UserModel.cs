@@ -26,6 +26,9 @@ namespace ModernPizzaApi.Models
         public String Haslo { get; set; }
         [BsonElement("Role")]
         public String Role { get; set; }
+        [BsonElement("Avatar")]
+        public byte[] Avatar { get; set; }
+
 
         public String Token { get; set; }
         internal object SzyfrujHaslo(object login, object haslo)

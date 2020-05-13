@@ -21,7 +21,10 @@ namespace MobilePizzaApp.Models
         public String Password { get; set; }
         [JsonProperty("Role")]
         public String Role { get; set; }
-        
+        [JsonProperty("Avatar")]
+        public byte[] Avatar { get; set; }
+
+
         public static String EncryotPw(String pw)
         {
             var EncyrptedPW = String.Empty;
