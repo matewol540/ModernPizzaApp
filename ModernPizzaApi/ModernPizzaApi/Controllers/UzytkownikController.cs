@@ -47,7 +47,6 @@ namespace ModernPizzaApi.Controllers
         {
             var token = Request.Headers[HeaderNames.Authorization].ToString().Split(' ').Last();
             var result = await DBConnector.PobierzUzytkownika(token);
-            result.Haslo = String.Empty;
             return Ok(result);
         }
         [HttpPut]
