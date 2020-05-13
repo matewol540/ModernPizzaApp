@@ -109,25 +109,31 @@ namespace MobilePizzaApp.Pages
                         }
                         break;
                     case "Aparat":
-                        await CrossMedia.Current.Initialize();
-                        if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                        try
                         {
-                            await DisplayAlert("Error", "Aparat nie jest dostepny.", "OK");
-                            break;
-                        }
-                        var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-                        {
-                            Directory = "Sample",
-                            Name = "test.jpg"
-                        });
-                        if (file != null)
-                        {
-                            Avatar.Source = ImageSource.FromStream(() => file.GetStream());
-                            using (var ms = new MemoryStream())
+                            await CrossMedia.Current.Initialize();
+                            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                             {
-                                file.GetStream().CopyTo(ms);
-                                this.User.Avatar = ms.ToArray();
+                                await DisplayAlert("Error", "Aparat nie jest dostepny.", "OK");
+                                break;
                             }
+                            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                            {
+                                Directory = "Sample",
+                                Name = "test.jpg"
+                            });
+                            if (file != null)
+                            {
+                                Avatar.Source = ImageSource.FromStream(() => file.GetStream());
+                                using (var ms = new MemoryStream())
+                                {
+                                    file.GetStream().CopyTo(ms);
+                                    this.User.Avatar = ms.ToArray();
+                                }
+                            }
+                        } catch (Exception err)
+                        {
+                            Console.WriteLine(err.Message);
                         }
                         break;
                     case "Usuń":
