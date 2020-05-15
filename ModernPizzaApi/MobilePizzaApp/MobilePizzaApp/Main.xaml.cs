@@ -17,11 +17,13 @@ namespace MobilePizzaApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Main : TabbedPage
     {
+        public static UserModel User { get; set; }
+
         public Main()
         {
             InitializeComponent();
         }
-        private async Task<UserModel> DownloadUser()
+        public static async Task DownloadUser()
         {
             try
             {
@@ -32,8 +34,9 @@ namespace MobilePizzaApp
                     if (response.IsSuccessStatusCode)
                     {
                         var Context = await response.Content.ReadAsStringAsync();
-                        return Newtonsoft.Json.JsonConvert.DeserializeObject<UserModel>(Context);
-                    } else
+                        User = Newtonsoft.Json.JsonConvert.DeserializeObject<UserModel>(Context);
+                    }
+                    else
                     {
                         throw new Exception();
                     }
@@ -41,18 +44,14 @@ namespace MobilePizzaApp
             }
             catch (Exception err)
             {
-                await DisplayAlert("Alert", "Musisz odswierzyc dane logowania. Zaloguj się ponownie", "Ok");
             }
-            return null;
-
         }
         private async void PagesOrganizer_Appearing(object sender, EventArgs e)
         {
-            UserModel User = null;
             PagesOrganizer.Children.RemoveAt(4);
 
             if (Application.Current.Properties.ContainsKey("token"))
-                User = await DownloadUser();
+                await DownloadUser();
 
             if (User != null)
             {

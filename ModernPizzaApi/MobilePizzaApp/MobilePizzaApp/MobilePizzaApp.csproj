@@ -23,6 +23,8 @@
     <None Remove="Zasoby\KoszykIkona.png" />
     <None Remove="Zasoby\OsobaIkona.png" />
     <None Remove="Zasoby\PizzaIkona.png" />
+    <None Remove="Zasoby\Reservation.png" />
+    <None Remove="Zasoby\ReservationCheck.png" />
     <None Remove="Zasoby\StolikIkona.png" />
   </ItemGroup>
 
@@ -43,6 +45,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Zasoby\PizzaIkona.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zasoby\Reservation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zasoby\ReservationCheck.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Zasoby\StolikIkona.png">

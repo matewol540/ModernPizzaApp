@@ -13,21 +13,23 @@
              Padding="5"
              >
     <ContentPage.Content>
-        <StackLayout x:Name="MainStack" Padding="10">
-            <AbsoluteLayout HeightRequest="400" Padding="0" MinimumHeightRequest="300">
+        <StackLayout x:Name="MainStack" Padding="5">
+            <AbsoluteLayout HeightRequest="200" Padding="0" MinimumHeightRequest="150">
                 <Label x:Name="Date" Text="{Binding Data}" FontSize="Subtitle" AbsoluteLayout.LayoutBounds="1,0,1,0.2" HorizontalTextAlignment="End" AbsoluteLayout.LayoutFlags="All"/>
                 <MarkupExtension:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="Transparent" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
                     <ic:CircleImage x:Name="ArticleMainImage" Aspect="AspectFill" WidthRequest="200" HeightRequest="200" AbsoluteLayout.LayoutBounds="0.5,0.5,0.6,0.6" AbsoluteLayout.LayoutFlags="All"/>
                 </MarkupExtension:GradientFrameRenderer>
-                <Label x:Name="Title" Text="{Binding Tytul}" Padding="5" TextColor="Black" HorizontalTextAlignment="Center" FontFamily="{StaticResource Oswald}" LineBreakMode="WordWrap"  AbsoluteLayout.LayoutBounds="0,1,1,0.4" AbsoluteLayout.LayoutFlags="All" FontSize="48"/>
+                <Label x:Name="Title" Text="{Binding Tytul}" Padding="5" TextColor="Black" HorizontalTextAlignment="Center" FontFamily="{StaticResource Oswald}" LineBreakMode="WordWrap"  AbsoluteLayout.LayoutBounds="0,1,1,0.4" AbsoluteLayout.LayoutFlags="All" FontSize="30"/>
             </AbsoluteLayout>
-            <Frame CornerRadius="5" Padding="10">
-                <Label HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Text="{Binding Zawartosc}" FontFamily="{StaticResource Helvetica}" FontSize="Body"/>
+            <Frame CornerRadius="5" Padding="10" >
+                <ScrollView>
+                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" Text="{Binding Zawartosc}" FontFamily="{StaticResource Helvetica}" FontSize="Body"/>
+                </ScrollView>
             </Frame>
             <ActivityIndicator Color="Black" IsRunning="True" x:Name="LoaderIndicator"/>
             <Frame CornerRadius="5"  BackgroundColor="#ADADAD">
                 <StackLayout Orientation="Vertical">
-                    <Label Text="Komentarze" FontSize="Title" FontFamily="{StaticResource Helvetica}"/>
+                    <Label Text="Komentarze" FontSize="Subtitle" FontFamily="{StaticResource Helvetica}"/>
                     <ListView x:Name="CommentsListView" IsPullToRefreshEnabled="True" Refreshing="CommentsListView_Refreshing" HasUnevenRows="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -39,7 +41,7 @@
                     </ListView>
                 </StackLayout>
             </Frame>
-            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand"  HorizontalOptions="FillAndExpand" Padding="5">
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand"  HorizontalOptions="FillAndExpand" Padding="2">
                 <Editor x:Name="Komentarz" HorizontalOptions="FillAndExpand" Placeholder="Zostaw komentarz mordo"/>
                 <Button Text="Dodaj" Clicked="Button_Clicked"/>
             </StackLayout>

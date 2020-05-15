@@ -11,31 +11,28 @@
              >
     <ContentPage.Content>
         <AbsoluteLayout x:Name="UserManagePage" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15">
-
-
-            <Frame CornerRadius="8"  AbsoluteLayout.LayoutBounds="0,120,1,0.3" AbsoluteLayout.LayoutFlags="SizeProportional" >
+            <Frame CornerRadius="8"  AbsoluteLayout.LayoutBounds="0,90,1,0.35" AbsoluteLayout.LayoutFlags="SizeProportional" >
                 <StackLayout HorizontalOptions="FillAndExpand" Padding="20">
-                    <Entry Placeholder="Imie" Text="{Binding Imie}" HorizontalOptions="FillAndExpand" />
-                    <Entry Placeholder="Nazwisko" Text="{Binding Nazwisko}" HorizontalOptions="FillAndExpand"/>
-                    <Entry Placeholder="E-mail" Text="{Binding Mail}" IsEnabled="False" VerticalTextAlignment="Center"/>
+                    <Entry Placeholder="Imie" Text="{Binding Imie}" HorizontalOptions="FillAndExpand" FontSize="15" />
+                    <Entry Placeholder="Nazwisko" Text="{Binding Nazwisko}" HorizontalOptions="FillAndExpand" FontSize="15"/>
+                    <Entry Placeholder="E-mail" Text="{Binding Mail}" IsEnabled="False" VerticalTextAlignment="Center" FontSize="15"/>
                 </StackLayout>
             </Frame>
             <ActivityIndicator Color="Black" IsRunning="False" x:Name="Loader" AbsoluteLayout.LayoutBounds="0.5,0.5,30,30" AbsoluteLayout.LayoutFlags="All"/>
-            <ic:CircleImage x:Name="Avatar" BorderColor="White" Source="https://picsum.photos/200/300" HorizontalOptions="Start" Aspect="AspectFill" WidthRequest="150" AbsoluteLayout.LayoutBounds="0.5,10,150,150" AbsoluteLayout.LayoutFlags="XProportional">
+            <ic:CircleImage x:Name="Avatar" BorderColor="White" Source="https://picsum.photos/200/300" HorizontalOptions="Start" Aspect="AspectFill" WidthRequest="120" AbsoluteLayout.LayoutBounds="0.5,0,120,120" AbsoluteLayout.LayoutFlags="XProportional">
                 <ic:CircleImage.GestureRecognizers>
                     <TapGestureRecognizer Tapped="ChangeImageAvatar"/>
                 </ic:CircleImage.GestureRecognizers>
             </ic:CircleImage>
-            
-            <Frame CornerRadius="8" AbsoluteLayout.LayoutBounds="0,0.8,1,0.25" AbsoluteLayout.LayoutFlags="All">
-                <StackLayout  VerticalOptions="CenterAndExpand" >
-                    <Button Text="Zmien haslo" Clicked="Button_Clicked" VerticalOptions="End"/>
-                    <Button Text="Zapisz Zmiany" Clicked="SendChanges" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
-                    <Button Text="Wyloguj" HorizontalOptions="FillAndExpand" Clicked="Logout_Clicked" VerticalOptions="End"/>
+            <Frame CornerRadius="8" AbsoluteLayout.LayoutBounds="0,0.75,1,0.3" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout  VerticalOptions="CenterAndExpand" Spacing="0" Padding="0" >
+                    <Button Text="Zmien haslo" Clicked="Button_Clicked" VerticalOptions="End" HeightRequest="40"/>
+                    <Button Text="Zapisz Zmiany" Clicked="SendChanges" HorizontalOptions="FillAndExpand" VerticalOptions="End" HeightRequest="40"/>
+                    <Button Text="Wyloguj" HorizontalOptions="FillAndExpand" Clicked="Logout_Clicked" VerticalOptions="End" HeightRequest="40"/>
                 </StackLayout>
             </Frame>
-            <Frame CornerRadius="8"  AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All" >
-                <Button Text="Usun konto" HorizontalOptions="FillAndExpand" VerticalOptions="End" BackgroundColor="DarkRed" />
+            <Frame CornerRadius="8"  AbsoluteLayout.LayoutBounds="0,1,1,0.15" AbsoluteLayout.LayoutFlags="All" >
+                <Button Text="Usun konto" HorizontalOptions="FillAndExpand" VerticalOptions="End" BackgroundColor="DarkRed" HeightRequest="40"/>
             </Frame>
         </AbsoluteLayout>
     </ContentPage.Content>

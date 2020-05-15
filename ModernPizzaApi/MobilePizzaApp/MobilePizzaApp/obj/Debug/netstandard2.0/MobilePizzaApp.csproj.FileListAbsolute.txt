@@ -40,3 +40,5 @@ D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netsta
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\UserManagePages\UserAccountPage.xaml.g.cs
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\MobilePizzaApp.csproj.CoreCompileInputs.cache
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\XamlC.stamp
+D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\Reservation.png
+D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\ReservationCheck.png

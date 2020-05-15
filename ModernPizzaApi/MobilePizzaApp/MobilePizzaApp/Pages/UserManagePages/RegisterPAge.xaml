@@ -10,47 +10,46 @@
     <ContentPage.Content>
         <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
             <FrameRenderer:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="Red" Padding="0" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
-
             <StackLayout  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="10">
-                <Frame CornerRadius="5" VerticalOptions="CenterAndExpand">
-                    <StackLayout>
-                        <Frame x:Name="NameFrame" BorderColor="{Binding Source={x:Reference RegisterPage}, Path=ImieColor}">
-                            <StackLayout Orientation="Horizontal" Padding="10">
-                                <Label Text="Name" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>
-                                <Entry x:Name="NameEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                <Frame CornerRadius="5" VerticalOptions="CenterAndExpand" Margin="10">
+                    <StackLayout Padding="0" Spacing="0">
+                        <Frame x:Name="NameFrame" BorderColor="{Binding Source={x:Reference RegisterPage}, Path=ImieColor}" Padding="5">
+                            <StackLayout Orientation="Horizontal" Padding="0" HeightRequest="40" >
+                                <Label Text="Imie" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Small" WidthRequest="100"/>
+                                <Entry x:Name="NameEntry" HorizontalOptions="FillAndExpand" VerticalOptions="End" FontSize="Small"/>
                             </StackLayout>
                         </Frame>
-                        <Frame x:Name="SubnameFrame" BorderColor="Transparent">
-                            <StackLayout Orientation="Horizontal" Padding="10">
-                                <Label Text="Subname" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>
-                                <Entry  x:Name="SubNameEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                        <Frame x:Name="SubnameFrame" BorderColor="Transparent"  Padding="5">
+                            <StackLayout Orientation="Horizontal" Padding="0" HeightRequest="40" >
+                                <Label Text="Nazwisko" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Small" WidthRequest="100"/>
+                                <Entry  x:Name="SubNameEntry" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" FontSize="Small" />
                             </StackLayout>
                         </Frame >
-                        <Frame x:Name="MailFrame" BorderColor="Transparent">
-                            <StackLayout Orientation="Horizontal" Padding="10">
-                                <Label Text="E-Mail" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="150" FontSize="Medium" FontFamily="{StaticResource Helvetica}"/>
+                        <Frame x:Name="MailFrame" BorderColor="Transparent"  Padding="5">
+                            <StackLayout Orientation="Horizontal"  Padding="0" HeightRequest="40">
+                                <Label Text="E-Mail" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="100" FontSize="Small" FontFamily="{StaticResource Helvetica}"/>
                                 <Entry x:Name="MailEntry"  HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
                             </StackLayout>
                         </Frame >
-                        <Frame x:Name="PasswordFrame" BorderColor="Transparent">
-                            <StackLayout >
-                                <StackLayout Orientation="Horizontal" Padding="10">
-                                    <Label Text="Password" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>
-                                    <Entry x:Name="PasswordEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsPassword="True"/>
+                        <Frame x:Name="PasswordFrame" BorderColor="Transparent"  Padding="5">
+                            <StackLayout Padding="5" HeightRequest="60">
+                                <StackLayout Orientation="Horizontal" Padding="0" HeightRequest="40" >
+                                    <Label Text="Haslo" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Small" WidthRequest="100"/>
+                                    <Entry x:Name="PasswordEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsPassword="True" FontSize="Small"/>
                                 </StackLayout>
-                                <StackLayout x:Name="PasswordIndicator" Orientation="Horizontal"/>
+                                <StackLayout x:Name="PasswordIndicator"  Orientation="Horizontal"/>
                             </StackLayout>
                             </Frame>
-                        <Frame x:Name="RepeatPasswordFrame" BorderColor="Transparent">
-                            <StackLayout Orientation="Horizontal" Padding="10">
-                                <Label Text="Repeat Password" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>
+                        <Frame x:Name="RepeatPasswordFrame" BorderColor="Transparent"  Padding="5">
+                            <StackLayout Orientation="Horizontal" HeightRequest="40" Padding="0">
+                                <Label Text="Powtorz haslo" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Small" WidthRequest="100"/>
                                 <Entry x:Name="RepeatPasswordEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsPassword="True"/>
                             </StackLayout>
                         </Frame>
-                        <Frame x:Name="CheckboxFrame" BorderColor="Transparent">
-                            <StackLayout Orientation="Horizontal" Padding="10">
+                        <Frame x:Name="CheckboxFrame" BorderColor="Transparent"  HeightRequest="20">
+                            <StackLayout Orientation="Horizontal" >
                                 <CheckBox x:Name="IsAgreedTermsOfUse"/>
-                                <Label Text="Zapoznałem się z regulaminem" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" />
+                                <Label Text="Zapoznałem się z regulaminem" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Small" />
                             </StackLayout>
                         </Frame>
                     </StackLayout>

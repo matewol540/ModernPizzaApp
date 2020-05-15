@@ -69,9 +69,10 @@ namespace MobilePizzaApp.Pages
             finally
             {
                 for (int i = 0; i < (InfTemp.Count / 2); i++)
-                    NewsGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(330, GridUnitType.Absolute) });
+                    NewsGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(200, GridUnitType.Absolute) });
                 LoadedArticles.AddRange(InfTemp);
                 ActivityIndicator.IsRunning = false;
+                ActivityIndicator.IsVisible= false;
             }
             return InfTemp.Count;
         }
@@ -93,16 +94,16 @@ namespace MobilePizzaApp.Pages
         private async void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
         {
             if (IsLoadingTask == null &&
-                NewsGrid.Children[NewsGrid.Children.Count - 3].Y + NewsGrid.Children[NewsGrid.Children.Count - 3].Height / 4 < e.ScrollY + 300 &&
+                NewsGrid.Children[NewsGrid.Children.Count - 3].Y + NewsGrid.Children[NewsGrid.Children.Count - 3].Height / 4 < e.ScrollY + 200 &&
                 LastLoadedItemsCount != 0)
             {
                 ActivityIndicator.IsRunning = true;
+                ActivityIndicator.IsVisible= true;
                 IsLoadingTask = DownloadArticlesToList(LoadedArticles.Count + 1);
                 var TempCount = await IsLoadingTask;
                 ListInfoView = CreateInformationViewFromList(LoadedArticles, TempCount);
                 LastLoadedItemsCount = ListInfoView.Count;
                 ListInfoView.ForEach(x => NewsGrid.Children.Add(x, NewsGrid.Children.Count % 2, NewsGrid.Children.Count / 2));
-                ActivityIndicator.IsRunning = !IsLoadingTask.IsCompleted;
                 IsLoadingTask = null;
             }
         }

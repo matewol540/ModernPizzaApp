@@ -12,13 +12,13 @@
         <StackLayout  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="10">
             <Frame CornerRadius="5" VerticalOptions="EndAndExpand">
                 <StackLayout Orientation="Horizontal" Padding="10">
-                    <Label Text="Login" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="150" FontSize="Medium" FontFamily="{StaticResource Helvetica}"/>
+                    <Label Text="Login" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="100" FontSize="Small" FontFamily="{StaticResource Helvetica}"/>
                     <Entry x:Name="loginEntry"  HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
                 </StackLayout>
             </Frame>
             <Frame CornerRadius="5" VerticalOptions="StartAndExpand">
                 <StackLayout Orientation="Horizontal" Padding="10">
-                    <Label  Text="Password" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Medium" WidthRequest="150"/>
+                    <Label  Text="Password" VerticalOptions="Center" HorizontalOptions="Start" FontFamily="{StaticResource Helvetica}" FontSize="Small" WidthRequest="100"/>
                     <Entry x:Name="passwordEntry" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsPassword="True"/>
                 </StackLayout>
             </Frame>
@@ -26,12 +26,12 @@
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" >
                         <CheckBox x:Name="Zapamietaj" />
-                        <Label Text="Zapamietaj mnie" VerticalOptions="Center"  FontSize="Medium"/>
+                        <Label Text="Zapamietaj mnie" VerticalOptions="Center"  FontSize="Small"/>
                     </StackLayout>
-                    <Button Text="Zaloguj"  FontFamily="{StaticResource Helvetica}" FontSize="Title" Clicked="Button_ClickedAsync" />
+                    <Button Text="Zaloguj"  FontFamily="{StaticResource Helvetica}" FontSize="Subtitle" Clicked="Button_ClickedAsync" />
                 </StackLayout>
             </Frame>
-            <Label VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10" TextColor="Black" FontSize="Large">
+            <Label VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10" TextColor="Black" FontSize="Medium">
                 <Label.Text>
                     If you don't have account swipe left to register
                 </Label.Text>

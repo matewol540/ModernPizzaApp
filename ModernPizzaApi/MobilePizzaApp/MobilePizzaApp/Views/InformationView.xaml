@@ -23,7 +23,7 @@
                         </Image.GestureRecognizers>
                     </Image>
                 </local:GradientFrameRenderer>
-                <Label Text="{Binding Tytul}" Padding="3" FontFamily="{StaticResource Helvetica}" TextColor="Black" FontSize="Large" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0,1,0.9,0.2" AbsoluteLayout.LayoutFlags="All"/>
+                <Label Text="{Binding Tytul}" Padding="3" FontFamily="{StaticResource Helvetica}" TextColor="Black" FontSize="Medium" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0,1,0.9,0.3" AbsoluteLayout.LayoutFlags="All"/>
             </AbsoluteLayout>
         </Frame>
     </ContentView.Content>

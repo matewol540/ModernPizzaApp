@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MobilePizzaApp.Pages
+namespace MobilePizzaApp.Pages.ReservationPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RezerwacjaPage : ContentPage
+    public partial class CreateReservationPage : ContentPage
     {
-        public RezerwacjaPage()
+        public CreateReservationPage()
         {
             InitializeComponent();
         }

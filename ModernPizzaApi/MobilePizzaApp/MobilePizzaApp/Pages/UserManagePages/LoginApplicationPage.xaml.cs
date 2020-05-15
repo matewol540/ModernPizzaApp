@@ -70,6 +70,8 @@ namespace MobilePizzaApp.Pages
                         Application.Current.Properties.Add("token", token);
                     if (Zapamietaj.IsChecked)
                         await Application.Current.SavePropertiesAsync();
+                    await Main.DownloadUser();
+                    User = Main.User;
                     return true;
                 }
             }

@@ -14,7 +14,7 @@
             <ScrollView x:Name="ScrollPage"  Scrolled="ScrollView_Scrolled" >
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="300" />
+                        <RowDefinition Height="250" />
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <AbsoluteLayout x:Name="FirstNews" Grid.Row="0" Padding="-20">
@@ -25,7 +25,7 @@
                                 </Image.GestureRecognizers>
                             </Image>
                         </EmbeddedSource:GradientFrameRenderer>
-                        <Label Text="{Binding Tytul}"  TextColor="Black" FontFamily="{StaticResource Oswald}"  AbsoluteLayout.LayoutBounds="0,1,1,0.3" AbsoluteLayout.LayoutFlags="All" FontSize="36" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                        <Label Text="{Binding Tytul}"  TextColor="Black" FontFamily="{StaticResource Oswald}"  AbsoluteLayout.LayoutBounds="0,1,1,0.3" AbsoluteLayout.LayoutFlags="All" FontSize="30" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
                     </AbsoluteLayout>
                     <Grid x:Name="NewsGrid" Grid.Row="1" BackgroundColor="WhiteSmoke" Padding="5" RowSpacing="10">
                         <Grid.ColumnDefinitions>
