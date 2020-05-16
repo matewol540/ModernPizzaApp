@@ -11,6 +11,7 @@ using System.Net;
 using Android.Content;
 using System.Threading.Tasks;
 using System.IO;
+using Acr.UserDialogs;
 
 namespace MobilePizzaApp.Droid
 {
@@ -29,7 +30,7 @@ namespace MobilePizzaApp.Droid
             ServicePointManager.ServerCertificateValidationCallback += (o, cert, chain, errors) => true;
             ImageCircleRenderer.Init();
             LoadApplication(new App());
-
+            UserDialogs.Init(this);
             Instance = this;
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

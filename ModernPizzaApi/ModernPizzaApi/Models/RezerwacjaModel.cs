@@ -12,14 +12,19 @@ namespace ModernPizzaApi.Models
         [BsonId()]
         [BsonRepresentation(BsonType.ObjectId)]
         public String ObjectId { get; set; }
-        [BsonElement("Nazwa")]
-        public String Nazwa { get; set; }
-        [BsonElement("StartRezerwacji")]
-        public String StartRejestracji { get; set; }
-        [BsonElement("KoniecRejestracji")]
-        public double KoniecRejestracji { get; set; }
-        [BsonElement("Stolik")]
-        public StolikModel Stolik;
 
+        [BsonElement("User")]
+        public String User { get; set; }
+
+        [BsonElement("StartRezerwacji")]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime StartRezerwacji { get; set; }
+
+        [BsonElement("KoniecRezerwacji")]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime KoniecRezerwacji { get; set; }
+
+        [BsonElement("Stolik")]
+        public StolikModel Stolik { get; set; }
     }
 }

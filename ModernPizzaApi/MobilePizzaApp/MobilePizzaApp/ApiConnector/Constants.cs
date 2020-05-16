@@ -29,5 +29,19 @@ namespace MobilePizzaApp.ApiConnector
                 return ApiUrl + "api/uzytkownik/";
             }
         }
+        public static String ConnectionApiUriRestauracja
+        {
+            get
+            {
+                return ApiUrl + "api/Restauracja/";
+            }
+        }
+        public static String ConnectionApiUriRezerwacja
+        {
+            get
+            {
+                return ApiUrl + "api/Rezerwacja/";
+            }
+        }
     }
 }

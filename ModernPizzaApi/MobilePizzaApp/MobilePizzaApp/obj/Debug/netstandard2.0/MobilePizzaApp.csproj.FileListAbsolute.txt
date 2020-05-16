@@ -24,7 +24,6 @@ D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netsta
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\MobilePizzaApp.pdb
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Views\Loader.xaml.g.cs
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\OrderPage.xaml.g.cs
-D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\RezerwacjaPage.xaml.g.cs
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\StolikIkona.png
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\MobilePizzaApp.csprojAssemblyReference.cache
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\DomIkona.png
@@ -38,7 +37,11 @@ D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netsta
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\UserManagePages\ManageAccountPage.xaml.g.cs
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\UserManagePages\RegisterPAge.xaml.g.cs
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\UserManagePages\UserAccountPage.xaml.g.cs
-D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\MobilePizzaApp.csproj.CoreCompileInputs.cache
-D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\XamlC.stamp
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\Reservation.png
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\ReservationCheck.png
+D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\ReservationPages\CreateReservationPage.xaml.g.cs
+D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Pages\ReservationPages\RezerwacjaPage.xaml.g.cs
+D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\MobilePizzaApp.csproj.CoreCompileInputs.cache
+D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\XamlC.stamp
+D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\Globe.jpg
+D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\CameraIcon.png

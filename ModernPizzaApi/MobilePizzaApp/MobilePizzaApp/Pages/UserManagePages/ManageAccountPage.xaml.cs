@@ -25,7 +25,6 @@ namespace MobilePizzaApp.Pages
             InitializeComponent();
             UserManagePage.BindingContext = User;
         }
-
         private void ContentPage_Appearing(object sender, EventArgs e)
         {
             Loader.IsRunning = true;
@@ -168,9 +167,6 @@ namespace MobilePizzaApp.Pages
                 else await DisplayAlert("Error", "Nie mozna nawiazac polaczenia. Haslo nie zostało zmienione", "Ok");
             }
         }
-
-
-
         private async Task<String> GetNewPassword()
         {
             String Password1, Password2;

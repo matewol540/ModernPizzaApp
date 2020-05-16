@@ -5,40 +5,58 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="MobilePizzaApp.Pages.RezerwacjaPage"
-             xmlns:MarkupExtension="clr-namespace:MobilePizzaApp.MarkupExtension">
+             xmlns:MarkupExtension="clr-namespace:MobilePizzaApp.MarkupExtension"
+             Appearing="ContentPage_Appearing">
     <ContentPage.Content>
         <AbsoluteLayout Padding="5" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" BackgroundColor="AliceBlue">
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,0.3" Padding="5" AbsoluteLayout.LayoutFlags="All" Orientation="Horizontal">
                 <Frame HorizontalOptions="CenterAndExpand">
-                        <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Reservation.png}" Aspect="AspectFit" />
+                    <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Reservation.png}" Aspect="AspectFit" />
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="AddNewRezerwation" NumberOfTapsRequired="1"/>
                     </Frame.GestureRecognizers>
                 </Frame>
                 <Frame  HorizontalOptions="CenterAndExpand">
-                        
-                    <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.ReservationCheck.png}" Aspect="AspectFill" />
+                    <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Reservation.png}" Aspect="AspectFit" />
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="AddNewRezerwation2" NumberOfTapsRequired="1"/>
                     </Frame.GestureRecognizers>
                 </Frame>
             </StackLayout>
-
-            <Frame  Padding="5"  AbsoluteLayout.LayoutBounds="0.1,0.9,1,0.6" AbsoluteLayout.LayoutFlags="All"  >
+            <Frame Padding="5" AbsoluteLayout.LayoutBounds="0.1,0.4,1,0.2" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout x:Name="ActualReservationLayout">
+                    <StackLayout Orientation="Horizontal">
+                        <Label HorizontalOptions="CenterAndExpand" Text="Aktywna rezerwacja" FontFamily="{StaticResource Helvetica}" FontSize="Medium" Margin="25,0,0,0"/>
+                        <Image HorizontalOptions="End" Aspect="AspectFit" Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Globe.jpg}" HeightRequest="35" />
+                    </StackLayout>
+                    <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.1" Color="Black"/>
+                    <StackLayout Orientation="Vertical" x:Name="RezerwacjaLayout" >
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Stolik.KodRestauracji,StringFormat='Restauracja: {0}'}" HorizontalOptions="StartAndExpand"/>
+                            <Label Text="{Binding Stolik.NumerStolika ,StringFormat='Stolik nr: {0}'}" HorizontalOptions="StartAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding StartRezerwacji}" HorizontalOptions="StartAndExpand"/>
+                            <Label Text="{Binding KoniecRezerwacji}" HorizontalOptions="StartAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <Frame  Padding="5"  AbsoluteLayout.LayoutBounds="0.1,0.9,1,0.4" AbsoluteLayout.LayoutFlags="All"  >
                 <StackLayout>
                     <Label HorizontalOptions="CenterAndExpand" Text="Historia rezerwacji" FontFamily="{StaticResource Helvetica}" FontSize="Medium"/>
                     <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.1" Color="Black"/>
                     <ListView x:Name="ReservationItemList" HasUnevenRows="True">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                    <Label Text="Przykladowa rezerwacja"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                        <Label Text="Przykladowa rezerwacja"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackLayout>
             </Frame>
         </AbsoluteLayout>

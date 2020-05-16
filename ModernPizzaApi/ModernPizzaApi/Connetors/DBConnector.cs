@@ -15,15 +15,12 @@ using ModernPizzaApi.Controllers;
 using System.IO;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Primitives;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace ModernPizzaApi
 {
     public static class DBConnector
     {
-        //private static MongoClient dbClient = new MongoClient(Constants.MONGODB_CONNECTION_STR);
-        //private const String DBName = "ModernPizzaDB";
-
-        //Connection to exteranal DB
         private static MongoClient dbClient = new MongoClient(new MongoClientSettings()
         {
             ConnectionMode = ConnectionMode.Automatic,
@@ -38,8 +35,47 @@ namespace ModernPizzaApi
         public static List<TransakcjaModel> OtwarteZamowienia = new List<TransakcjaModel>();
 
 
-
         public static List<TransakcjaModel> DoWalidacjiZamowienia = new List<TransakcjaModel>();
+
+        #region Artykul
+        public static async Task<List<ArtykulModel>> PobierzArtykulyAsync()
+        {
+            var MongoDBClient = dbClient.GetDatabase(DBName);
+            var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
+            var PustyFiltr = Builders<ArtykulModel>.Filter.Empty;
+            var TempList = await ArtykulKolekcja.FindAsync<ArtykulModel>(PustyFiltr);
+            return TempList.ToList();
+        }
+        internal static async Task<ArtykulModel> PobierzArtykulAsync(String artykulId)
+        {
+            var MongoDBClient = dbClient.GetDatabase(DBName);
+            var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
+            var Article = await ArtykulKolekcja.FindAsync<ArtykulModel>(x => x.Id == artykulId);
+
+            return Article.First();
+        }
+
+        internal static async Task<ArtykulModel> DodajKomentarz(KomentarzModel komment)
+        {
+            var MongoDBClient = dbClient.GetDatabase(DBName);
+            var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
+            var TempArtykul = ArtykulKolekcja.Find(x => x.Id == komment.Artykulid).First();
+            if (TempArtykul.Komentarze == null)
+                TempArtykul.Komentarze = new List<KomentarzModel>();
+            TempArtykul.Komentarze.Add(komment);
+            await ArtykulKolekcja.FindOneAndReplaceAsync(x => x.Id == komment.Artykulid, TempArtykul);
+            return TempArtykul;
+        }
+        public static void DodajArtykul(ArtykulModel Artykul)
+        {
+            Artykul.Obraz = File.ReadAllBytes(@"D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\Zasoby\TempPizzeria.jpg");
+            var MongoDBClient = dbClient.GetDatabase(DBName);
+            var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
+            ArtykulKolekcja.InsertOne(Artykul);
+        }
+
+
+        #endregion
 
         #region PizzaCommands
         public static List<PizzaModel> PobierzWszystkiePizza()
@@ -233,84 +269,6 @@ namespace ModernPizzaApi
 
         #endregion
 
-        #region Kod Wejscia
-        public static String PobierzKodWejscia(DateTime dt)
-        {
-            var MongoDBClient = dbClient.GetDatabase(DBName);
-            var KodKolekcja = MongoDBClient.GetCollection<KodWejsciaModel>("KodWejscia");
-
-            var KodWejscia = String.Empty;
-
-            var task = KodKolekcja.Find<KodWejsciaModel>(x => x.Data == dt.ToString("yyyyMMdd"));
-            if (task.Any())
-                KodWejscia = task.First().kodWejscia;
-            else
-            {
-                KodWejscia = Utillities.PobierNowyKodWejscia();
-                ZapiszKodWejsciaAsync(DateTime.Now, KodWejscia).Wait();
-            }
-            return KodWejscia;
-        }
-        public static Boolean WalidujKodWejscia(KodWejsciaModel KodWejscia)
-        {
-            var MongoDBClient = dbClient.GetDatabase(DBName);
-            var KodKolekcja = MongoDBClient.GetCollection<KodWejsciaModel>("KodWejscia");
-
-            var response = KodKolekcja.Find<KodWejsciaModel>(x => x.kodWejscia == KodWejscia.kodWejscia && x.Data == KodWejscia.Data);
-
-            return response.Any();
-        }
-
-        public static async Task ZapiszKodWejsciaAsync(DateTime dt, String kodWejscia)
-        {
-            var MongoDBClient = dbClient.GetDatabase(DBName);
-            var KodKolekcja = MongoDBClient.GetCollection<KodWejsciaModel>("KodWejscia");
-
-            var TempKodWejscia = new KodWejsciaModel(dt.ToString("yyyyMMdd"), kodWejscia);
-
-            await KodKolekcja.InsertOneAsync(TempKodWejscia);
-        }
-        #endregion
-
-        #region Artykul
-        public static async Task<List<ArtykulModel>> PobierzArtykulyAsync()
-        {
-            var MongoDBClient = dbClient.GetDatabase(DBName);
-            var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
-            var PustyFiltr = Builders<ArtykulModel>.Filter.Empty;
-            var TempList = await ArtykulKolekcja.FindAsync<ArtykulModel>(PustyFiltr);
-            return TempList.ToList();
-        }
-        internal static async Task<ArtykulModel> PobierzArtykulAsync(String artykulId)
-        {
-            var MongoDBClient = dbClient.GetDatabase(DBName);
-            var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
-            var Article = await ArtykulKolekcja.FindAsync<ArtykulModel>(x => x.Id == artykulId);
-
-            return Article.First();
-        }
-
-        internal static async Task<ArtykulModel> DodajKomentarz(KomentarzModel komment)
-        {
-            var MongoDBClient = dbClient.GetDatabase(DBName);
-            var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
-            var TempArtykul = ArtykulKolekcja.Find(x => x.Id == komment.Artykulid).First();
-            if (TempArtykul.Komentarze == null)
-                TempArtykul.Komentarze = new List<KomentarzModel>();
-            TempArtykul.Komentarze.Add(komment);
-            await ArtykulKolekcja.FindOneAndReplaceAsync(x => x.Id == komment.Artykulid, TempArtykul);
-            return TempArtykul;
-        }
-        public static void DodajArtykul(ArtykulModel Artykul)
-        {
-            Artykul.Obraz = File.ReadAllBytes(@"D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\Zasoby\TempPizzeria.jpg");
-            var MongoDBClient = dbClient.GetDatabase(DBName);
-            var ArtykulKolekcja = MongoDBClient.GetCollection<ArtykulModel>("Artykuly");
-            ArtykulKolekcja.InsertOne(Artykul);
-        }
-
-
-        #endregion
         #region Uzytkownik 
         public static UserModel AuthLoggingUser(string login, string v)
         {
@@ -380,11 +338,10 @@ namespace ModernPizzaApi
             }
             catch (Exception err)
             {
-                
+
             }
             return false;
         }
-
         public static void UsunUzytkownik(UserModel user)
         {
             try
@@ -399,5 +356,113 @@ namespace ModernPizzaApi
             }
         }
         #endregion
+
+        #region Rezerwacja
+        internal async static Task<List<RezerwacjaModel>> PobierzRezerwacjeUzytkownika(String userID)
+        {
+            var MongoDBKlient = dbClient.GetDatabase(DBName);
+            var RezerwacjeCollection = MongoDBKlient.GetCollection<RezerwacjaModel>("Rezerwacje");
+            var Results = await RezerwacjeCollection.FindAsync<RezerwacjaModel>(x => x.User == userID);
+
+            return Results.ToList();
+        }
+        internal async static Task<Boolean> SprawdzCzyTerminDostepny(RezerwacjaModel rezerwacja)
+        {
+            var MongoDBKlient = dbClient.GetDatabase(DBName);
+            var RezerwacjeCollection = MongoDBKlient.GetCollection<RezerwacjaModel>("Rezerwacje");
+            var result = (await RezerwacjeCollection.FindAsync<RezerwacjaModel>(x => true)).ToList();
+            var reserved = result.Where(x => x.Stolik.KodRestauracji == rezerwacja.Stolik.KodRestauracji &&
+                x.Stolik.KodRestauracji == rezerwacja.Stolik.KodRestauracji &&
+                x.StartRezerwacji <= rezerwacja.StartRezerwacji &&
+                x.KoniecRezerwacji >= rezerwacja.StartRezerwacji);
+            return reserved.Any();
+        }
+        internal async static Task<bool> DodajRezerwacje(RezerwacjaModel rezerwacja)
+        {
+            try
+            {
+                var MongoDBKlient = dbClient.GetDatabase(DBName);
+                var RezerwacjeCollection = MongoDBKlient.GetCollection<RezerwacjaModel>("Rezerwacje");
+                await RezerwacjeCollection.InsertOneAsync(rezerwacja);
+                return true;
+            }
+            catch (Exception err)
+            {
+
+            }
+            return false;
+        }
+        internal async static Task<bool> EdytujRezerwacje(RezerwacjaModel rezerwacja)
+        {
+            try
+            {
+                var MongoDBKlient = dbClient.GetDatabase(DBName);
+                var RezerwacjeCollection = MongoDBKlient.GetCollection<RezerwacjaModel>("Rezerwacje");
+                await RezerwacjeCollection.FindOneAndReplaceAsync(x => x.ObjectId == rezerwacja.ObjectId, rezerwacja);
+                return true;
+            }
+            catch (Exception err)
+            {
+
+            }
+            return false;
+        }
+        internal async static Task<bool> UsunRezerwacje(String rezerwacjaID)
+        {
+            try
+            {
+                var MongoDBKlient = dbClient.GetDatabase(DBName);
+                var RezerwacjeCollection = MongoDBKlient.GetCollection<RezerwacjaModel>("Rezerwacje");
+                await RezerwacjeCollection.FindOneAndDeleteAsync(x => x.ObjectId == rezerwacjaID);
+                return true;
+            }
+            catch (Exception err)
+            {
+
+            }
+            return false;
+        }
+        #endregion
+
+
+        #region Resturacja 
+        internal async static Task<List<RestauracjaModel>> PobierzRestauracje()
+        {
+            var MongoDBKlient = dbClient.GetDatabase(DBName);
+            var RezerwacjeCollection = MongoDBKlient.GetCollection<RestauracjaModel>("Restauracje");
+            return (await RezerwacjeCollection.FindAsync<RestauracjaModel>(x => true)).ToList();
+        }
+        internal async static void DodajRestauracje(String ID)
+        {
+            var MongoDBKlient = dbClient.GetDatabase(DBName);
+            var RestauracjeCollection = MongoDBKlient.GetCollection<RestauracjaModel>("Restauracje");
+            var restTemp = new RestauracjaModel()
+            {
+                KodRestauracji = ID,
+                Stolik = new List<StolikModel>() {
+                    new StolikModel() {
+                        KodRestauracji = ID,
+                        NumerStolika = 1
+                    },
+                    new StolikModel() {
+                        KodRestauracji = ID,
+                        NumerStolika = 2
+                    },
+                    new StolikModel() {
+                        KodRestauracji = ID,
+                        NumerStolika = 3
+                    },
+                    new StolikModel() {
+                        KodRestauracji = ID,
+                        NumerStolika = 4
+                    }
+                },
+                XGeoLocalization = 49.883352,
+                YGeoLocalization = 19.493483
+            };
+            await RestauracjeCollection.InsertOneAsync(restTemp);
+        }
+        #endregion
+
     }
 }

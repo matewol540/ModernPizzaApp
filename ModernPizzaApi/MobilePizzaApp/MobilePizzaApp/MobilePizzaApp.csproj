@@ -17,7 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Zasoby\CameraIcon.png" />
     <None Remove="Zasoby\DomIkona.png" />
+    <None Remove="Zasoby\Globe.jpg" />
     <None Remove="Zasoby\Helvetica.ttf" />
     <None Remove="Zasoby\KluczIkona.png" />
     <None Remove="Zasoby\KoszykIkona.png" />
@@ -29,8 +31,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Zasoby\CameraIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Zasoby\DomIkona.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zasoby\Globe.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Zasoby\Helvetica.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -59,6 +67,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.442" />
     <PackageReference Include="Ansuria.XFGloss" Version="1.1.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="SkiaSharp" Version="1.68.2" />
@@ -75,10 +84,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Pages\ReservationPages\CreateReservationPAge.xaml.cs">
+      <DependentUpon>CreateReservationPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Main.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\ArticlePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ReservationPages\CreateReservationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\UserManagePages\LoginApplicationPage.xaml">
@@ -93,7 +111,7 @@
     <EmbeddedResource Update="Pages\UserManagePages\RegisterPAge.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\RezerwacjaPage.xaml">
+    <EmbeddedResource Update="Pages\ReservationPages\RezerwacjaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\UserManagePages\UserAccountPage.xaml">

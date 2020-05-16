@@ -4,12 +4,42 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MobilePizzaApp.Pages.ReservationPages.CreateReservationPage">
+             x:Class="MobilePizzaApp.Pages.ReservationPages.CreateReservationPage"
+             NavigationPage.HasBackButton="True">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <AbsoluteLayout BackgroundColor="Red">
+            <Frame AbsoluteLayout.LayoutBounds="0.5,0.1,0.8,0.8" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                        <Label Text="Start rezerwacji"  HorizontalOptions="Start"  FontSize="Medium"/>
+                        <Frame BackgroundColor="WhiteSmoke" Padding="5">
+                            <Label x:Name="StartReservation" Text="Kliknij aby wybrac"  HorizontalOptions="EndAndExpand" FontSize="Medium">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="SetStartOfReservation" NumberOfTapsRequired="1"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                        <Label Text="Ilosc czasu" HorizontalOptions="StartAndExpand"  FontSize="Medium"/>
+                        <Picker x:Name="IntervalPicker"  HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                        <Label Text="Retauracja" HorizontalOptions="StartAndExpand"  FontSize="Medium"/>
+                        <Picker x:Name="Restauracja" SelectedIndexChanged="Restauracja_SelectedIndexChanged" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                        <Label Text="Stolik" HorizontalOptions="StartAndExpand" FontSize="Medium"/>
+                        <Picker x:Name="Stolik" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+
+                </StackLayout>
+            </Frame>
+            <Button Text="Dodaj rezerwacje" Clicked="Button_Clicked" AbsoluteLayout.LayoutBounds="0.5,0.95,0.8,0.1" AbsoluteLayout.LayoutFlags="All" />
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
