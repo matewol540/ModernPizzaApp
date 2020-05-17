@@ -342,13 +342,13 @@ namespace ModernPizzaApi
             }
             return false;
         }
-        public static void UsunUzytkownik(UserModel user)
+        public async static void UsunUzytkownik(UserModel user)
         {
             try
             {
                 var MongoDBKlient = dbClient.GetDatabase(DBName);
                 var UsersCollection = MongoDBKlient.GetCollection<UserModel>("Uzytkownicy");
-                UsersCollection.FindOneAndDeleteAsync<UserModel>(x => x.Mail == user.Mail);
+                await UsersCollection.FindOneAndDeleteAsync<UserModel>(x => x.Mail == user.Mail);
             }
             catch (Exception err)
             {

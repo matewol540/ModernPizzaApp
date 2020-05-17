@@ -10079,6 +10079,9 @@ namespace MobilePizzaApp.Droid
 			global::XFGloss.Droid.Resource.Styleable.ViewStubCompat_android_id = global::MobilePizzaApp.Droid.Resource.Styleable.ViewStubCompat_android_id;
 			global::XFGloss.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId = global::MobilePizzaApp.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId;
 			global::XFGloss.Droid.Resource.Styleable.ViewStubCompat_android_layout = global::MobilePizzaApp.Droid.Resource.Styleable.ViewStubCompat_android_layout;
+			global::ZXing.Net.Mobile.Forms.Android.Resource.Layout.zxingscanneractivitylayout = global::MobilePizzaApp.Droid.Resource.Layout.zxingscanneractivitylayout;
+			global::ZXing.Net.Mobile.Forms.Android.Resource.Layout.zxingscannerfragmentlayout = global::MobilePizzaApp.Droid.Resource.Layout.zxingscannerfragmentlayout;
+			global::ZXing.Net.Mobile.Forms.Android.Resource.String.library_name = global::MobilePizzaApp.Droid.Resource.String.library_name;
 			global::ZXing.Mobile.Resource.Id.contentFrame = global::MobilePizzaApp.Droid.Resource.Id.contentFrame;
 			global::ZXing.Mobile.Resource.Layout.zxingscanneractivitylayout = global::MobilePizzaApp.Droid.Resource.Layout.zxingscanneractivitylayout;
 			global::ZXing.Mobile.Resource.Layout.zxingscannerfragmentlayout = global::MobilePizzaApp.Droid.Resource.Layout.zxingscannerfragmentlayout;

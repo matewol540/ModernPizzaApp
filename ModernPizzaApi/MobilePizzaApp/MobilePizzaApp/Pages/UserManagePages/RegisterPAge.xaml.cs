@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using Xamarin.Forms.Internals;
+using System.IO;
 
 namespace MobilePizzaApp.Pages
 {
@@ -158,6 +159,14 @@ namespace MobilePizzaApp.Pages
                 return null;
             }
 
+            //FileStream fs = new FileStream(@"\Zasoby\OsobaIkona.png",FileMode.Open);
+            // bytes;
+            //using (var ms = new MemoryStream())
+            //{
+            //    fs.CopyTo(ms);
+            //    bytes = ms.ToArray();
+            //}
+
             var Model = new UserModel
             {
                 Imie = String.IsNullOrEmpty(nameEntry) ? String.Empty : nameEntry,
@@ -165,7 +174,6 @@ namespace MobilePizzaApp.Pages
                 Mail = mailEntry,
                 Password = UserModel.EncryotPw(passwordEntry),
                 Role = "User",
-                Avatar = new byte[1]
             };
             return Model;
         }

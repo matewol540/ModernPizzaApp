@@ -12,6 +12,7 @@ using Android.Content;
 using System.Threading.Tasks;
 using System.IO;
 using Acr.UserDialogs;
+using Xamarin.Forms;
 
 namespace MobilePizzaApp.Droid
 {

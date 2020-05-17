@@ -34,7 +34,7 @@ namespace MobilePizzaApp.Pages
             Loader.IsRunning = false;
 
         }
-        private async void Button_Clicked(object sender, EventArgs e)
+        private async void ChnagePasswordClicked(object sender, EventArgs e)
         {
             Loader.IsRunning = true;
             string result = await DisplayPromptAsync("Step 1", "Wprowadz swoje haslo");
@@ -71,11 +71,12 @@ namespace MobilePizzaApp.Pages
             }
             Loader.IsRunning = false;
         }
-        private void Logout_Clicked(object sender, EventArgs e)
+        private async void Logout_Clicked(object sender, EventArgs e)
         {
             Loader.IsRunning = true;
             if (Application.Current.Properties.Remove("token"))
             {
+                Main.User = null;
                 (Application.Current.MainPage as TabbedPage).CurrentPage = (Application.Current.MainPage as TabbedPage).Children[0];
                 Loader.IsRunning = false;
                 (Application.Current.MainPage as TabbedPage).Children.RemoveAt(4);
@@ -84,7 +85,7 @@ namespace MobilePizzaApp.Pages
                     Title = "Moje konto",
                     IconImageSource = ImageSource.FromResource("ModernPizzaApp.Zasoby.OsobaIkona.png"),
                 });
-                Application.Current.SavePropertiesAsync();
+                await Application.Current.SavePropertiesAsync();
             }
         }
         public async void ChangeImageAvatar(object sender, EventArgs e)
@@ -130,7 +131,8 @@ namespace MobilePizzaApp.Pages
                                     this.User.Avatar = ms.ToArray();
                                 }
                             }
-                        } catch (Exception err)
+                        }
+                        catch (Exception err)
                         {
                             Console.WriteLine(err.Message);
                         }
@@ -198,6 +200,29 @@ namespace MobilePizzaApp.Pages
                 else
                     return true;
             }
+        }
+
+        private async void DeleteUserAccount(object sender, EventArgs e)
+        {
+            using (var HtttpClientConnector = new HttpApiConnector().GetClient())
+            {
+                var PendingSend = Newtonsoft.Json.JsonConvert.SerializeObject(Main.User);
+                var Buffer = Encoding.UTF8.GetBytes(PendingSend);
+                var byteContent = new ByteArrayContent(Buffer);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                HtttpClientConnector.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Application.Current.Properties["token"].ToString());
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Delete,
+                    RequestUri = new Uri(Constants.ConnectionApiUriUser),
+                    Content = byteContent,
+                    
+                };
+                var response = await HtttpClientConnector.SendAsync(request);
+                if (response.IsSuccessStatusCode)
+                    await DisplayAlert("Sukces", "Udalo sie usunac konto", "Ok");
+            }
+            Logout_Clicked(null, null);
         }
     }
 }

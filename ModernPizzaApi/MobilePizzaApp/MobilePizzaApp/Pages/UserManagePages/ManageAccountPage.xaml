@@ -26,13 +26,13 @@
             </ic:CircleImage>
             <Frame CornerRadius="8" AbsoluteLayout.LayoutBounds="0,0.75,1,0.3" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout  VerticalOptions="CenterAndExpand" Spacing="0" Padding="0" >
-                    <Button Text="Zmien haslo" Clicked="Button_Clicked" VerticalOptions="End" HeightRequest="40"/>
+                    <Button Text="Zmien haslo" Clicked="ChnagePasswordClicked" VerticalOptions="End" HeightRequest="40"/>
                     <Button Text="Zapisz Zmiany" Clicked="SendChanges" HorizontalOptions="FillAndExpand" VerticalOptions="End" HeightRequest="40"/>
                     <Button Text="Wyloguj" HorizontalOptions="FillAndExpand" Clicked="Logout_Clicked" VerticalOptions="End" HeightRequest="40"/>
                 </StackLayout>
             </Frame>
             <Frame CornerRadius="8"  AbsoluteLayout.LayoutBounds="0,1,1,0.15" AbsoluteLayout.LayoutFlags="All" >
-                <Button Text="Usun konto" HorizontalOptions="FillAndExpand" VerticalOptions="End" BackgroundColor="DarkRed" HeightRequest="40"/>
+                <Button Text="Usun konto" HorizontalOptions="FillAndExpand" VerticalOptions="End" BackgroundColor="DarkRed" HeightRequest="40" Clicked="DeleteUserAccount"/>
             </Frame>
         </AbsoluteLayout>
     </ContentPage.Content>

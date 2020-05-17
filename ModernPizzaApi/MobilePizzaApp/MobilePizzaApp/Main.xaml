@@ -17,7 +17,7 @@
         <OnPlatform x:TypeArguments="Thickness" iOS="0,20,0,0"/>
     </TabbedPage.Padding>
     <local:StartPage x:Name="StartPage"
-                     Title="Strona glowna"
+                     Title="Start"
                      IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.DomIkona.png}"
                      />
     <local:RezerwacjaPage x:Name="RezerwacjaPage" 

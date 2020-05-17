@@ -19,14 +19,14 @@
                 <Frame  HorizontalOptions="CenterAndExpand">
                     <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Reservation.png}" Aspect="AspectFit" />
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="AddNewRezerwation2" NumberOfTapsRequired="1"/>
+                        <TapGestureRecognizer Tapped="ActivateReservation" NumberOfTapsRequired="1"/>
                     </Frame.GestureRecognizers>
                 </Frame>
             </StackLayout>
             <Frame Padding="5" AbsoluteLayout.LayoutBounds="0.1,0.4,1,0.2" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout x:Name="ActualReservationLayout">
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="CenterAndExpand" Text="Aktywna rezerwacja" FontFamily="{StaticResource Helvetica}" FontSize="Medium" Margin="25,0,0,0"/>
+                        <Label HorizontalOptions="CenterAndExpand" Text="Najbliższa rezerwacja" FontFamily="{StaticResource Helvetica}" FontSize="Medium" Margin="25,0,0,0"/>
                         <Image HorizontalOptions="End" Aspect="AspectFit" Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Globe.jpg}" HeightRequest="35" />
                     </StackLayout>
                     <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.1" Color="Black"/>
@@ -43,15 +43,22 @@
                 </StackLayout>
             </Frame>
             <Frame  Padding="5"  AbsoluteLayout.LayoutBounds="0.1,0.9,1,0.4" AbsoluteLayout.LayoutFlags="All"  >
-                <StackLayout>
+                <StackLayout Padding="5">
                     <Label HorizontalOptions="CenterAndExpand" Text="Historia rezerwacji" FontFamily="{StaticResource Helvetica}" FontSize="Medium"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Data" HorizontalOptions="StartAndExpand"/>
+                        <Label Text="Restauracja" HorizontalOptions="CenterAndExpand"/>
+                        <Label Text="Stolik" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
                     <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.1" Color="Black"/>
                     <ListView x:Name="ReservationItemList" HasUnevenRows="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                        <Label Text="Przykladowa rezerwacja"/>
+                                    <StackLayout  Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
+                                        <Label Text="{Binding StartRezerwacji , StringFormat='{0:MMMM dd, yyyy}'}" HorizontalOptions="FillAndExpand"/>
+                                        <Label Text="{Binding Stolik.KodRestauracji}" HorizontalOptions="FillAndExpand" />
+                                        <Label Text="{Binding Stolik.NumerStolika}" HorizontalOptions="FillAndExpand"/>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

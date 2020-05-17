@@ -58,6 +58,7 @@ namespace ModernPizzaApi.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete()]
+        [Authorize(Roles = "User")]
         public void DeleteUser([FromBody] UserModel user)
         {
             DBConnector.UsunUzytkownik(user);
