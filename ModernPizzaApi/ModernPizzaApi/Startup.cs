@@ -16,7 +16,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.OpenApi.Models;
-
+using Hangfire;
+using Hangfire.Dashboard;
+using Hangfire.Mongo;
+using MongoDB.Driver;
 
 namespace ModernPizzaApi
 {
@@ -60,10 +63,21 @@ namespace ModernPizzaApi
                 };
             });
             services.AddSwaggerGen(c =>
-            c.SwaggerDoc("Version_1.0.0", new OpenApiInfo(){
+            c.SwaggerDoc("Version_1.0.0", new OpenApiInfo()
+            {
                 Title = "Modern Pizza API",
 
             }));
+
+            var migrationOptions = new MongoStorageOptions { MigrationOptions = new MongoMigrationOptions { Strategy = MongoMigrationStrategy.Drop, BackupStrategy = MongoBackupStrategy.None } };
+
+            services.AddHangfire(config => config.UseMongoStorage(new MongoClientSettings()
+            {
+                ConnectionMode = ConnectionMode.Automatic,
+                Credential = MongoCredential.CreateCredential("bvjlr3yieol9j03", "u2bcoixvwja8lneywmyo", "LWSdD6FD3x9g4WrT9Dv8"),
+                Server = new MongoServerAddress("bvjlr3yieol9j03-mongodb.services.clever-cloud.com", 27017)
+            }, "bvjlr3yieol9j03",migrationOptions));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,6 +92,12 @@ namespace ModernPizzaApi
 
             app.UseHttpsRedirection();
             app.UseRouting();
+
+
+            app.UseHangfireServer();
+
+            RecurringJob.AddOrUpdate("Check for expired reservaions",   () => DBConnector.CheckReservagtions(), "*/15 * * * *");
+
 
             app.UseCors(x =>
             {

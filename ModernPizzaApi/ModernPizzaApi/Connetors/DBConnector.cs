@@ -464,5 +464,28 @@ namespace ModernPizzaApi
         }
         #endregion
 
+
+        #region CronHandler
+        public static void CheckReservagtions()
+        {
+            try
+            {
+                var MongoDBKlient = dbClient.GetDatabase(DBName);
+                var RezerwacjeCollection = MongoDBKlient.GetCollection<RezerwacjaModel>("Rezerwacje");
+                var result = RezerwacjeCollection.Find(x => x.Status == "Planned" && x.StartRezerwacji <= DateTime.Now.AddMinutes(-5.0F)).ToList();
+
+                result.ForEach(x =>
+                {
+                        x.Status = "Expired";
+                        RezerwacjeCollection.FindOneAndReplaceAsync(x1 => x1.ObjectId == x.ObjectId, x);
+                });
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err.StackTrace);
+            }
+        }
+        #endregion
+
     }
 }
