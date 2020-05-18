@@ -21,5 +21,7 @@ namespace MobilePizzaApp.Models
 
         [JsonProperty("Stolik")]
         public StolikModel Stolik { get; set; }
+        [JsonProperty("Status")]
+        public String Status { get; set; }
     }
 }

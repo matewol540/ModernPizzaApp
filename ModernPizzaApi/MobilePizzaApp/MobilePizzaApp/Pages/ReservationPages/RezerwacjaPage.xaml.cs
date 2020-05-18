@@ -8,10 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ZXing.Net.Mobile.Forms;
@@ -35,7 +37,11 @@ namespace MobilePizzaApp.Pages
         private async void ContentPage_Appearing(object sender, EventArgs e)
         {
             if (Application.Current.Properties.ContainsKey("token"))
+            {
+                LoadingIndicator.IsRunning = true;
                 DownlaodUserReservations();
+                LoadingIndicator.IsRunning = false;
+            }
             else
             {
                 await DisplayAlert("Ostrzezenie", "Musisz się zalogować aby przeglądać rezerwacje", "Ok");
@@ -65,7 +71,8 @@ namespace MobilePizzaApp.Pages
                     }
 
                     RezerwacjaLayout.BindingContext = _rezerwacja;
-                    ReservationItemList.ItemsSource = PastReservations;
+                    ReservationItemList.ItemsSource = FutureReservations;
+                    ActivationButton.IsEnabled = _rezerwacja.StartRezerwacji.AddMinutes(5.0) >= DateTime.Now;
                 }
             }
         }
@@ -98,9 +105,24 @@ namespace MobilePizzaApp.Pages
             await Navigation.PushModalAsync(scanPage);
         }
 
-        private Task ActivateByTableCode(string result)
+        private async void ActivateByTableCode(string result)
         {
-            throw new NotImplementedException();
+            _rezerwacja.Status = "Active";
+            using (var HttpApiConnector = new HttpApiConnector().GetClient())
+            {
+                var Content = JsonConvert.SerializeObject(_rezerwacja);
+                var bytes = Encoding.UTF8.GetBytes(Content);
+                var byteContent = new ByteArrayContent(bytes);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                HttpApiConnector.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Application.Current.Properties["token"].ToString());
+                var response = await HttpApiConnector.PutAsync(Constants.ConnectionApiUriRezerwacja, byteContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    ActivationButton.IsEnabled = false;
+                    ActivationButton.BackgroundColor = Color.FromHex("#66ff66");
+                    ActivationButton.TextColor= Color.FromHex("#074a07");
+                }
+            }
         }
 
         private void AddReservation(object sender, EventArgs e)
@@ -115,8 +137,51 @@ namespace MobilePizzaApp.Pages
             else
             {
                 FutureReservations.Add(tempRezerwacja);
-
             }
+        }
+        private async void ShowHistory(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new ReservationHisotryPage(PastReservations));
+        }
+        private async void ShowOnMap(object sender, EventArgs e)
+        {
+
+            var restaurant = await DownlaodRestaurnatOnReservationCode(_rezerwacja);
+            if (restaurant == null)
+                return;
+            double latitud = restaurant.XGeoLocalization;
+            double longitud = restaurant.YGeoLocalization;
+            string placeName = "Pizzeria";
+
+            var supportsUri = await Launcher.CanOpenAsync("comgooglemaps://");
+
+            if (supportsUri)
+                await Launcher.OpenAsync($"comgooglemaps://?q={latitud},{longitud}({placeName})");
+
+            else
+                await Map.OpenAsync(latitud, longitud, new MapLaunchOptions { Name = "Test" });
+        }
+        private async Task<RestauracjaModel> DownlaodRestaurnatOnReservationCode(RezerwacjaModel rezerwacja)
+        {
+            RestauracjaModel tempRestaurantModel = null;
+            try
+            {
+
+                using (var HttpConnector = new HttpApiConnector().GetClient())
+                {
+                    var result = await HttpConnector.GetAsync(Constants.ConnectionApiUriRestauracja);
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var Content = await result.Content.ReadAsStringAsync();
+                        tempRestaurantModel = JsonConvert.DeserializeObject<List<RestauracjaModel>>(Content).ToList().First(x => x.KodRestauracji == rezerwacja.Stolik.KodRestauracji);
+                    }
+                }
+            }
+            catch (Exception er)
+            {
+                await DisplayAlert("Błąd", "Nie mozna pobrac miejsca docelowego", "Ok");
+            }
+            return tempRestaurantModel;
         }
     }
 }

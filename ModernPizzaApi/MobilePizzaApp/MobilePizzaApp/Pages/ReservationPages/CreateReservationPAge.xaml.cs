@@ -56,7 +56,6 @@ namespace MobilePizzaApp.Pages.ReservationPages
                 }
             }
         }
-
         private async void SetStartOfReservation(object sender, EventArgs e)
         {
             var dateResult = await UserDialogs.Instance.DatePromptAsync(new DatePromptConfig());
@@ -108,7 +107,8 @@ namespace MobilePizzaApp.Pages.ReservationPages
                 StartRezerwacji = StartRezerwacji,
                 KoniecRezerwacji = KoniecRezerwacji,
                 Stolik = SelectedTable,
-                User = Main.User.Mail
+                User = Main.User.Mail,
+                Status = "Planned"
             };
             if (await CheckIfReservationCanBeDone(Rezerwacja))
             {

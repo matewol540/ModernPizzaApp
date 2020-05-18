@@ -26,5 +26,9 @@ namespace ModernPizzaApi.Models
 
         [BsonElement("Stolik")]
         public StolikModel Stolik { get; set; }
+        [BsonElement("Status")]
+        public String Status { get; set; }
+        //Planned , Active , Expired, Done
+
     }
 }

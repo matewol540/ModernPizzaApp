@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobilePizzaApp.Pages.ReservationPages.ReservationHisotryPage"
+             Appearing="ContentPage_Appearing"
+             >
+    <StackLayout Padding="5">
+        <Label HorizontalOptions="CenterAndExpand" Text="Historia rezerwacji" FontFamily="{StaticResource Helvetica}" FontSize="Medium"/>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Data" HorizontalOptions="StartAndExpand"/>
+            <Label Text="Restauracja" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Stolik" HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.1" Color="Black"/>
+        <ListView x:Name="HistoryItemList" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout  Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
+                            <Label Text="{Binding StartRezerwacji , StringFormat='{0:MMMM dd, yyyy}'}" HorizontalOptions="FillAndExpand"/>
+                            <Label Text="{Binding Stolik.KodRestauracji}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="{Binding Stolik.NumerStolika}" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

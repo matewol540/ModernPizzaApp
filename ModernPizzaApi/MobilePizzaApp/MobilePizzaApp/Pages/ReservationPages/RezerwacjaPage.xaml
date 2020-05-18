@@ -19,15 +19,19 @@
                 <Frame  HorizontalOptions="CenterAndExpand">
                     <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Reservation.png}" Aspect="AspectFit" />
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="ActivateReservation" NumberOfTapsRequired="1"/>
+                        <TapGestureRecognizer Tapped="ShowHistory" NumberOfTapsRequired="1"/>
                     </Frame.GestureRecognizers>
                 </Frame>
             </StackLayout>
-            <Frame Padding="5" AbsoluteLayout.LayoutBounds="0.1,0.4,1,0.2" AbsoluteLayout.LayoutFlags="All">
+            <Frame Padding="5" AbsoluteLayout.LayoutBounds="0.1,0.4,1,0.25" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout x:Name="ActualReservationLayout">
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="CenterAndExpand" Text="Najbliższa rezerwacja" FontFamily="{StaticResource Helvetica}" FontSize="Medium" Margin="25,0,0,0"/>
-                        <Image HorizontalOptions="End" Aspect="AspectFit" Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Globe.jpg}" HeightRequest="35" />
+                        <Image HorizontalOptions="End" Aspect="AspectFit" Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Globe.jpg}" HeightRequest="35" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ShowOnMap" NumberOfTapsRequired="1"/>
+                            </Image.GestureRecognizers>
+                        </Image>
                     </StackLayout>
                     <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.1" Color="Black"/>
                     <StackLayout Orientation="Vertical" x:Name="RezerwacjaLayout" >
@@ -40,11 +44,12 @@
                             <Label Text="{Binding KoniecRezerwacji}" HorizontalOptions="StartAndExpand"/>
                         </StackLayout>
                     </StackLayout>
+                    <Button x:Name="ActivationButton" Clicked="ActivateReservation" Text="AktywujRezerwacje" HorizontalOptions="FillAndExpand" IsEnabled="False" />
                 </StackLayout>
             </Frame>
-            <Frame  Padding="5"  AbsoluteLayout.LayoutBounds="0.1,0.9,1,0.4" AbsoluteLayout.LayoutFlags="All"  >
+            <Frame  Padding="5"  AbsoluteLayout.LayoutBounds="0.1,0.9,1,0.35" AbsoluteLayout.LayoutFlags="All"  >
                 <StackLayout Padding="5">
-                    <Label HorizontalOptions="CenterAndExpand" Text="Historia rezerwacji" FontFamily="{StaticResource Helvetica}" FontSize="Medium"/>
+                    <Label HorizontalOptions="CenterAndExpand" Text="Zaplanowane rezerwacje" FontFamily="{StaticResource Helvetica}" FontSize="Medium"/>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Data" HorizontalOptions="StartAndExpand"/>
                         <Label Text="Restauracja" HorizontalOptions="CenterAndExpand"/>
@@ -66,6 +71,8 @@
                     </ListView>
                 </StackLayout>
             </Frame>
+
+            <ActivityIndicator IsVisible="True" IsRunning="True" x:Name="LoadingIndicator" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1" AbsoluteLayout.LayoutFlags="All"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
