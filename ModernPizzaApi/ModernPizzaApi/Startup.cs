@@ -20,6 +20,7 @@ using Hangfire;
 using Hangfire.Dashboard;
 using Hangfire.Mongo;
 using MongoDB.Driver;
+using ModernPizzaApi.Connetors;
 
 namespace ModernPizzaApi
 {
@@ -95,9 +96,12 @@ namespace ModernPizzaApi
 
 
             app.UseHangfireServer();
-
-            RecurringJob.AddOrUpdate("Check for expired reservaions",   () => DBConnector.CheckReservagtions(), "*/15 * * * *");
-
+            app.UseHangfireDashboard("/hangfire",new DashboardOptions()
+            {
+                Authorization = new [] { new HangfireAuth() }
+            });
+            RecurringJob.AddOrUpdate("Check for expired reservaions",   () => DBConnector.CheckReservagtionsForExpired(), "*/15 * * * *");
+            RecurringJob.AddOrUpdate("Clean up old reservations", () => DBConnector.CleanUpReservations(), "* */24 * * * *");
 
             app.UseCors(x =>
             {

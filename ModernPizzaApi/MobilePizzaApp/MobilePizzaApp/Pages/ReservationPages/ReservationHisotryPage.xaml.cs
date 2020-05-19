@@ -24,5 +24,11 @@ namespace MobilePizzaApp.Pages.ReservationPages
         {
             HistoryItemList.ItemsSource = HistoryList;
         }
+
+        private void HistoryItemList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+
+            (sender as ListView).SelectedItem = null;
+        }
     }
 }

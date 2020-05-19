@@ -6,6 +6,7 @@ using MobilePizzaApp.Pages.ReservationPages;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
@@ -25,13 +26,13 @@ namespace MobilePizzaApp.Pages
     {
         private RezerwacjaModel _rezerwacja { get; set; }
         private List<RezerwacjaModel> PastReservations { get; set; }
-        private List<RezerwacjaModel> FutureReservations { get; set; }
+        private ObservableCollection<RezerwacjaModel> FutureReservations { get; set; }
 
         public RezerwacjaPage()
         {
             InitializeComponent();
             PastReservations = new List<RezerwacjaModel>();
-            FutureReservations = new List<RezerwacjaModel>();
+            FutureReservations = new ObservableCollection<RezerwacjaModel>();
 
         }
         private async void ContentPage_Appearing(object sender, EventArgs e)
@@ -61,18 +62,22 @@ namespace MobilePizzaApp.Pages
                 {
                     TempList = JsonConvert.DeserializeObject<List<RezerwacjaModel>>(await response.Content.ReadAsStringAsync());
 
-                    FutureReservations = TempList.Where(x => DateTime.Compare(x.KoniecRezerwacji, DateTime.Now) > 0).ToList();
-                    PastReservations = TempList.Where(x => DateTime.Compare(x.KoniecRezerwacji, DateTime.Now) < 0).ToList();
+                    FutureReservations = new ObservableCollection<RezerwacjaModel>(TempList.Where(x => DateTime.Compare(x.KoniecRezerwacji, DateTime.Now.ToLocalTime()) > 0 && x.Status == "Planned").ToList());
+                    PastReservations = TempList.Where(x => DateTime.Compare(x.KoniecRezerwacji, DateTime.Now.ToLocalTime()) < 0).ToList();
 
                     if (FutureReservations.Any())
                     {
                         _rezerwacja = FutureReservations.OrderBy(x => x.StartRezerwacji).First();
                         FutureReservations.Remove(_rezerwacja);
+                        RezerwacjaLayout.BindingContext = _rezerwacja;
+                        ReservationItemList.ItemsSource = FutureReservations;
+                        var da = DateTime.Now.ToLocalTime();
+                        var daw = _rezerwacja.StartRezerwacji.AddMinutes(-5.0F);
+                        ActivationButton.IsEnabled = da >= daw;
                     }
+                    else
+                        ActivationButton.IsEnabled = false;
 
-                    RezerwacjaLayout.BindingContext = _rezerwacja;
-                    ReservationItemList.ItemsSource = FutureReservations;
-                    ActivationButton.IsEnabled = _rezerwacja.StartRezerwacji.AddMinutes(5.0) >= DateTime.Now;
                 }
             }
         }
@@ -82,8 +87,8 @@ namespace MobilePizzaApp.Pages
             if (FutureReservations.Count < 5)
             {
                 var ReservationPage = new CreateReservationPage();
-                await Navigation.PushModalAsync(ReservationPage);
                 ReservationPage.Disappearing += AddReservation;
+                await Navigation.PushModalAsync(ReservationPage);
             }
             else
                 await DisplayAlert("Ostrzezenie", "Mozesz posiadac do 5 zaplanowanych rezerwacji", "Ok");
@@ -120,7 +125,7 @@ namespace MobilePizzaApp.Pages
                 {
                     ActivationButton.IsEnabled = false;
                     ActivationButton.BackgroundColor = Color.FromHex("#66ff66");
-                    ActivationButton.TextColor= Color.FromHex("#074a07");
+                    ActivationButton.TextColor = Color.FromHex("#074a07");
                 }
             }
         }
@@ -129,7 +134,13 @@ namespace MobilePizzaApp.Pages
         {
             var SenderPage = sender as CreateReservationPage;
             var tempRezerwacja = SenderPage.rezerwacja;
-            if (tempRezerwacja.StartRezerwacji < _rezerwacja.StartRezerwacji)
+            if (tempRezerwacja == null)
+                return;
+            if (_rezerwacja == null)
+            {
+                FutureReservations.Add(tempRezerwacja);
+            }
+            else if (tempRezerwacja.StartRezerwacji < _rezerwacja.StartRezerwacji)
             {
                 FutureReservations.Add(_rezerwacja);
                 _rezerwacja = tempRezerwacja;
@@ -182,6 +193,36 @@ namespace MobilePizzaApp.Pages
                 await DisplayAlert("Błąd", "Nie mozna pobrac miejsca docelowego", "Ok");
             }
             return tempRestaurantModel;
+        }
+        private async void RemoveReservation(object sender, EventArgs e)
+        {
+
+            var ReservationToRemove = (sender as MenuItem).CommandParameter as RezerwacjaModel;
+
+            using (var HttpApiConnector = new HttpApiConnector().GetClient())
+            {
+                var Content = JsonConvert.SerializeObject(ReservationToRemove);
+                var ByteContent = Encoding.UTF8.GetBytes(Content);
+                var ByteArrayConent = new ByteArrayContent(ByteContent);
+                ByteArrayConent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                HttpApiConnector.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Application.Current.Properties["token"].ToString());
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Delete,
+                    RequestUri = new Uri(Constants.ConnectionApiUriRezerwacja + ReservationToRemove.ObjectId),
+                    Content = ByteArrayConent
+                };
+                var response = await HttpApiConnector.SendAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    FutureReservations.Remove(ReservationToRemove);
+                }
+            }
+        }
+
+        private void RemoveSelectionOnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            (sender as ListView).SelectedItem = null;
         }
     }
 }

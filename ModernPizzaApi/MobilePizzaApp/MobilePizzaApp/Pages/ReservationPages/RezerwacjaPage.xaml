@@ -6,9 +6,10 @@
              mc:Ignorable="d"
              x:Class="MobilePizzaApp.Pages.RezerwacjaPage"
              xmlns:MarkupExtension="clr-namespace:MobilePizzaApp.MarkupExtension"
-             Appearing="ContentPage_Appearing">
-    <ContentPage.Content>
-        <AbsoluteLayout Padding="5" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" BackgroundColor="AliceBlue">
+             Appearing="ContentPage_Appearing"
+             BackgroundColor="AliceBlue"
+             >
+        <AbsoluteLayout Padding="5" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"  >
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,0.3" Padding="5" AbsoluteLayout.LayoutFlags="All" Orientation="Horizontal">
                 <Frame HorizontalOptions="CenterAndExpand">
                     <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Reservation.png}" Aspect="AspectFit" />
@@ -40,8 +41,8 @@
                             <Label Text="{Binding Stolik.NumerStolika ,StringFormat='Stolik nr: {0}'}" HorizontalOptions="StartAndExpand"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding StartRezerwacji}" HorizontalOptions="StartAndExpand"/>
-                            <Label Text="{Binding KoniecRezerwacji}" HorizontalOptions="StartAndExpand"/>
+                        <Label Text="{Binding StartRezerwacji, StringFormat='{0:dd MMMM yyyy HH:mm}'}" HorizontalOptions="StartAndExpand"/>
+                        <Label Text="{Binding KoniecRezerwacji, StringFormat='{0:dd MMMM yyyy HH:mm}'}" HorizontalOptions="StartAndExpand"/>
                         </StackLayout>
                     </StackLayout>
                     <Button x:Name="ActivationButton" Clicked="ActivateReservation" Text="AktywujRezerwacje" HorizontalOptions="FillAndExpand" IsEnabled="False" />
@@ -56,23 +57,26 @@
                         <Label Text="Stolik" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
                     <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.1" Color="Black"/>
-                    <ListView x:Name="ReservationItemList" HasUnevenRows="True">
+                    <ListView x:Name="ReservationItemList" HasUnevenRows="True" ItemSelected="RemoveSelectionOnItemSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout  Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
+                                    <ViewCell.View>
+                                        <StackLayout  Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
                                         <Label Text="{Binding StartRezerwacji , StringFormat='{0:MMMM dd, yyyy}'}" HorizontalOptions="FillAndExpand"/>
                                         <Label Text="{Binding Stolik.KodRestauracji}" HorizontalOptions="FillAndExpand" />
                                         <Label Text="{Binding Stolik.NumerStolika}" HorizontalOptions="FillAndExpand"/>
                                     </StackLayout>
+                                        </ViewCell.View>
+                                    <ViewCell.ContextActions >
+                                        <MenuItem Text="Usuń" Clicked="RemoveReservation" IsDestructive="True" CommandParameter="{Binding .}"/>
+                                    </ViewCell.ContextActions>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackLayout>
             </Frame>
-
             <ActivityIndicator IsVisible="True" IsRunning="True" x:Name="LoadingIndicator" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1" AbsoluteLayout.LayoutFlags="All"/>
         </AbsoluteLayout>
-    </ContentPage.Content>
 </ContentPage>

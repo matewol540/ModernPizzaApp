@@ -6,7 +6,6 @@
              mc:Ignorable="d"
              x:Class="MobilePizzaApp.Pages.StartPage"
              xmlns:EmbeddedSource="clr-namespace:MobilePizzaApp.MarkupExtension"
-             xmlns:GradientContent="clr-namespace:XFGloss;assembly=XFGloss"
              Appearing="LoadArticles"
              >
     <ContentPage.Content>
@@ -18,7 +17,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <AbsoluteLayout x:Name="FirstNews" Grid.Row="0" Padding="-20">
-                        <EmbeddedSource:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="Transparent" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
+                        <EmbeddedSource:GradientFrameRenderer StartColor="AliceBlue" EndColor="Transparent" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
                             <Image  x:Name="FirstImageArticle" Aspect="AspectFill">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
@@ -27,7 +26,7 @@
                         </EmbeddedSource:GradientFrameRenderer>
                         <Label Text="{Binding Tytul}"  TextColor="Black" FontFamily="{StaticResource Oswald}"  AbsoluteLayout.LayoutBounds="0,1,1,0.3" AbsoluteLayout.LayoutFlags="All" FontSize="30" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
                     </AbsoluteLayout>
-                    <Grid x:Name="NewsGrid" Grid.Row="1" BackgroundColor="WhiteSmoke" Padding="5" RowSpacing="10">
+                    <Grid x:Name="NewsGrid" Grid.Row="1" BackgroundColor="AliceBlue" Padding="5" RowSpacing="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>

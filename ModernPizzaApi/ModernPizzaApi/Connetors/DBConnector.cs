@@ -466,7 +466,7 @@ namespace ModernPizzaApi
 
 
         #region CronHandler
-        public static void CheckReservagtions()
+        public static void CheckReservagtionsForExpired()
         {
             try
             {
@@ -476,9 +476,34 @@ namespace ModernPizzaApi
 
                 result.ForEach(x =>
                 {
-                        x.Status = "Expired";
-                        RezerwacjeCollection.FindOneAndReplaceAsync(x1 => x1.ObjectId == x.ObjectId, x);
+                    x.Status = "Expired";
+                    RezerwacjeCollection.FindOneAndReplaceAsync(x1 => x1.ObjectId == x.ObjectId, x);
                 });
+
+                result = RezerwacjeCollection.Find(x => x.Status == "Active" && DateTime.Now <= x.KoniecRezerwacji).ToList();
+
+                result.ForEach(x =>
+                {
+                    x.Status = "Done";
+                    RezerwacjeCollection.FindOneAndReplaceAsync(x1 => x1.ObjectId == x.ObjectId, x);
+                });
+
+
+
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err.StackTrace);
+            }
+        }
+
+        public static void CleanUpReservations()
+        {
+            try
+            {
+                var MongoDBKlient = dbClient.GetDatabase(DBName);
+                var RezerwacjeCollection = MongoDBKlient.GetCollection<RezerwacjaModel>("Rezerwacje");
+                RezerwacjeCollection.DeleteManyAsync(x => x.StartRezerwacji <= DateTime.Now.AddDays(-30F));
             }
             catch (Exception err)
             {

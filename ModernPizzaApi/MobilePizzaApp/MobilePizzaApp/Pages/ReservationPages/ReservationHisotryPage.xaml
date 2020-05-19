@@ -9,21 +9,33 @@
              >
     <StackLayout Padding="5">
         <Label HorizontalOptions="CenterAndExpand" Text="Historia rezerwacji" FontFamily="{StaticResource Helvetica}" FontSize="Medium"/>
-        <StackLayout Orientation="Horizontal">
+
+        <AbsoluteLayout HorizontalOptions="FillAndExpand"  >
+            <Label Text="Data" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0,0,0.25,1" AbsoluteLayout.LayoutFlags="All"/>
+            <Label Text="Restauracja" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0.33,0,0.25,1" AbsoluteLayout.LayoutFlags="All"/>
+            <Label Text="Stolik" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0.66,0,0.25,1" AbsoluteLayout.LayoutFlags="All"/>
+            <Label Text="Status" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="1,0,0.25,1" AbsoluteLayout.LayoutFlags="All" />
+        </AbsoluteLayout>
+        
+        <!--<StackLayout Orientation="Horizontal">
             <Label Text="Data" HorizontalOptions="StartAndExpand"/>
             <Label Text="Restauracja" HorizontalOptions="CenterAndExpand"/>
-            <Label Text="Stolik" HorizontalOptions="FillAndExpand"/>
-        </StackLayout>
+            <Label Text="Stolik" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Status" HorizontalOptions="EndAndExpand" />
+        </StackLayout>-->
         <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.1" Color="Black"/>
-        <ListView x:Name="HistoryItemList" HasUnevenRows="True">
+        <ListView x:Name="HistoryItemList" HasUnevenRows="True" ItemSelected="HistoryItemList_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout  Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
-                            <Label Text="{Binding StartRezerwacji , StringFormat='{0:MMMM dd, yyyy}'}" HorizontalOptions="FillAndExpand"/>
-                            <Label Text="{Binding Stolik.KodRestauracji}" HorizontalOptions="FillAndExpand" />
-                            <Label Text="{Binding Stolik.NumerStolika}" HorizontalOptions="FillAndExpand"/>
-                        </StackLayout>
+                        <!--<StackLayout  Orientation="Horizontal" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">-->
+                        <AbsoluteLayout HorizontalOptions="FillAndExpand"  Padding="5">
+                            <Label Text="{Binding StartRezerwacji , StringFormat='{0:MMMM dd, yyyy}'}" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0,0,0.25,1" AbsoluteLayout.LayoutFlags="All"/>
+                            <Label Text="{Binding Stolik.KodRestauracji}" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0.33,0,0.25,1" AbsoluteLayout.LayoutFlags="All"  />
+                            <Label Text="{Binding Stolik.NumerStolika}" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="0.66,0,0.25,1" AbsoluteLayout.LayoutFlags="All" />
+                            <Label Text="{Binding Status}" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutBounds="1,0,0.25,1" AbsoluteLayout.LayoutFlags="All"  />
+                            <!--</StackLayout>-->
+                        </AbsoluteLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

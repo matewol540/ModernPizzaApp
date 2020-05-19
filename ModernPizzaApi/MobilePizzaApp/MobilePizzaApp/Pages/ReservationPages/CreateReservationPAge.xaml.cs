@@ -76,8 +76,8 @@ namespace MobilePizzaApp.Pages.ReservationPages
                         minutes = 0;
                     if (timeResult.SelectedTime.Minutes % 15 != 0)
                         await DisplayAlert("Uwaga", $"Zmieniono czas rezerwacji na {timeResult.SelectedTime.Hours}:{minutes}", "Ok");
-                    Start = new DateTime(dateResult.SelectedDate.Year, dateResult.SelectedDate.Month, dateResult.SelectedDate.Day, timeResult.SelectedTime.Hours, minutes, 0);
-                    if (Start <= DateTime.Now)
+                    Start = new DateTime(dateResult.SelectedDate.Year, dateResult.SelectedDate.Month, dateResult.SelectedDate.Day, timeResult.SelectedTime.Hours, minutes, 0,DateTimeKind.Local);
+                    if (Start <= DateTime.Now.ToLocalTime())
                     {
                         Start = new DateTime();
                         await DisplayAlert("Error", "Nie mozna wybrac daty z przeszlosci", "Ok");
