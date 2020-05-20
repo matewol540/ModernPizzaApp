@@ -374,7 +374,8 @@ namespace ModernPizzaApi
             var reserved = result.Where(x => x.Stolik.KodRestauracji == rezerwacja.Stolik.KodRestauracji &&
                 x.Stolik.KodRestauracji == rezerwacja.Stolik.KodRestauracji &&
                 x.StartRezerwacji <= rezerwacja.StartRezerwacji &&
-                x.KoniecRezerwacji >= rezerwacja.StartRezerwacji);
+                x.KoniecRezerwacji >= rezerwacja.StartRezerwacji &&
+                x.Status != "Expired");
             return reserved.Any();
         }
         internal async static Task<bool> DodajRezerwacje(RezerwacjaModel rezerwacja)
@@ -487,9 +488,6 @@ namespace ModernPizzaApi
                     x.Status = "Done";
                     RezerwacjeCollection.FindOneAndReplaceAsync(x1 => x1.ObjectId == x.ObjectId, x);
                 });
-
-
-
             }
             catch (Exception err)
             {
