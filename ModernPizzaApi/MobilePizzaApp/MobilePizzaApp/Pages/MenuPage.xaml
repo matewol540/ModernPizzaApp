@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="MobilePizzaApp.Pages.MenuPage"
+              Appearing="LoadItemsToCollections"
              >
     <ContentPage Title="Pizza">
         <ListView x:Name="PizzaItemsList" HasUnevenRows="True">
@@ -13,8 +14,6 @@
                     <ViewCell Tapped="ViewCell_Tapped">
                         <StackLayout Orientation="Horizontal" Padding="5">
                             <Label Text="{d:Binding Nazwa}" FontSize="20" HorizontalOptions="StartAndExpand"/>
-                            <Button Text="Dodaj do zamowienia" Clicked="AddItemToOrderList"/>
-                            <Button Text="Szczegoly"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
@@ -24,8 +23,17 @@
 
 
     <ContentPage Title="Napoje">
-        <Image Source="https://cdn4.iconfinder.com/data/icons/hotel-service-20/64/Hotel_Service-30-512.png"/>
-    </ContentPage>
+        <ListView x:Name="NapojItemsList" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="5">
+                            <Label Text="{d:Binding Nazwa}" FontSize="20" HorizontalOptions="StartAndExpand"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView> </ContentPage>
     <ContentPage Title="Przekaski">
         <Image Source="https://cdn3.iconfinder.com/data/icons/fast-food-outline-6/64/Bag-chips-fried-packet-potato-snack-512.png"/>
     </ContentPage>

@@ -25,5 +25,5 @@
                           Title="Rezerwacje"
                           IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.StolikIkona.png}" />
     <local:MenuPage Title="Menu" IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.PizzaIkona.png}"/>
-    <ContentPage Title="Placeholder" IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.OsobaIkona.png}"/>
+    <Page x:Name="UserSwitchPage" Title="Placeholder" IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.OsobaIkona.png}"/>
 </TabbedPage>

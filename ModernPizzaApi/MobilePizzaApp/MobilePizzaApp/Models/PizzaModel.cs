@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MobilePizzaApp.Interface;
 using Newtonsoft.Json;
 namespace MobilePizzaApp.Models
 {
     
-    public class PizzaModel
+    public class PizzaModel : IItemTemplate
     {
         [JsonProperty("objectid")]
         public String ObjectId { get; set; }
@@ -15,5 +16,8 @@ namespace MobilePizzaApp.Models
         public List<String> Lista_Skladnikow { get; set; }
         [JsonProperty("cena")]
         public double Cena { get; set; }
+
+        [JsonProperty("Obraz")]
+        public byte[] Obraz { get; set; }
     }
 }

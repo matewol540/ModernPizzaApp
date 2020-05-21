@@ -29,8 +29,6 @@ namespace ModernPizzaApi
 
         });
 
-
-
         private const String DBName = "bvjlr3yieol9j03";
         public static List<TransakcjaModel> OtwarteZamowienia = new List<TransakcjaModel>();
 
@@ -425,6 +423,58 @@ namespace ModernPizzaApi
         }
         #endregion
 
+        #region Napoje
+        public async static Task<List<NapojModel>> PobierzNapoje()
+        {
+            var MongoDB = dbClient.GetDatabase(DBName);
+            var NapojeKolekcja = MongoDB.GetCollection<NapojModel>("Napoj");
+            var TempList = (await NapojeKolekcja.FindAsync<NapojModel>(x => true)).ToList();
+            return TempList;
+        }
+        public async static Task<Boolean> EdytujNapoj(NapojModel tempNapoj)
+        {
+            var MongoDB = dbClient.GetDatabase(DBName);
+            var NapojeKolekcja = MongoDB.GetCollection<NapojModel>("Napoj");
+            var TempList = (await NapojeKolekcja.FindOneAndReplaceAsync<NapojModel>(x => tempNapoj.ObjectId == x.ObjectId, tempNapoj));
+            if (TempList != null)
+                return true;
+            return false;
+
+        }
+
+        public async static Task<Boolean> DodajNapoj(NapojModel tempNapoj)
+        {
+            try
+            {
+                var MongoDB = dbClient.GetDatabase(DBName);
+                var NapojeKolekcja = MongoDB.GetCollection<NapojModel>("Napoj");
+                await NapojeKolekcja.InsertOneAsync(tempNapoj);
+                return true;
+            }
+            catch (Exception err)
+            {
+
+            }
+            return false;
+        }
+
+        public async static Task<Boolean> UsunNapoj(NapojModel tempNapoj)
+        {
+            try
+            {
+                var MongoDB = dbClient.GetDatabase(DBName);
+                var NapojeKolekcja = MongoDB.GetCollection<NapojModel>("Napoj");
+                await NapojeKolekcja.DeleteOneAsync(x => x.ObjectId == tempNapoj.ObjectId);
+                return true;
+            }
+            catch (Exception err)
+            {
+
+            }
+            return false;
+        }
+        #endregion
+
 
         #region Resturacja 
         internal async static Task<List<RestauracjaModel>> PobierzRestauracje()
@@ -464,7 +514,6 @@ namespace ModernPizzaApi
             await RestauracjeCollection.InsertOneAsync(restTemp);
         }
         #endregion
-
 
         #region CronHandler
         public static void CheckReservagtionsForExpired()
@@ -508,6 +557,8 @@ namespace ModernPizzaApi
                 Console.WriteLine(err.StackTrace);
             }
         }
+
+
         #endregion
 
     }

@@ -10,25 +10,25 @@
              BackgroundColor="AliceBlue"
              >
         <AbsoluteLayout Padding="5" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"  >
-            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,0.3" Padding="5" AbsoluteLayout.LayoutFlags="All" Orientation="Horizontal">
-                <Frame HorizontalOptions="CenterAndExpand">
-                    <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Reservation.png}" Aspect="AspectFit" />
+            <!--<StackLayout AbsoluteLayout.LayoutBounds="0,0,1,0.3" Padding="5" AbsoluteLayout.LayoutFlags="All" Orientation="Horizontal">-->
+            <Frame AbsoluteLayout.LayoutBounds="0.1,0.03,0.4,0.25" Padding="5" AbsoluteLayout.LayoutFlags="All">
+                <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.RegisterReservation.png}" Aspect="AspectFit" />
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="AddNewRezerwation" NumberOfTapsRequired="1"/>
                     </Frame.GestureRecognizers>
                 </Frame>
-                <Frame  HorizontalOptions="CenterAndExpand">
+            <Frame  AbsoluteLayout.LayoutBounds="0.9,0.03,0.4,0.25" Padding="5" AbsoluteLayout.LayoutFlags="All">
                 <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.HistoryBookIcon.png}" Aspect="AspectFit" />
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ShowHistory" NumberOfTapsRequired="1"/>
                     </Frame.GestureRecognizers>
                 </Frame>
-            </StackLayout>
+            <!--</StackLayout>-->
             <Frame Padding="5" AbsoluteLayout.LayoutBounds="0.1,0.4,1,0.25" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout x:Name="ActualReservationLayout">
                     <StackLayout Orientation="Horizontal">
                         <Label HorizontalOptions="CenterAndExpand" Text="Najbliższa rezerwacja" FontFamily="{StaticResource Helvetica}" FontSize="Medium" Margin="25,0,0,0"/>
-                        <Image HorizontalOptions="End" Aspect="AspectFit" Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Globe.jpg}" HeightRequest="35" >
+                    <Image HorizontalOptions="End" Aspect="AspectFit" Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.FindOnMapICon.png}" HeightRequest="35" >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="ShowOnMap" NumberOfTapsRequired="1"/>
                             </Image.GestureRecognizers>

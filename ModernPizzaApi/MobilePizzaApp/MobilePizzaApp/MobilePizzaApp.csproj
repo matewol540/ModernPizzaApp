@@ -17,29 +17,34 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Zasoby\CameraIcon.png" />
     <None Remove="Zasoby\DomIkona.png" />
+    <None Remove="Zasoby\FindOnMapICon.png" />
     <None Remove="Zasoby\Globe.jpg" />
     <None Remove="Zasoby\Helvetica.ttf" />
     <None Remove="Zasoby\HistoryBookIcon.png" />
     <None Remove="Zasoby\KluczIkona.png" />
     <None Remove="Zasoby\KoszykIkona.png" />
     <None Remove="Zasoby\OsobaIkona.png" />
+    <None Remove="Zasoby\PhotoCameraIcon.png" />
     <None Remove="Zasoby\PizzaIkona.png" />
+    <None Remove="Zasoby\RegisterReservation.png" />
     <None Remove="Zasoby\Reservation.png" />
     <None Remove="Zasoby\ReservationCheck.png" />
     <None Remove="Zasoby\StolikIkona.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Zasoby\CameraIcon.png">
+    <EmbeddedResource Include="Zasoby\RegisterReservation.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Zasoby\DomIkona.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Zasoby\Globe.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <EmbeddedResource Include="Zasoby\FindOnMapICon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Zasoby\Helvetica.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -56,13 +61,10 @@
     <EmbeddedResource Include="Zasoby\OsobaIkona.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Zasoby\PhotoCameraIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Zasoby\PizzaIkona.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Zasoby\Reservation.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Zasoby\ReservationCheck.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Zasoby\StolikIkona.png">

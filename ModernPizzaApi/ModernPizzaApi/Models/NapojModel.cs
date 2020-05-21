@@ -20,6 +20,8 @@ namespace ModernPizzaApi.Models
         [BsonElement("WalidacjaWieku")]
         public Boolean WalidujWiek { get; set; }
 
+        [BsonElement("Obraz")]
+        public byte[] Obraz { get; set; }
         public NapojModel()
         {
             ObjectId = Utillities.getHexGuid();

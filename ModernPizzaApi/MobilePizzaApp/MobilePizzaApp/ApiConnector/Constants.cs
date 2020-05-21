@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace MobilePizzaApp.ApiConnector
@@ -41,6 +42,13 @@ namespace MobilePizzaApp.ApiConnector
             get
             {
                 return ApiUrl + "api/Rezerwacja/";
+            }
+        }
+        public static String ConnectionApiUriNapoj
+        {
+            get
+            {
+                return ApiUrl + "Napoj";
             }
         }
     }
