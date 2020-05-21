@@ -5,41 +5,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="MobilePizzaApp.Pages.ReservationPages.CreateReservationPage"
+             xmlns:MarkupExtension="clr-namespace:MobilePizzaApp.MarkupExtension"
              NavigationPage.HasBackButton="True">
     <ContentPage.Content>
-        <AbsoluteLayout BackgroundColor="Red">
+        <AbsoluteLayout BackgroundColor="AliceBlue">
             <Frame AbsoluteLayout.LayoutBounds="0.5,0.1,0.8,0.8" AbsoluteLayout.LayoutFlags="All">
-                <StackLayout>
-
-                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
-                        <Label Text="Start rezerwacji"  HorizontalOptions="Start"  FontSize="Medium"/>
-                        <Frame BackgroundColor="WhiteSmoke" Padding="5">
-                            <Label x:Name="StartReservation" Text="Kliknij aby wybrac"  HorizontalOptions="EndAndExpand" FontSize="Medium">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="SetStartOfReservation" NumberOfTapsRequired="1"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </Frame>
+                <StackLayout Spacing="50" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                    <StackLayout >
+                        <Label Text="Start rezerwacji"  HorizontalOptions="CenterAndExpand"  FontSize="Medium"/>
+                        <Picker x:Name="StartReservation"  HorizontalOptions="FillAndExpand" Focused="UnfocusPicker" Unfocused="SetStartReservation" >
+                            <!--<Picker.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SetStartReservation" NumberOfTapsRequired="1" />
+                            </Picker.GestureRecognizers>-->
+                        </Picker>
                     </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
-                        <Label Text="Ilosc czasu" HorizontalOptions="StartAndExpand"  FontSize="Medium"/>
+                    <StackLayout  >
+                        <Label Text="Ilosc czasu" HorizontalOptions="CenterAndExpand"  FontSize="Medium"/>
                         <Picker x:Name="IntervalPicker"  HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
-                        <Label Text="Retauracja" HorizontalOptions="StartAndExpand"  FontSize="Medium"/>
+                    <StackLayout>
+                        <Label Text="Retauracja" HorizontalOptions="CenterAndExpand"  FontSize="Medium"/>
                         <Picker x:Name="Restauracja" SelectedIndexChanged="Restauracja_SelectedIndexChanged" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
-                        <Label Text="Stolik" HorizontalOptions="StartAndExpand" FontSize="Medium"/>
+                    <StackLayout>
+                        <Label Text="Stolik" HorizontalOptions="CenterAndExpand" FontSize="Medium"/>
                         <Picker x:Name="Stolik" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
-
                 </StackLayout>
             </Frame>
-            <Button Text="Dodaj rezerwacje" Clicked="Button_Clicked" AbsoluteLayout.LayoutBounds="0.5,0.95,0.8,0.1" AbsoluteLayout.LayoutFlags="All" />
+            <Frame AbsoluteLayout.LayoutBounds="0.5,0.95,0.8,0.1"  AbsoluteLayout.LayoutFlags="All" Padding="0">
+                <Button Text="Dodaj rezerwacje" Clicked="Button_Clicked" BackgroundColor="Transparent"  />
+            </Frame>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

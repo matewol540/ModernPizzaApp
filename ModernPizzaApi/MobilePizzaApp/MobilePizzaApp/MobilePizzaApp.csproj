@@ -21,6 +21,7 @@
     <None Remove="Zasoby\DomIkona.png" />
     <None Remove="Zasoby\Globe.jpg" />
     <None Remove="Zasoby\Helvetica.ttf" />
+    <None Remove="Zasoby\HistoryBookIcon.png" />
     <None Remove="Zasoby\KluczIkona.png" />
     <None Remove="Zasoby\KoszykIkona.png" />
     <None Remove="Zasoby\OsobaIkona.png" />
@@ -41,6 +42,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Zasoby\Helvetica.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zasoby\HistoryBookIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Zasoby\KluczIkona.png">

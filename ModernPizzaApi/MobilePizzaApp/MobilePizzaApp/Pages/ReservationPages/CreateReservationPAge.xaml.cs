@@ -23,6 +23,8 @@ namespace MobilePizzaApp.Pages.ReservationPages
         private List<StolikModel> stoliks;
         public int[] TimeInterval = new int[] { 15, 30, 45, 60 };
         DateTime Start;
+        DatePromptResult dateResult;
+
         public RezerwacjaModel rezerwacja { get; set; }
 
         public CreateReservationPage()
@@ -56,10 +58,20 @@ namespace MobilePizzaApp.Pages.ReservationPages
                 }
             }
         }
-        private async void SetStartOfReservation(object sender, EventArgs e)
+        private void UnfocusPicker(object sender, FocusEventArgs e)
         {
-            var dateResult = await UserDialogs.Instance.DatePromptAsync(new DatePromptConfig());
-            if (dateResult.Ok)
+            if (dateResult == null)
+            {
+                var DateEntrySender = sender as Picker;
+                DateEntrySender.Unfocus();
+            }
+        }
+        private async void SetStartReservation(object sender, FocusEventArgs e)
+        {
+            var DateEntrySender = sender as Picker;
+            dateResult = new DatePromptResult(true, new DateTime());
+            dateResult = await UserDialogs.Instance.DatePromptAsync(new DatePromptConfig());
+            if (dateResult != null && dateResult.Ok)
             {
                 var timeResult = await UserDialogs.Instance.TimePromptAsync(new TimePromptConfig
                 {
@@ -67,27 +79,46 @@ namespace MobilePizzaApp.Pages.ReservationPages
                     Use24HourClock = true
                 });
                 var minutes = 0;
+                var ExtraHour = 0;
                 if (timeResult.Ok)
                 {
-
-                    if (timeResult.SelectedTime.Minutes / 15 > 1 || timeResult.SelectedTime.Minutes / 15 < 3)
-                        minutes = 30;
-                    else
+                    if (timeResult.SelectedTime.Minutes < 7)
                         minutes = 0;
-                    if (timeResult.SelectedTime.Minutes % 15 != 0)
-                        await DisplayAlert("Uwaga", $"Zmieniono czas rezerwacji na {timeResult.SelectedTime.Hours}:{minutes}", "Ok");
-                    Start = new DateTime(dateResult.SelectedDate.Year, dateResult.SelectedDate.Month, dateResult.SelectedDate.Day, timeResult.SelectedTime.Hours, minutes, 0,DateTimeKind.Local);
+                    else if (timeResult.SelectedTime.Minutes > 7 && timeResult.SelectedTime.Minutes < 22)
+                        minutes = 15;
+                    else if (timeResult.SelectedTime.Minutes >= 22 && timeResult.SelectedTime.Minutes < 37)
+                        minutes = 30;
+                    else if (timeResult.SelectedTime.Minutes >= 37 && timeResult.SelectedTime.Minutes < 52)
+                        minutes = 45;
+                    else
+                    {
+                        ExtraHour++;
+                        minutes = 0;
+                    }
+
+                    Start = new DateTime(dateResult.SelectedDate.Year, dateResult.SelectedDate.Month, dateResult.SelectedDate.Day, timeResult.SelectedTime.Hours, minutes, 0, DateTimeKind.Local).AddHours(ExtraHour);
+
                     if (Start <= DateTime.Now.ToLocalTime())
                     {
                         Start = new DateTime();
                         await DisplayAlert("Error", "Nie mozna wybrac daty z przeszlosci", "Ok");
-                    } else
+                    }
+                    else
                     {
-                        StartReservation.Text = Start.ToString("yyyy-MM-dd-HH-mm");
+                        if (timeResult.SelectedTime.Minutes % 15 != 0)
+                            await DisplayAlert("Uwaga", $"Zmieniono czas rezerwacji na {Start.Hour}:{Start.Minute}", "Ok");
+
+                        var SelectedDate = Start.ToString("yyyy-MM-dd HH:mm");
+                        DateEntrySender.Items.Clear();
+                        DateEntrySender.Items.Add(SelectedDate);
+                        DateEntrySender.SelectedItem = SelectedDate;
                     }
                 }
+                dateResult = null;
             }
+
         }
+
         private void Restauracja_SelectedIndexChanged(object sender, EventArgs e)
         {
             Stolik.SelectedItem = null;

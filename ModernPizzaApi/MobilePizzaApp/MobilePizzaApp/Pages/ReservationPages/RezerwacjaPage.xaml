@@ -18,7 +18,7 @@
                     </Frame.GestureRecognizers>
                 </Frame>
                 <Frame  HorizontalOptions="CenterAndExpand">
-                    <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.Reservation.png}" Aspect="AspectFit" />
+                <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.HistoryBookIcon.png}" Aspect="AspectFit" />
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ShowHistory" NumberOfTapsRequired="1"/>
                     </Frame.GestureRecognizers>

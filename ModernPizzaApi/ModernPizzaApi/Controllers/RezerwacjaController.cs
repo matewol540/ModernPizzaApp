@@ -36,8 +36,9 @@ namespace ModernPizzaApi.Controllers
         [HttpPut]
         public async Task<ActionResult<RezerwacjaModel>> Put([FromBody] RezerwacjaModel Rezerwacja)
         {
-            if (await DBConnector.EdytujRezerwacje(Rezerwacja))
-                return Ok(Rezerwacja);
+            if (Rezerwacja.Status == "Planned")
+                if (await DBConnector.EdytujRezerwacje(Rezerwacja))
+                    return Ok(Rezerwacja);
             return BadRequest(null);
         }
 

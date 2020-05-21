@@ -102,12 +102,12 @@ namespace MobilePizzaApp.Pages
 
                  Device.BeginInvokeOnMainThread(() =>
                  {
-                     Navigation.PopModalAsync();
+                     Navigation.PopAsync();
                      ActivateByTableCode(result.Text);
                  });
              };
 
-            await Navigation.PushModalAsync(scanPage);
+            await Navigation.PushAsync(scanPage);
         }
 
         private async void ActivateByTableCode(string result)

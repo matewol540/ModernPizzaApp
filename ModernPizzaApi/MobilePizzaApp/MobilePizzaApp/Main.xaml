@@ -12,6 +12,7 @@
             xmlns:local="clr-namespace:MobilePizzaApp.Pages"
             x:Name="PagesOrganizer"
             Appearing="PagesOrganizer_Appearing"
+            NavigationPage.HasNavigationBar="False"
             >
     <TabbedPage.Padding>
         <OnPlatform x:TypeArguments="Thickness" iOS="0,20,0,0"/>
@@ -24,7 +25,5 @@
                           Title="Rezerwacje"
                           IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.StolikIkona.png}" />
     <local:MenuPage Title="Menu" IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.PizzaIkona.png}"/>
-    <local:OrderPage Title="Zamowienie" IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.KoszykIkona.png}" />
-    <ContentPage Title="Placeholder"/>
-    <ContentPage Title="Ustawienia" IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.KluczIkona.png}"/>
+    <ContentPage Title="Placeholder" IconImageSource="{ImageResolver:EmbeddedClass MobilePizzaApp.Zasoby.OsobaIkona.png}"/>
 </TabbedPage>

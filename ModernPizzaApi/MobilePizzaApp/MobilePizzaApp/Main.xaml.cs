@@ -48,7 +48,7 @@ namespace MobilePizzaApp
         }
         private async void PagesOrganizer_Appearing(object sender, EventArgs e)
         {
-            PagesOrganizer.Children.RemoveAt(4);
+            PagesOrganizer.Children.RemoveAt(3);
 
             if (Application.Current.Properties.ContainsKey("token"))
                 await DownloadUser();
@@ -61,7 +61,7 @@ namespace MobilePizzaApp
                     IconImageSource = ImageSource.FromResource("MobilePizzaApp.Zasoby.OsobaIkona.png"),
                     User = User
                 };
-                PagesOrganizer.Children.Insert(4, UserPage);
+                PagesOrganizer.Children.Insert(3, UserPage);
             }
             else
             {
@@ -70,7 +70,7 @@ namespace MobilePizzaApp
                     Title = "Moje konto",
                     IconImageSource = ImageSource.FromResource("MobilePizzaApp.Zasoby.OsobaIkona.png"),
                 };
-                PagesOrganizer.Children.Insert(4, RegLogPages);
+                PagesOrganizer.Children.Insert(3, RegLogPages);
             }
         }
     }
