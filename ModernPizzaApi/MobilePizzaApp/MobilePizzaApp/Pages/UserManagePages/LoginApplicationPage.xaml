@@ -39,5 +39,4 @@
         </StackLayout>
         <ActivityIndicator x:Name="LoginAcivityIndicator" IsRunning="False" AbsoluteLayout.LayoutBounds="0.5,0.5,25,25" AbsoluteLayout.LayoutFlags="SizeProportional" />
     </AbsoluteLayout>
-
 </ContentPage>

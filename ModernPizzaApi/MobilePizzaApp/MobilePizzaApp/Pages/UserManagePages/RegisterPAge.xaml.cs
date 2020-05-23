@@ -159,14 +159,6 @@ namespace MobilePizzaApp.Pages
                 return null;
             }
 
-            //FileStream fs = new FileStream(@"\Zasoby\OsobaIkona.png",FileMode.Open);
-            // bytes;
-            //using (var ms = new MemoryStream())
-            //{
-            //    fs.CopyTo(ms);
-            //    bytes = ms.ToArray();
-            //}
-
             var Model = new UserModel
             {
                 Imie = String.IsNullOrEmpty(nameEntry) ? String.Empty : nameEntry,

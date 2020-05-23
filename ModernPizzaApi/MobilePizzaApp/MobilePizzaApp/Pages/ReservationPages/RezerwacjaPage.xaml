@@ -77,6 +77,6 @@
                     </ListView>
                 </StackLayout>
             </Frame>
-            <ActivityIndicator IsVisible="True" IsRunning="True" x:Name="LoadingIndicator" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1" AbsoluteLayout.LayoutFlags="All"/>
+            <ActivityIndicator IsVisible="True" IsRunning="True" x:Name="LoadingIndicator" AbsoluteLayout.LayoutBounds="0.5,0.5,30,30" AbsoluteLayout.LayoutFlags="PositionProportional"/>
         </AbsoluteLayout>
 </ContentPage>

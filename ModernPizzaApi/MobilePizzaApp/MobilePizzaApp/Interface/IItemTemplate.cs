@@ -11,7 +11,6 @@ namespace MobilePizzaApp.Interface
         String Nazwa { get; set; }
         [JsonProperty("Cena")]
         double Cena { get; set; }
-
         [JsonProperty("Obraz")]
         byte[] Obraz { get; set; }
     }

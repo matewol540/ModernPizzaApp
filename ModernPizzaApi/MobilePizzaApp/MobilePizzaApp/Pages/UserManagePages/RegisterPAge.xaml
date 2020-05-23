@@ -7,7 +7,6 @@
              x:Class="MobilePizzaApp.Pages.RegisterPAge"
              xmlns:FrameRenderer="clr-namespace:MobilePizzaApp.MarkupExtension"
              x:Name="RegisterPage">
-    <ContentPage.Content>
         <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
             <FrameRenderer:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="Red" Padding="0" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
             <StackLayout  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="10">
@@ -60,5 +59,4 @@
                 </Frame>
             </StackLayout>
         </AbsoluteLayout>
-    </ContentPage.Content >
 </ContentPage>

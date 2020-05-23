@@ -27,17 +27,6 @@ namespace ModernPizzaApi.Controllers
             return DBConnector.PobierzWszystkiePizza();
         }
 
-        [AllowAnonymous]
-        [HttpGet("{id}")]
-        public ActionResult PobierzPizze(String id)
-        {
-            var newId = id;
-            var result = DBConnector.PobierzPizza(newId);
-            byte[] b = System.IO.File.ReadAllBytes(result.SciezkaDoObrazu);
-
-            return File(b, "image/jpeg");
-        }
-
         [HttpPost]
         public ActionResult<String> DodajPizza([FromBody]PizzaModel Pizza)
         {

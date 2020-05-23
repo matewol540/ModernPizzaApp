@@ -46,3 +46,4 @@ D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netsta
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\RegisterReservation.png
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\FindOnMapICon.png
 D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\bin\Debug\netstandard2.0\Zasoby\PhotoCameraIcon.png
+D:\ModernPizzaRepo\ModernPizzaApi\MobilePizzaApp\MobilePizzaApp\obj\Debug\netstandard2.0\Views\ItemView.xaml.g.cs

@@ -84,13 +84,13 @@ namespace ModernPizzaApi
             var PustyFiltr = Builders<PizzaModel>.Filter.Empty;
             return MongoDBKolekcja.Find(PustyFiltr).ToList();
         }
-        public static PizzaModel PobierzPizza(String id)
-        {
-            var MongoDBKlient = dbClient.GetDatabase(DBName);
-            var PizzaKolekcja = MongoDBKlient.GetCollection<PizzaModel>("Pizza");
+        //public static PizzaModel PobierzPizza(String id)
+        //{
+        //    var MongoDBKlient = dbClient.GetDatabase(DBName);
+        //    var PizzaKolekcja = MongoDBKlient.GetCollection<PizzaModel>("Pizza");
 
-            return PizzaKolekcja.Find<PizzaModel>(x => x.ObjectId == id).First();
-        }
+        //    return PizzaKolekcja.Find<PizzaModel>(x => x.ObjectId == id).First();
+        //}
 
         public static async Task<string> DodajPizzaAsync(PizzaModel pizza)
         {

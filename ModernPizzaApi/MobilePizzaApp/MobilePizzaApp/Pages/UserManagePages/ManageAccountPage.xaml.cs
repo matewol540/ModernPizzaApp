@@ -78,13 +78,8 @@ namespace MobilePizzaApp.Pages
             {
                 Main.User = null;
                 (Application.Current.MainPage as TabbedPage).CurrentPage = (Application.Current.MainPage as TabbedPage).Children[0];
-                Loader.IsRunning = false;
-                (Application.Current.MainPage as TabbedPage).Children.RemoveAt(4);
-                (Application.Current.MainPage as TabbedPage).Children.Insert(4, new UserAccountPage()
-                {
-                    Title = "Moje konto",
-                    IconImageSource = ImageSource.FromResource("ModernPizzaApp.Zasoby.OsobaIkona.png"),
-                });
+                (Application.Current.MainPage as TabbedPage).Children.Remove(this);
+                (Application.Current.MainPage as Main).CreatePageOnUserLogged(null);
                 await Application.Current.SavePropertiesAsync();
             }
         }

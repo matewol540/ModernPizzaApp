@@ -52,26 +52,32 @@ namespace MobilePizzaApp
 
             if (Application.Current.Properties.ContainsKey("token"))
                 await DownloadUser();
+            CreatePageOnUserLogged(User);
+            this.Appearing -= PagesOrganizer_Appearing;
+        }
 
-            if (User != null)
-            {
-                var UserPage = new ManageAccountPage()
+        public void CreatePageOnUserLogged(UserModel LoggedUser)
+        {
+            if (PagesOrganizer.Children.Count == 3)
+                if (LoggedUser != null)
                 {
-                    Title = "Moje konto",
-                    IconImageSource = ImageSource.FromResource("MobilePizzaApp.Zasoby.OsobaIkona.png"),
-                    User = User
-                };
-                PagesOrganizer.Children.Insert(3, UserPage);
-            }
-            else
-            {
-                var RegLogPages = new UserAccountPage()
+                    var UserPage = new ManageAccountPage()
+                    {
+                        Title = "Moje konto",
+                        IconImageSource = ImageSource.FromResource("MobilePizzaApp.Zasoby.OsobaIkona.png"),
+                        User = LoggedUser
+                    };
+                    PagesOrganizer.Children.Insert(3, UserPage);
+                }
+                else
                 {
-                    Title = "Moje konto",
-                    IconImageSource = ImageSource.FromResource("MobilePizzaApp.Zasoby.OsobaIkona.png"),
-                };
-                PagesOrganizer.Children.Insert(3, RegLogPages);
-            }
+                    var RegLogPages = new UserAccountPage()
+                    {
+                        Title = "Moje konto",
+                        IconImageSource = ImageSource.FromResource("MobilePizzaApp.Zasoby.OsobaIkona.png"),
+                    };
+                    PagesOrganizer.Children.Insert(3, RegLogPages);
+                }
         }
     }
 }

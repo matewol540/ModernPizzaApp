@@ -12,7 +12,7 @@ namespace MobilePizzaApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Main());
+            MainPage =new Main();
         }
 
         protected override void OnStart()

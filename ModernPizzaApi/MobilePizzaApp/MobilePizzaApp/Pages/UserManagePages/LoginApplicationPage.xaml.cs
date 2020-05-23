@@ -17,6 +17,7 @@ namespace MobilePizzaApp.Pages
     public partial class LoginApplicationPage : ContentPage
     {
         UserModel User;
+        public CarouselPage ParentPage { get; set; }
         public LoginApplicationPage()
         {
             InitializeComponent();
@@ -25,17 +26,11 @@ namespace MobilePizzaApp.Pages
         private async void Button_ClickedAsync(object sender, EventArgs e)
         {
             LoginAcivityIndicator.IsRunning = true;
-            if (await LoginToApplication())
+            if (User == null && await LoginToApplication())
             {
-                (Application.Current.MainPage as TabbedPage).CurrentPage = (Application.Current.MainPage as TabbedPage).Children[0];
-                (Application.Current.MainPage as TabbedPage).Children.RemoveAt(4);
-                LoginAcivityIndicator.IsRunning = false;
-                (Application.Current.MainPage as TabbedPage).Children.Insert(4, new ManageAccountPage()
-                {
-                    Title = "Moje konto",
-                    IconImageSource = ImageSource.FromResource("ModernPizzaApp.Zasoby.OsobaIkona.png"),
-                    User = User
-                });
+                (Application.Current.MainPage as Main).CurrentPage = (Application.Current.MainPage as TabbedPage).Children[0];
+                (Application.Current.MainPage as Main).Children.Remove(this.ParentPage);
+                (Application.Current.MainPage as Main).CreatePageOnUserLogged(User);
                 await DisplayAlert("Sukces", "Udało się poprawnie zalogować do aplikajci", "Ok");
             }
         }

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobilePizzaApp.Views.ItemView"
+             xmlns:local="clr-namespace:MobilePizzaApp.MarkupExtension">
+    <ContentView.Content>
+        <Frame 
+            CornerRadius="10"
+            IsClippedToBounds="True"
+            Padding="-5"
+            >
+            <AbsoluteLayout x:Name="ItemObject">
+                <local:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="Transparent" Padding="-10" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional" >
+                    <Image x:Name="ItemImage" Aspect="AspectFill"/>
+                </local:GradientFrameRenderer>
+                <Label  Text="{Binding Nazwa}" Padding="5"  FontFamily="{StaticResource Helvetica}" TextColor="Black" FontSize="Medium" HorizontalTextAlignment="Start" AbsoluteLayout.LayoutBounds="0.2,1,0.8,0.2" AbsoluteLayout.LayoutFlags="All"  />
+                <Frame AbsoluteLayout.LayoutBounds="0.9,0.1,0.2,0.15" AbsoluteLayout.LayoutFlags="All" Padding="1">
+                    <Label Text="{Binding Cena}" Padding="5"  FontFamily="{StaticResource Helvetica}" TextColor="Black" FontSize="Small" HorizontalTextAlignment="Center" />
+                </Frame>
+            </AbsoluteLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

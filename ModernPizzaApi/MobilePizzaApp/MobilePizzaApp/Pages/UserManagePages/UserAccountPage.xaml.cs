@@ -18,6 +18,7 @@ namespace MobilePizzaApp.Pages
         {
             InitializeComponent();
             this.RegisterPage.ParentPage = this;
+            this.LoginPage.ParentPage = this;
         }
     }
 }

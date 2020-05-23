@@ -6,35 +6,43 @@
              mc:Ignorable="d"
              x:Class="MobilePizzaApp.Pages.MenuPage"
               Appearing="LoadItemsToCollections"
+              xmlns:Views="clr-namespace:MobilePizzaApp.Views"
              >
     <ContentPage Title="Pizza">
-        <ListView x:Name="PizzaItemsList" HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell Tapped="ViewCell_Tapped">
-                        <StackLayout Orientation="Horizontal" Padding="5">
-                            <Label Text="{d:Binding Nazwa}" FontSize="20" HorizontalOptions="StartAndExpand"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                <Label Text="Pizza" FontFamily="{StaticResource Helvetica}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large"/>
+                <Label Text="➡️" VerticalOptions="Center" HorizontalOptions="End" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large"/>
+            </StackLayout>
+            <BoxView BackgroundColor="Gray" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+            <ActivityIndicator x:Name="ActivityIndicatorPizza" IsRunning="true" IsVisible="{d:Binding Source={x:Reference ActivityIndicatorPizza}, Path=IsRunning}"/>
+            <ScrollView  Padding="5">
+                <Grid x:Name="PizzaItemsList" Grid.Row="1" BackgroundColor="AliceBlue" Padding="5" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollView>
+        </StackLayout>
     </ContentPage>
 
-
     <ContentPage Title="Napoje">
-        <ListView x:Name="NapojItemsList" HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="5">
-                            <Label Text="{d:Binding Nazwa}" FontSize="20" HorizontalOptions="StartAndExpand"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView> </ContentPage>
-    <ContentPage Title="Przekaski">
-        <Image Source="https://cdn3.iconfinder.com/data/icons/fast-food-outline-6/64/Bag-chips-fried-packet-potato-snack-512.png"/>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                <Label Text="⬅️" FontFamily="{StaticResource Helvetica}" VerticalOptions="Center" HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large"/>
+                <Label Text="Napoje" VerticalOptions="Center" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large"/>
+            </StackLayout>
+            <BoxView BackgroundColor="Gray" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+            <ActivityIndicator x:Name="ActivityIndicatorDrink" IsRunning="true" IsVisible="{d:Binding Source={x:Reference ActivityIndicatorDrink}, Path=IsRunning}"/>
+            <ScrollView Padding="5">
+                <Grid x:Name="NapojItemsList" Grid.Row="1" BackgroundColor="AliceBlue" Padding="5" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollView>
+        </StackLayout>
     </ContentPage>
 </CarouselPage>
