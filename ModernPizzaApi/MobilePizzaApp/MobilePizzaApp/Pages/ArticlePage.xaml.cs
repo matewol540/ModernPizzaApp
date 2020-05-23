@@ -75,7 +75,7 @@ namespace MobilePizzaApp.Pages
                     ArtukulID = artyukul.ObjectId,
                     Tresc = Komentarz.Text,
                     Autor = Main.User.Mail,
-                    Data = DateTime.Now.ToLocalTime(),
+                    Data = DateTime.Now
                 };
                 if (!Application.Current.Properties.ContainsKey("token"))
                 {

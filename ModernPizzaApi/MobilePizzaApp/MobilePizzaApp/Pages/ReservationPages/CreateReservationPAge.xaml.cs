@@ -98,7 +98,7 @@ namespace MobilePizzaApp.Pages.ReservationPages
 
                     Start = new DateTime(dateResult.SelectedDate.Year, dateResult.SelectedDate.Month, dateResult.SelectedDate.Day, timeResult.SelectedTime.Hours, minutes, 0, DateTimeKind.Local).AddHours(ExtraHour);
 
-                    if (Start <= DateTime.Now.ToLocalTime())
+                    if (Start <= DateTime.Now)
                     {
                         Start = new DateTime();
                         await DisplayAlert("Error", "Nie mozna wybrac daty z przeszlosci", "Ok");
