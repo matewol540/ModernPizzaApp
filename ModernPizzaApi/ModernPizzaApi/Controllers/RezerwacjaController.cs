@@ -36,7 +36,8 @@ namespace ModernPizzaApi.Controllers
         [HttpPut]
         public async Task<ActionResult<RezerwacjaModel>> Put([FromBody] RezerwacjaModel Rezerwacja)
         {
-            if (Rezerwacja.Status == "Planned")
+            var tempRezerwacja = (await DBConnector.PobierzRezerwacjeUzytkownika(Rezerwacja.User)).First(x => x.ObjectId == Rezerwacja.ObjectId);
+            if (tempRezerwacja != null && tempRezerwacja.Status == "Planned")
                 if (await DBConnector.EdytujRezerwacje(Rezerwacja))
                     return Ok(Rezerwacja);
             return BadRequest(null);

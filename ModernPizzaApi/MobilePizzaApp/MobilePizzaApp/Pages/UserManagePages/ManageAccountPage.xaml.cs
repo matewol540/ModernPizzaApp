@@ -77,9 +77,9 @@ namespace MobilePizzaApp.Pages
             if (Application.Current.Properties.Remove("token"))
             {
                 Main.User = null;
-                (Application.Current.MainPage as TabbedPage).CurrentPage = (Application.Current.MainPage as TabbedPage).Children[0];
-                (Application.Current.MainPage as TabbedPage).Children.Remove(this);
-                (Application.Current.MainPage as Main).CreatePageOnUserLogged(null);
+                ((Application.Current.MainPage as NavigationPage).RootPage as TabbedPage).CurrentPage = ((Application.Current.MainPage as NavigationPage).RootPage as TabbedPage).Children[0];
+                ((Application.Current.MainPage as NavigationPage).RootPage as TabbedPage).Children.Remove(this);
+                ((Application.Current.MainPage as NavigationPage).RootPage as Main).CreatePageOnUserLogged(null);
                 await Application.Current.SavePropertiesAsync();
             }
         }

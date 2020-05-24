@@ -46,7 +46,7 @@ namespace MobilePizzaApp.Pages
             else
             {
                 await DisplayAlert("Ostrzezenie", "Musisz się zalogować aby przeglądać rezerwacje", "Ok");
-                (Application.Current.MainPage as TabbedPage).CurrentPage = (Application.Current.MainPage as TabbedPage).Children[0];
+                ((Application.Current.MainPage as NavigationPage).RootPage as TabbedPage).CurrentPage = ((Application.Current.MainPage as NavigationPage).RootPage as TabbedPage).Children[0];
             }
         }
 
@@ -62,7 +62,7 @@ namespace MobilePizzaApp.Pages
                 {
                     TempList = JsonConvert.DeserializeObject<List<RezerwacjaModel>>(await response.Content.ReadAsStringAsync());
 
-                    FutureReservations = new ObservableCollection<RezerwacjaModel>(TempList.Where(x => DateTime.Compare(x.KoniecRezerwacji, DateTime.Now.AddMinutes(5.0F)) > 0 && x.Status == "Planned").ToList());
+                    FutureReservations = new ObservableCollection<RezerwacjaModel>(TempList.Where(x => (DateTime.Compare(x.KoniecRezerwacji, DateTime.Now.AddMinutes(5.0F)) > 0 && x.Status == "Planned") || x.Status == "Active").ToList());
                     PastReservations = TempList.Where(x => DateTime.Compare(x.KoniecRezerwacji, DateTime.Now) < 0).ToList();
 
                     if (FutureReservations.Any())
@@ -71,9 +71,18 @@ namespace MobilePizzaApp.Pages
                         FutureReservations.Remove(_rezerwacja);
                         RezerwacjaLayout.BindingContext = _rezerwacja;
                         ReservationItemList.ItemsSource = FutureReservations;
-                        var da = DateTime.Now;
-                        var daw = _rezerwacja.StartRezerwacji.AddMinutes(-5.0F);
-                        ActivationButton.IsEnabled = da >= daw;
+                        if (_rezerwacja.Status == "Planned")
+                        {
+                            var da = DateTime.Now;
+                            var daw = _rezerwacja.StartRezerwacji.AddMinutes(-5.0F);
+                            ActivationButton.IsEnabled = da >= daw;
+                        }
+                        else if (_rezerwacja.Status == "Active")
+                        {
+                            ActivationButton.Text = "Aktywna";
+                            ActivationButton.IsEnabled = false;
+
+                        }
                     }
                     else
                         ActivationButton.IsEnabled = false;
@@ -100,17 +109,34 @@ namespace MobilePizzaApp.Pages
             scanPage.OnScanResult += (result) =>
              {
                  scanPage.IsScanning = false;
-
-                 Device.BeginInvokeOnMainThread(() =>
+                 Device.BeginInvokeOnMainThread(async () =>
                  {
-                     Navigation.PopAsync();
+                     await Navigation.PopAsync();
                      try
                      {
-
+                         await DisplayAlert("Read rsponse ", $"{result.Text}", "Ok");
                          ActivateByTableCode(result.Text);
                      }
                      catch (Exception err)
                      {
+                         await DisplayAlert("Error", $"{err.StackTrace}", "Ok");
+                     }
+                 });
+             };
+            scanPage.Disappearing += (send, aqwe) =>
+             {
+                 scanPage.IsScanning = false;
+                 Device.BeginInvokeOnMainThread(async () =>
+                 {
+                     await Navigation.PopAsync();
+                     try
+                     {
+                         await DisplayAlert("Read rsponse ", $"dg01.1", "Ok");
+                         ActivateByTableCode("dg01.1");
+                     }
+                     catch (Exception err)
+                     {
+                         await DisplayAlert("Error", $"{err.StackTrace}", "Ok");
                      }
                  });
              };
@@ -120,6 +146,7 @@ namespace MobilePizzaApp.Pages
 
         private async void ActivateByTableCode(string result)
         {
+            await DisplayAlert("Read rsponse ", $"{result}", "Ok");
             if (result.Contains('.'))
             {
                 var Restaurant = result.Split('.')[0];
@@ -148,6 +175,7 @@ namespace MobilePizzaApp.Pages
                     if (response.IsSuccessStatusCode)
                     {
                         ActivationButton.IsEnabled = false;
+                        ActivationButton.Text = "Aktywna";
                         ActivationButton.BackgroundColor = Color.FromHex("#66ff66");
                         ActivationButton.TextColor = Color.FromHex("#074a07");
                     }

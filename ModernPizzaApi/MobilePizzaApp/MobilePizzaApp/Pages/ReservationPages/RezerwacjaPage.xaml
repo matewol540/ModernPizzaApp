@@ -10,7 +10,6 @@
              BackgroundColor="AliceBlue"
              >
         <AbsoluteLayout Padding="5" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"  >
-            <!--<StackLayout AbsoluteLayout.LayoutBounds="0,0,1,0.3" Padding="5" AbsoluteLayout.LayoutFlags="All" Orientation="Horizontal">-->
             <Frame AbsoluteLayout.LayoutBounds="0.1,0.03,0.4,0.25" Padding="5" AbsoluteLayout.LayoutFlags="All">
                 <Image Source="{MarkupExtension:EmbeddedClass MobilePizzaApp.Zasoby.RegisterReservation.png}" Aspect="AspectFit" />
                     <Frame.GestureRecognizers>

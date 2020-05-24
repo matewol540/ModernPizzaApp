@@ -28,9 +28,9 @@ namespace MobilePizzaApp.Pages
             LoginAcivityIndicator.IsRunning = true;
             if (User == null && await LoginToApplication())
             {
-                (Application.Current.MainPage as Main).CurrentPage = (Application.Current.MainPage as TabbedPage).Children[0];
-                (Application.Current.MainPage as Main).Children.Remove(this.ParentPage);
-                (Application.Current.MainPage as Main).CreatePageOnUserLogged(User);
+                ((Application.Current.MainPage as NavigationPage).RootPage as TabbedPage).CurrentPage = ((Application.Current.MainPage as NavigationPage).RootPage as TabbedPage).Children[0];
+                ((Application.Current.MainPage as NavigationPage).RootPage as TabbedPage).Children.Remove(this.ParentPage);
+                ((Application.Current.MainPage as NavigationPage).RootPage as Main).CreatePageOnUserLogged(User);
                 await DisplayAlert("Sukces", "Udało się poprawnie zalogować do aplikajci", "Ok");
             }
         }
