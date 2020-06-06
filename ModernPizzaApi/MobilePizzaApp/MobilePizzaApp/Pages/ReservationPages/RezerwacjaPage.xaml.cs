@@ -123,23 +123,24 @@ namespace MobilePizzaApp.Pages
                      }
                  });
              };
-            scanPage.Disappearing += (send, aqwe) =>
-             {
-                 scanPage.IsScanning = false;
-                 Device.BeginInvokeOnMainThread(async () =>
-                 {
-                     await Navigation.PopAsync();
-                     try
-                     {
-                         await DisplayAlert("Read rsponse ", $"dg01.1", "Ok");
-                         ActivateByTableCode("dg01.1");
-                     }
-                     catch (Exception err)
-                     {
-                         await DisplayAlert("Error", $"{err.StackTrace}", "Ok");
-                     }
-                 });
-             };
+            //Only for scanner problem - for presentation usage
+            //scanPage.Disappearing += (send, aqwe) =>
+            // {
+            //     scanPage.IsScanning = false;
+            //     Device.BeginInvokeOnMainThread(async () =>
+            //     {
+            //         await Navigation.PopAsync();
+            //         try
+            //         {
+            //             await DisplayAlert("Read rsponse ", $"dg01.1", "Ok");
+            //             ActivateByTableCode("dg01.1");
+            //         }
+            //         catch (Exception err)
+            //         {
+            //             await DisplayAlert("Error", $"{err.StackTrace}", "Ok");
+            //         }
+            //     });
+            // };
 
             await Navigation.PushAsync(scanPage);
         }

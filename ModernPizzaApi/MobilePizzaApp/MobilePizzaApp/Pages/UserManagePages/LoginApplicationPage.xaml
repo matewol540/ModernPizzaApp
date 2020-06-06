@@ -7,7 +7,7 @@
              x:Class="MobilePizzaApp.Pages.LoginApplicationPage"
              xmlns:FrameRenderer="clr-namespace:MobilePizzaApp.MarkupExtension">
     <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-        <FrameRenderer:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="Red" Padding="0" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+        <FrameRenderer:GradientFrameRenderer StartColor="WhiteSmoke" EndColor="LightGray" Padding="0" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
         </FrameRenderer:GradientFrameRenderer>
         <StackLayout  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="10">
             <Frame CornerRadius="5" VerticalOptions="EndAndExpand">

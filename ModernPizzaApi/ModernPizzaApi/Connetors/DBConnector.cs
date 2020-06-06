@@ -30,6 +30,8 @@ namespace ModernPizzaApi
         });
 
         private const String DBName = "bvjlr3yieol9j03";
+
+
         public static List<TransakcjaModel> OtwarteZamowienia = new List<TransakcjaModel>();
 
 
@@ -313,14 +315,8 @@ namespace ModernPizzaApi
             var MongoDBKlient = dbClient.GetDatabase(DBName);
             var UsersCollection = MongoDBKlient.GetCollection<UserModel>("Uzytkownicy");
             var users = await UsersCollection.FindAsync<UserModel>(x => x.Mail == Mail);
-            try
-            {
+            if (users.ToList().Count != 0)
                 return users.First();
-            }
-            catch (Exception err)
-            {
-
-            }
             return null;
         }
         public async static Task<Boolean> AktualizujUzytkownika(UserModel user)
@@ -334,7 +330,7 @@ namespace ModernPizzaApi
                 await UsersCollection.ReplaceOneAsync<UserModel>(x => x.Mail == user.Mail, user);
                 return true;
             }
-            catch (Exception err)
+            catch
             {
 
             }

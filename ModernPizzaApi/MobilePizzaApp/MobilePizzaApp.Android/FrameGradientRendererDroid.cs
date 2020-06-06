@@ -33,7 +33,8 @@ namespace MobilePizzaApp.Droid
         public override void Draw(Canvas canvas)
         {
             base.Draw(canvas);
-            var gradient = new Android.Graphics.LinearGradient(0, Height, 0, 0, this.StartColor.ToAndroid(), this.EndColor.ToAndroid(), Android.Graphics.Shader.TileMode.Mirror);
+            var gradient = new Android.Graphics.LinearGradient(0, Height, 0, 0,
+                this.StartColor.ToAndroid(), this.EndColor.ToAndroid(), Android.Graphics.Shader.TileMode.Mirror);
 
             var paint = new Android.Graphics.Paint()
             {

@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.Net.Http.Headers;
 using ModernPizzaApi.Models;
 
@@ -20,7 +14,6 @@ namespace ModernPizzaApi.Controllers
     [ApiController]
     public class UzytkownikController : ControllerBase
     {
-
 
         [AllowAnonymous]
         [HttpPost("login")]
@@ -49,6 +42,7 @@ namespace ModernPizzaApi.Controllers
             var result = await DBConnector.PobierzUzytkownika(token);
             return Ok(result);
         }
+
         [HttpPut]
         public async Task<Boolean> EditUser([FromBody]UserModel User)
         {
@@ -56,7 +50,6 @@ namespace ModernPizzaApi.Controllers
             return result;
         }
 
-        // DELETE: api/ApiWithActions/5
         [HttpDelete()]
         [Authorize(Roles = "User")]
         public void DeleteUser([FromBody] UserModel user)

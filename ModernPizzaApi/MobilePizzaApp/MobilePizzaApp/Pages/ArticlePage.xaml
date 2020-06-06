@@ -42,7 +42,7 @@
                 </StackLayout>
             </Frame>
             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand"  HorizontalOptions="FillAndExpand" Padding="2">
-                <Editor x:Name="Komentarz" HorizontalOptions="FillAndExpand" Placeholder="Zostaw komentarz mordo"/>
+                <Editor x:Name="Komentarz" HorizontalOptions="FillAndExpand" Placeholder="Zostaw komentarz"/>
                 <Button Text="Dodaj" Clicked="Button_Clicked"/>
             </StackLayout>
         </StackLayout>
