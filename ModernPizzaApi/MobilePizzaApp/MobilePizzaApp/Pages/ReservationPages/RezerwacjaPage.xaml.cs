@@ -114,7 +114,6 @@ namespace MobilePizzaApp.Pages
                      await Navigation.PopAsync();
                      try
                      {
-                         await DisplayAlert("Read rsponse ", $"{result.Text}", "Ok");
                          ActivateByTableCode(result.Text);
                      }
                      catch (Exception err)

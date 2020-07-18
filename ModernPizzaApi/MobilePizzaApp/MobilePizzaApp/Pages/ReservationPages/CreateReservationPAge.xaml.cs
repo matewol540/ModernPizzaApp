@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Markup;
 using Xamarin.Forms.Xaml;
 
 namespace MobilePizzaApp.Pages.ReservationPages
@@ -58,11 +59,12 @@ namespace MobilePizzaApp.Pages.ReservationPages
                 }
             }
         }
-        private void UnfocusPicker(object sender, FocusEventArgs e)
+        private async void UnfocusPicker(object sender, FocusEventArgs e)
         {
             if (dateResult == null)
             {
                 var DateEntrySender = sender as Picker;
+                DateEntrySender.Unfocused += SetStartReservation;
                 DateEntrySender.Unfocus();
             }
         }
@@ -115,8 +117,8 @@ namespace MobilePizzaApp.Pages.ReservationPages
                     }
                 }
                 dateResult = null;
+                DateEntrySender.Unfocused -= SetStartReservation;
             }
-
         }
 
         private void Restauracja_SelectedIndexChanged(object sender, EventArgs e)

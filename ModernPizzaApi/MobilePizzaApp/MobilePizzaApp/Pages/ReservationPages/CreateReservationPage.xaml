@@ -13,10 +13,7 @@
                 <StackLayout Spacing="50" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
                     <StackLayout >
                         <Label Text="Start rezerwacji"  HorizontalOptions="CenterAndExpand"  FontSize="Medium"/>
-                        <Picker x:Name="StartReservation"  HorizontalOptions="FillAndExpand" Focused="UnfocusPicker" Unfocused="SetStartReservation" >
-                            <!--<Picker.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="SetStartReservation" NumberOfTapsRequired="1" />
-                            </Picker.GestureRecognizers>-->
+                        <Picker x:Name="StartReservation"  HorizontalOptions="FillAndExpand" Focused="UnfocusPicker" >
                         </Picker>
                     </StackLayout>
                     <StackLayout  >
